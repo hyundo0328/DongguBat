@@ -137,7 +137,7 @@ class Main extends StatelessWidget {
             children: <Widget>[
               UserAccountsDrawerHeader(
                 currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/vertical_symnbol.jpg'),
+                  backgroundImage: AssetImage('assets/박현도.jpg'),
                 ),
                 accountName: Text('hyundo'),
                 accountEmail: Text('hyundo13@naver.com'),
