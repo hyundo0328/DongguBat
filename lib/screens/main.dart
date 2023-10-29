@@ -1,5 +1,6 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'communicate.dart';
 
 void main() {
   runApp(MyApp());
@@ -145,6 +146,15 @@ class Main extends StatelessWidget {
                   print('arrow is clicked');
                 },
               ),
+              ListTile(
+                title: Text('소통'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Communicate()));
+                },
+              )
             ],
           )),
           bottomNavigationBar: BottomNavigationBar(
