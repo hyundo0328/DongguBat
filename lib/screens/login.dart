@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
 import 'main_page.dart';
+import 'signup.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -57,7 +57,6 @@ class _LogInstate extends State<LogIn> {
                               height: 15.0,
                             ),
                             TextFormField(
-                              // 비밀번호 입력칸
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   contentPadding:
@@ -77,13 +76,11 @@ class _LogInstate extends State<LogIn> {
                                 height: 10,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary:
-                                          const Color.fromARGB(255, 44, 96, 68),
-                                      fixedSize: Size(140, 10)),
+                                      primary: const Color.fromARGB(255, 44, 96,
+                                          68)), // background onPrimary: Colors.white
                                   onPressed: () {
-                                    if (controller1.text == 'hyundo' &&
-                                        controller2.text == '1234') {
-                                          
+                                    if (controller1.text == '' &&
+                                        controller2.text == '') {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -108,10 +105,15 @@ class _LogInstate extends State<LogIn> {
                                   // 텍스트버튼에 아이콘 넣기
                                   onPressed: () {
                                     print('회원가입 버튼');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SignUpPage()),
+                                    );
                                   },
                                   child: Text('회원가입'),
                                   style: TextButton.styleFrom(
-                                      primary: Colors.black54),
+                                      primary: Colors.black45),
                                 ),
                                 TextButton(
                                   // 텍스트버튼에 아이콘 넣기
@@ -120,7 +122,7 @@ class _LogInstate extends State<LogIn> {
                                   },
                                   child: Text('ID/PW 찾기'),
                                   style: TextButton.styleFrom(
-                                      primary: Colors.black54),
+                                      primary: Colors.black45),
                                 ),
                               ],
                             )

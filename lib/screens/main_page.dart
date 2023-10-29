@@ -5,6 +5,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'dart:async';
 import 'login.dart';
 import 'mypage.dart';
+import 'communicate.dart';
+import 'mypage.dart';
+import 'program_rent.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -22,15 +25,15 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> _pages = [
     Expanded(
         child: Container(
-      child: Image.asset("assets/rainbow.jpg"),
+      child: Image.asset("assets/세이프 라이딩.jpg"),
     )),
     Expanded(
         child: Container(
-      child: Image.asset("assets/vertical_symnbol.jpg"),
+      child: Image.asset("assets/플로깅플레져.jpg"),
     )),
     Expanded(
         child: Container(
-      child: Image.asset("assets/rainbow.jpg"),
+      child: Image.asset("assets/SNS 인증샷.jpg"),
     )),
   ];
 
@@ -47,7 +50,7 @@ class _MainPageState extends State<MainPage> {
       _currentPage++;
       _currentPage = _currentPage % 3;
       // print(_currentPage);
-      
+
       _pageController.animateToPage(_currentPage,
           duration: Duration(milliseconds: 500), curve: Curves.ease);
     });
@@ -66,7 +69,7 @@ class _MainPageState extends State<MainPage> {
           key: scaffoldKey,
           // 상단바, 하단바, 메인화면으로 나눌때 주로 사용
           appBar: AppBar(
-            title: Text('앱 이름으로 할 것임'),
+            title: Text('동구밭'),
             centerTitle: true,
             backgroundColor: const Color.fromARGB(255, 44, 96, 68),
             toolbarHeight: 60,
@@ -86,6 +89,24 @@ class _MainPageState extends State<MainPage> {
                 accountEmail: Text('hyundo13@naver.com'),
                 onDetailsPressed: () {
                   print('arrow is clicked');
+                },
+              ),
+              ListTile(
+                title: Text('소통'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => Communicate()));
+                },
+              ),
+              ListTile(
+                title: Text('프로그램/대관'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => program_apply()));
                 },
               ),
             ],
@@ -109,7 +130,7 @@ class _MainPageState extends State<MainPage> {
                                   borderRadius: BorderRadius.circular(10.0)),
                               child: PageView.builder(
                                 controller: _pageController,
-                                
+
                                 onPageChanged: (int page) {
                                   setState(() {
                                     _activePage = page;
@@ -260,22 +281,3 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
-// class PageCustom extends StatelessWidget{
-//   @override
-//   Widget build(BuildContext context) {
-//     return PageView.custom(
-//         childrenDelegate: SliverChildDelegate., //children 위젯을 PageView 위젯에게 제공하는 역할
-//         pageSnapping: true, // 페이지 단위로 화면이 넘어갈지 여부
-//         clipBehavior: Clip.hardEdge, // content가 범위를 넘어갈 때 해당 content를 자르는 방법
-//         // controller: PageController., // PageView 컨트롤을 위한 Controller
-//         dragStartBehavior: DragStartBehavior.start, // 사용자의 드래그를 인식
-//         // onPageChanged: , // 뷰포트 중앙 화면이 변경될 때마다 호출되는 함수
-//         // physics: , // 페이지 뷰가 사용자 입력에 반응하는 방법
-//         // restorationId: , //스크롤의 위치 정보를 저장하고 복원하는 역할
-//         reverse: true, // children 위젯을 역방향으로 보여줄 것인지 여부
-//         scrollDirection: Axis.vertical, // 스크롤 방향 여부
-//         allowImplicitScrolling: false, // 각 children 위젯들의 내부 스크롤 부여 여부
-//     )
-//   }
-// }
