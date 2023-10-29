@@ -8,7 +8,7 @@ class Communicate extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('게시판'),
+          title: Text('소통'),
           centerTitle: true,
           backgroundColor: const Color.fromARGB(255, 44, 96, 68),
         ),
