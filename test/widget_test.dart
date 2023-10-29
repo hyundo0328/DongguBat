@@ -1,6 +1,4 @@
-//main.dart
 import 'package:flutter/material.dart';
-import 'login.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,91 +8,78 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'DongguBat',
-      home: LogIn(),
+      home: PageViewWithButtons(),
     );
   }
 }
 
-class Main extends StatelessWidget {
-  // const Main({super.key});
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+class PageViewWithButtons extends StatefulWidget {
+  @override
+  _PageViewWithButtonsState createState() => _PageViewWithButtonsState();
+}
+
+class _PageViewWithButtonsState extends State<PageViewWithButtons> {
+  PageController _pageController = PageController(initialPage: 0);
+  int _currentPage = 0;
+  int _numberOfPages = 3;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          key: scaffoldKey,
-          // 상단바, 하단바, 메인화면으로 나눌때 주로 사용
-          appBar: AppBar(
-            title: Text('메인페이지'),
-            centerTitle: true,
-            backgroundColor: const Color.fromARGB(255, 44, 96, 68),
-
-            // leading : 아이콘 버튼이나 간단한 위젯을 왼쪽에 배치할 때 사용
-
-            // actions : 복수의 아이콘 버튼 등을 오른쪽에 배치할 때 사용
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  print("search button is clicked");
-                },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PageView with Buttons'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              height: 200.0,
+              child: PageView(
+                controller: _pageController,
+                children: <Widget>[
+                  Container(color: Colors.blue),
+                  Container(color: Colors.green),
+                  Container(color: Colors.orange),
+                ],
               ),
-            ],
-          ),
-          drawer: Drawer(
-              child: ListView(
-            padding: EdgeInsets.all(10),
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/vertical_symnbol.jpg'),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () {
+                    if (_currentPage > 0) {
+                      _currentPage--;
+                      _pageController.animateToPage(_currentPage,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeOut);
+                    }
+                  },
                 ),
-                accountName: Text('hyundo'),
-                accountEmail: Text('hyundo13@naver.com'),
-                onDetailsPressed: () {
-                  print('arrow is clicked');
-                },
-              ),
-            ],
-          )),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            iconSize: 35,
-            selectedItemColor: const Color.fromARGB(255, 44, 96, 68),
-            unselectedItemColor: Colors.grey,
-            selectedLabelStyle: TextStyle(fontSize: 10),
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: '목록'),
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: '마이페이지'),
-            ],
-            onTap: (int index) {
-              if (index == 0) {
-                if (scaffoldKey.currentState!.isDrawerOpen) {
-                  scaffoldKey.currentState!.closeDrawer();
-                } else {
-                  scaffoldKey.currentState!.openDrawer();
-                }
-              } else if (index == 1) {
-                // '홈' 아이콘을 클릭한 경우 홈 화면으로 이동
-                Navigator.push(
-                  context,
-                  // MaterialPageRoute(
-                  //   builder: (BuildContext context) => HomeScreen(),
-                  // ),
-                );
-              } else if (index == 2) {
-                // '마이페이지' 아이콘을 클릭한 경우 마이페이지 화면으로 이동
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyPageScreen()),
-                );
-
-              // }
-            },
-          )),
+                IconButton(
+                  icon: Icon(Icons.arrow_forward),
+                  onPressed: () {
+                    if (_currentPage < _numberOfPages - 1) {
+                      _currentPage++;
+                      _pageController.animateToPage(_currentPage,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeOut);
+                    }
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'main_page.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -56,13 +57,13 @@ class _LogInstate extends State<LogIn> {
                               height: 15.0,
                             ),
                             TextFormField(
+                              // 비밀번호 입력칸
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   contentPadding:
                                       EdgeInsets.fromLTRB(15, 5, 5, 15),
                                   hintText: 'Password'),
                               controller: controller2,
-                                  
                               keyboardType: TextInputType.text,
                               obscureText: true,
                             ),
@@ -70,23 +71,24 @@ class _LogInstate extends State<LogIn> {
                               // 비밀번호 입력칸과 로그인 버튼 공백
                               height: 40.0,
                             ),
-
                             ButtonTheme(
                                 // 로그인 Button
                                 minWidth: 100,
                                 height: 10,
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                      primary: const Color.fromARGB(255, 44, 96,
-                                          68)), // background onPrimary: Colors.white
+                                      primary:
+                                          const Color.fromARGB(255, 44, 96, 68),
+                                      fixedSize: Size(140, 10)),
                                   onPressed: () {
                                     if (controller1.text == 'hyundo' &&
                                         controller2.text == '1234') {
+                                          
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
-                                                  Main()));
+                                                  MainPage()));
                                     } else if (controller1.text == 'hyundo' &&
                                         controller2.text != '1234') {
                                     } else if (controller2.text != 'hyundo' &&
@@ -98,7 +100,7 @@ class _LogInstate extends State<LogIn> {
                             ButtonBar(
                               // 버튼 바
                               alignment: MainAxisAlignment.center, // 중앙 정렬
-                  
+
                               buttonPadding:
                                   EdgeInsets.fromLTRB(0, 0, 0, 0), // 버튼의 패딩 주기
                               children: [
@@ -109,7 +111,7 @@ class _LogInstate extends State<LogIn> {
                                   },
                                   child: Text('회원가입'),
                                   style: TextButton.styleFrom(
-                                      primary: Colors.black45),
+                                      primary: Colors.black54),
                                 ),
                                 TextButton(
                                   // 텍스트버튼에 아이콘 넣기
@@ -118,7 +120,7 @@ class _LogInstate extends State<LogIn> {
                                   },
                                   child: Text('ID/PW 찾기'),
                                   style: TextButton.styleFrom(
-                                      primary: Colors.black45),
+                                      primary: Colors.black54),
                                 ),
                               ],
                             )
