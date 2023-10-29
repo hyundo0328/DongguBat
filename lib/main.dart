@@ -1,5 +1,7 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'login.dart';
+import 'mypage.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,103 +18,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class LogIn extends StatefulWidget {
-  @override
-  _LogInstate createState() => _LogInstate();
-}
-
-class _LogInstate extends State<LogIn> {
-  TextEditingController controller1 = TextEditingController();
-  TextEditingController controller2 = TextEditingController();
-  // 더 이상 사용하지 않으면 메모리 낭비 방지를 위해서 dispose method를 사용 (추가)
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Builder(
-      builder: (context) {
-        return GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 170.0,
-                ),
-                Center(
-                    child: Image(
-                  image: AssetImage('assets/vertical_symnbol.jpg'),
-                  width: 200.0,
-                  height: 250.0,
-                )),
-                Form(
-                    child: Theme(
-                        data: ThemeData(
-                            primaryColor: const Color.fromARGB(255, 44, 96, 68),
-                            inputDecorationTheme: InputDecorationTheme(
-                                labelStyle: TextStyle(
-                                    color: Colors.teal, fontSize: 15.0))),
-                        child: Container(
-                          padding: EdgeInsets.all(70),
-                          child: Column(children: <Widget>[
-                            TextField(
-                                autofocus: true,
-                                controller: controller1,
-                                decoration:
-                                    InputDecoration(labelText: 'Enter ID'),
-                                keyboardType: TextInputType.emailAddress),
-                            TextField(
-                              controller: controller2,
-                              decoration:
-                                  InputDecoration(labelText: 'Enter Password'),
-                              keyboardType: TextInputType.text,
-                              obscureText: true,
-                            ),
-                            SizedBox(
-                              height: 40.0,
-                            ),
-                            ButtonTheme(
-                                minWidth: 100,
-                                height: 50,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: const Color.fromARGB(255, 44, 96,
-                                          68)), // background onPrimary: Colors.white
-                                  onPressed: () {
-                                    if (controller1.text == 'hyundo' &&
-                                        controller2.text == '1234') {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  Main()));
-                                    } else if (controller1.text == 'hyundo' &&
-                                        controller2.text != '1234') {
-                                    } else if (controller2.text != 'hyundo' &&
-                                        controller2.text != '1234') {
-                                    } else {}
-                                  },
-                                  child: Text('로그인'),
-                                ))
-                          ]),
-                        )))
-              ],
-            ),
-          ),
-        );
-      },
-    ));
-  }
-}
-
 class Main extends StatelessWidget {
-  const Main({super.key});
-
+  // const Main({super.key});
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+          key: scaffoldKey,
           // 상단바, 하단바, 메인화면으로 나눌때 주로 사용
           appBar: AppBar(
             title: Text('메인페이지'),
@@ -158,6 +71,29 @@ class Main extends StatelessWidget {
               BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
               BottomNavigationBarItem(icon: Icon(Icons.person), label: '마이페이지'),
             ],
+            onTap: (int index) {
+              if (index == 0) {
+                if (scaffoldKey.currentState!.isDrawerOpen) {
+                  scaffoldKey.currentState!.closeDrawer();
+                } else {
+                  scaffoldKey.currentState!.openDrawer();
+                }
+              } else if (index == 1) {
+                // '홈' 아이콘을 클릭한 경우 홈 화면으로 이동
+                // Navigator.push(
+                //   context
+                //   MaterialPageRoute(
+                //     builder: (BuildContext context) => HomeScreen(),
+                //   ),
+                // );
+              } else if (index == 2) {
+                // '마이페이지' 아이콘을 클릭한 경우 마이페이지 화면으로 이동
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyPageScreen()),
+                );
+              }
+            },
           )),
     );
   }
