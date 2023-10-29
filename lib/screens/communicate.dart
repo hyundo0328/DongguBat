@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:donggu_bat/widget/Postcard.dart';
+import '../widget/Postcard.dart';
 import 'postcardmaking.dart';
 import 'postcarddetails.dart';
+import 'login.dart';
+import 'mypage.dart';
 
 class Communicate extends StatelessWidget {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +47,86 @@ class Communicate extends StatelessWidget {
                 },
               );
             }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
+            Builder(builder: (BuildContext context) {
+              return PostCard(
+                title: '[시설대관] 공유주방에서 함께 요리 해요',
+                content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
+                onClick: () {
+                  Navigator.of(context)
+                      .pushNamed('/postcarddetails', arguments: '세 번째 게시물');
+                },
+              );
+            }),
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -67,6 +150,29 @@ class Communicate extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: '마이페이지'),
           ],
+          onTap: (int index) {
+            if (index == 0) {
+              if (scaffoldKey.currentState!.isDrawerOpen) {
+                scaffoldKey.currentState!.closeDrawer();
+              } else {
+                scaffoldKey.currentState!.openDrawer();
+              }
+            } else if (index == 1) {
+              // '홈' 아이콘을 클릭한 경우 홈 화면으로 이동
+              // Navigator.push(
+              //   context
+              //   MaterialPageRoute(
+              //     builder: (BuildContext context) => HomeScreen(),
+              //   ),
+              // );
+            } else if (index == 2) {
+              // '마이페이지' 아이콘을 클릭한 경우 마이페이지 화면으로 이동
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyPageScreen()),
+              );
+            }
+          },
         ));
   }
 }
