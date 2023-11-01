@@ -47,7 +47,7 @@ class _LogInstate extends State<LogIn> {
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
                             hintText: 'ID'),
-                        keyboardType: TextInputType.emailAddress),
+                        keyboardType: TextInputType.text),
                   )),
                   Center(
                       child: Padding(

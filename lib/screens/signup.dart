@@ -71,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -86,51 +86,33 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                Align(
-                  // 이름 입력 칸
-                  alignment: AlignmentDirectional(0.00, 0.00),
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                   child: TextFormField(
-                    controller: _nameController,
-                    // focusNode: _model.nameFocusNode,
-                    textCapitalization: TextCapitalization.none,
-                    obscureText: false,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black45,
-                          width: 1,
+                      // 이름 입력칸
+                      autofocus: true,
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
                         ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(100, 0, 0, 0),
-                          width: 1,
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
                         ),
-                        borderRadius: BorderRadius.circular(12),
                       ),
-                      errorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(100, 255, 89, 99),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedErrorBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromARGB(100, 0, 0, 0),
-                          width: 1,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    style:
-                        TextStyle(fontFamily: 'Readex Pro', letterSpacing: 0),
-                    textAlign: TextAlign.start,
-                    // validator:
-                    //     _model.nameControllerValidator.asValidator(context),
-                  ),
-                ),
+                      keyboardType: TextInputType.text),
+                )),
                 Align(
                   // 아이디 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
@@ -142,96 +124,174 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                TextFormField(
-                  // 아이디 입력 칸
-                  controller: _idController,
-                  // focusNode: ,
-                  autofocus: true,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black45,
-                        width: 1,
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  child: TextFormField(
+                      // 아이디 입력칸
+                      autofocus: true,
+                      controller: _idController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(100, 0, 0, 0),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(100, 255, 89, 99),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromARGB(100, 0, 0, 0),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
+                      keyboardType: TextInputType.text),
+                )),
+                Align(
+                  // 비밀번호 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    child: Text(
+                      '비밀번호',
+                      textAlign: TextAlign.start,
                     ),
                   ),
-                  // validator:
-                  //     _model.idControllerValidator.asValidator(context),
                 ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                      hintText: '비밀번호'),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  child: TextFormField(
+                      // 비밀번호 입력칸
+                      autofocus: true,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      keyboardType: TextInputType.text),
+                )),
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
+                  child: TextFormField(
+                      // 비밀번호 재입력칸
+                      autofocus: true,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      keyboardType: TextInputType.text),
+                )),
+                Align(
+                  // 이메일 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
+                    child: Text(
+                      '이메일',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
                 ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                      hintText: '비밀번호 확인'),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  child: TextFormField(
+                      // 이메일 입력칸
+                      autofocus: true,
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      keyboardType: TextInputType.text),
+                )),
+                Align(
+                  // 주소 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    child: Text(
+                      '주소',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
                 ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _PnumController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                      hintText: '전화번호'),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                      hintText: '이메일'),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                ),
-                SizedBox(height: 10),
-                TextFormField(
-                  controller: _addressController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                      hintText: '주소'),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
-                ),
-                SizedBox(height: 10),
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                  child: TextFormField(
+                      // 주소 입력칸
+                      autofocus: true,
+                      controller: _addressController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      keyboardType: TextInputType.text),
+                )),
                 if (!_passwordsMatch)
                   Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -248,8 +308,17 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                SizedBox(height: 10),
-                SizedBox(height: 10),
+                Align(
+                  // 아이디 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    child: Text(
+                      '개인 정보 방침',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -278,7 +347,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                 ),
-                SizedBox(height: 10),
                 Row(
                   children: [
                     Checkbox(
