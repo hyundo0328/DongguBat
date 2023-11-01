@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'mypage.dart';
+import 'my_page.dart';
 import 'communicate.dart';
 import '../main.dart';
 import 'main_page.dart';

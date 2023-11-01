@@ -3,7 +3,7 @@ import '../widgets/widget_postcard.dart';
 import 'postcardmaking.dart';
 import 'postcarddetails.dart';
 import 'login.dart';
-import 'mypage.dart';
+import 'my_page.dart';
 import 'program_rent.dart';
 import '../main.dart';
 import 'main_page.dart';

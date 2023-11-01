@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'dart:async';
 import 'login.dart';
-import 'mypage.dart';
+import 'my_page.dart';
 import 'communicate.dart';
-import 'mypage.dart';
+import 'my_page.dart';
 import 'program_rent.dart';
 
 class MainPage extends StatefulWidget {
