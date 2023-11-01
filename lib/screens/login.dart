@@ -14,125 +14,109 @@ class _LogInstate extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Builder(
-      builder: (context) {
-        return GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 170.0,
-                ),
-                Center(
-                    child: Image(
-                  image: AssetImage('assets/vertical_symnbol.jpg'),
-                  width: 200.0,
-                  height: 250.0,
-                )),
-                Form(
-                    child: Theme(
-                        data: ThemeData(
-                            primaryColor: const Color.fromARGB(255, 44, 96, 68),
-                            inputDecorationTheme: InputDecorationTheme(
-                                labelStyle: TextStyle(
-                                    color: Colors.teal, fontSize: 15.0))),
-                        child: Container(
-                          padding: EdgeInsets.all(70),
-                          child: Column(children: <Widget>[
-                            TextFormField(
-                                // 아이디 입력칸
-                                autofocus: true,
-                                controller: controller1,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    contentPadding:
-                                        EdgeInsets.fromLTRB(15, 5, 5, 15),
-                                    hintText: 'ID'),
-                                keyboardType: TextInputType.emailAddress),
-                            SizedBox(
-                              // 아이디 입력칸과 비밀번호 입력창 공간 생성
-                              height: 15.0,
-                            ),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(15, 5, 5, 15),
-                                  hintText: 'Password'),
-                              controller: controller2,
-                              keyboardType: TextInputType.text,
-                              obscureText: true,
-                            ),
-                            SizedBox(
-                              // 비밀번호 입력칸과 로그인 버튼 공백
-                              height: 40.0,
-                            ),
-                            ButtonTheme(
-                                // 로그인 Button
-                                minWidth: 100,
-                                height: 10,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: const Color.fromARGB(255, 44, 96,
-                                          68)), // background onPrimary: Colors.white
-                                  onPressed: () {
-                                    if (controller1.text == '' &&
-                                        controller2.text == '') {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  MainPage()));
-                                    } else if (controller1.text == 'hyundo' &&
-                                        controller2.text != '1234') {
-                                    } else if (controller2.text != 'hyundo' &&
-                                        controller2.text != '1234') {
-                                    } else {}
-                                  },
-                                  child: Text('Login'),
-                                )),
-                            ButtonBar(
-                              // 버튼 바
-                              alignment: MainAxisAlignment.center, // 중앙 정렬
-
-                              buttonPadding:
-                                  EdgeInsets.fromLTRB(0, 0, 0, 0), // 버튼의 패딩 주기
-                              children: [
-                                TextButton(
-                                  // 텍스트버튼에 아이콘 넣기
-                                  onPressed: () {
-                                    print('회원가입 버튼');
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => SignUpPage()),
-                                    );
-                                  },
-                                  child: Text('회원가입'),
-                                  style: TextButton.styleFrom(
-                                      primary: Colors.black45),
-                                ),
-                                TextButton(
-                                  // 텍스트버튼에 아이콘 넣기
-                                  onPressed: () {
-                                    print('ID/PW 버튼');
-                                  },
-                                  child: Text('ID/PW 찾기'),
-                                  style: TextButton.styleFrom(
-                                      primary: Colors.black45),
-                                ),
-                              ],
-                            )
-                          ]),
-                        ))),
-              ],
-            ),
-          ),
-        );
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
       },
-    ));
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Align(
+          alignment: AlignmentDirectional(0.00, 0.00),
+          child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(23, 30, 23, 30),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Center(
+                      child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 170, 0, 0),
+                    child: Image(
+                      image: AssetImage('assets/vertical_symnbol.jpg'),
+                      width: 200.0,
+                      height: 250.0,
+                    ),
+                  )),
+                  Center(
+                      child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(50, 70, 50, 15),
+                    child: TextFormField(
+                        // 아이디 입력칸
+                        autofocus: true,
+                        controller: controller1,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                            hintText: 'ID'),
+                        keyboardType: TextInputType.emailAddress),
+                  )),
+                  Center(
+                      child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 30),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                          hintText: 'Password'),
+                      controller: controller2,
+                      keyboardType: TextInputType.text,
+                      obscureText: true,
+                    ),
+                  )),
+                  Center(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 44, 96,
+                              68)), // background onPrimary: Colors.white
+                      onPressed: () {
+                        if (controller1.text == '' && controller2.text == '') {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      MainPage()));
+                        } else if (controller1.text == 'hyundo' &&
+                            controller2.text != '1234') {
+                        } else if (controller2.text != 'hyundo' &&
+                            controller2.text != '1234') {
+                        } else {}
+                      },
+                      child: Text('Login'),
+                    ),
+                  ),
+                  Center(
+                    child: ButtonBar(
+                      // 버튼 바
+                      alignment: MainAxisAlignment.center, // 중앙 정렬
+                      buttonPadding:
+                          EdgeInsets.fromLTRB(0, 0, 0, 0), // 버튼의 패딩 주기
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            // print('회원가입 버튼');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpPage()),
+                            );
+                          },
+                          child: Text('회원가입'),
+                          style: TextButton.styleFrom(primary: Colors.black45),
+                        ),
+                        TextButton(
+                          // 텍스트버튼에 아이콘 넣기
+                          onPressed: () {
+                            // print('ID/PW 버튼');
+                          },
+                          child: Text('ID/PW 찾기'),
+                          style: TextButton.styleFrom(primary: Colors.black45),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+      ),
+    );
   }
 }

@@ -75,25 +75,111 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: 40),
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                      hintText: '이름'),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
+                Align(
+                  // 이름 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
+                    child: Text(
+                      '이름',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
                 ),
-                SizedBox(height: 10),
+                Align(
+                  // 이름 입력 칸
+                  alignment: AlignmentDirectional(0.00, 0.00),
+                  child: TextFormField(
+                    controller: _nameController,
+                    // focusNode: _model.nameFocusNode,
+                    textCapitalization: TextCapitalization.none,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black45,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(100, 0, 0, 0),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(100, 255, 89, 99),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Color.fromARGB(100, 0, 0, 0),
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    style:
+                        TextStyle(fontFamily: 'Readex Pro', letterSpacing: 0),
+                    textAlign: TextAlign.start,
+                    // validator:
+                    //     _model.nameControllerValidator.asValidator(context),
+                  ),
+                ),
+                Align(
+                  // 아이디 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    child: Text(
+                      '아이디',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
                 TextFormField(
-                  controller: _PnumController,
+                  // 아이디 입력 칸
+                  controller: _idController,
+                  // focusNode: ,
+                  autofocus: true,
+                  obscureText: false,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                      hintText: '아이디'),
-                  keyboardType: TextInputType.text,
-                  obscureText: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black45,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(100, 0, 0, 0),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(100, 255, 89, 99),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Color.fromARGB(100, 0, 0, 0),
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  // validator:
+                  //     _model.idControllerValidator.asValidator(context),
                 ),
                 SizedBox(height: 10),
                 TextFormField(

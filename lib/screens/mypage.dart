@@ -24,7 +24,7 @@ class MyPageScreen extends StatelessWidget {
                     CircleAvatar(
                       radius: 50.0,
                       backgroundImage:
-                          AssetImage('assets/user_profile.jpg.jpg'),
+                          AssetImage('assets/user_profile.jpg'),
                     ),
                     SizedBox(height: 10.0),
                     // 사용자 이름
@@ -233,7 +233,7 @@ class UserProfilePage extends StatelessWidget {
                 CircleAvatar(
                   radius: 50.0,
                   backgroundImage:
-                      AssetImage('assets/user_profile.jpg.jpg'), // 프로필 이미지 경로
+                      AssetImage('assets/user_profile.jpg'), // 프로필 이미지 경로
                 ),
                 SizedBox(height: 10.0),
                 // 사용자 이름

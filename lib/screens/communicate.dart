@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/Postcard.dart';
+import '../widgets/widget_postcard.dart';
 import 'postcardmaking.dart';
 import 'postcarddetails.dart';
 import 'login.dart';
@@ -59,7 +59,8 @@ class Communicate extends StatelessWidget {
                 title: '[프로그램] ICT콤플렉스 원포인트 멘토링 같이해요!',
                 content: '멘토링 같이하실 분 구합니다.',
                 onClick: () {
-                  Navigator.of(context).pushNamed('screens/postcarddetails',
+                  Navigator.of(context).pushNamed(
+                      'screens/postcarddetails.dart',
                       arguments: '첫 번째 게시물');
                 },
               );
@@ -69,7 +70,8 @@ class Communicate extends StatelessWidget {
                 title: '[식료품 구매] 1인 가구 양파 구매하는데 같이 구매하실 분?',
                 content: '양파가 너무 많아요 한망이 크니 같이 구매해서 나눕시다.',
                 onClick: () {
-                  Navigator.of(context).pushNamed('screens/postcarddetails',
+                  Navigator.of(context).pushNamed(
+                      'screens/postcarddetails.dart',
                       arguments: '두 번째 게시물');
                 },
               );
@@ -79,7 +81,8 @@ class Communicate extends StatelessWidget {
                 title: '[프로그램] 공유주방에서 함께 요리 해요',
                 content: '자취방에서 요리하니깐 너무 냄새빼기 힘드네요. 같이 요리하고 요리한 음식 나눔해요~',
                 onClick: () {
-                  Navigator.of(context).pushNamed('screens/postcarddetails',
+                  Navigator.of(context).pushNamed(
+                      'screens/postcarddetails.dart',
                       arguments: '세 번째 게시물');
                 },
               );
