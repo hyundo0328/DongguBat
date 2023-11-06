@@ -4,7 +4,7 @@ import 'communicate.dart';
 import '../main.dart';
 import 'main_page.dart';
 
-class program_apply extends StatelessWidget {
+class ProgramApply extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class program_apply extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => program_apply()));
+                        builder: (BuildContext context) => ProgramApply()));
               },
             ),
           ],

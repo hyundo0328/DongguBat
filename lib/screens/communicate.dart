@@ -47,7 +47,7 @@ class Communicate extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (BuildContext context) => program_apply()));
+                        builder: (BuildContext context) => ProgramApply()));
               },
             ),
           ],
