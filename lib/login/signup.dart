@@ -91,7 +91,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                   child: TextFormField(
                       // 이름 입력칸
-                      autofocus: true,
                       controller: _nameController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -108,7 +107,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             color: Color.fromARGB(100, 255, 89, 99),
                             width: 1,
                           ),
-                          // borderRadius: BorderRadius.circular(12),
                         ),
                       ),
                       keyboardType: TextInputType.text),
@@ -129,7 +127,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                   child: TextFormField(
                       // 아이디 입력칸
-                      autofocus: true,
                       controller: _idController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -167,7 +164,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                   child: TextFormField(
                       // 비밀번호 입력칸
-                      autofocus: true,
                       controller: _passwordController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -194,7 +190,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
                   child: TextFormField(
                       // 비밀번호 재입력칸
-                      autofocus: true,
                       controller: _passwordController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -232,7 +227,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                   child: TextFormField(
                       // 이메일 입력칸
-                      autofocus: true,
                       controller: _emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -270,7 +264,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                   child: TextFormField(
                       // 주소 입력칸
-                      autofocus: true,
                       controller: _addressController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),

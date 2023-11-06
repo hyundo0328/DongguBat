@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../widgets/widget_postcard.dart';
 import 'postcardmaking.dart';
 import 'postcarddetails.dart';
-import 'login.dart';
 import 'my_page.dart';
 import 'program_rent.dart';
 import '../main.dart';

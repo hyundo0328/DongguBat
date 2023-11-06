@@ -1,3 +1,4 @@
+import 'package:donggu_bat/widgets/widget_bottombar.dart';
 import 'package:flutter/material.dart';
 import 'my_page.dart';
 import 'communicate.dart';
@@ -62,47 +63,7 @@ class ProgramApply extends StatelessWidget {
               },
             ),
           ],
-        )),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          iconSize: 35,
-          selectedItemColor: const Color.fromARGB(255, 44, 96, 68),
-          unselectedItemColor: Colors.grey,
-          selectedLabelStyle: TextStyle(fontSize: 10),
-          currentIndex: 1,
-          onTap: (int index) {
-            // onTap 이벤트를 처리하고 적절한 페이지로 이동
-            if (index == 0) {
-              if (scaffoldKey.currentState!.isDrawerOpen) {
-                scaffoldKey.currentState!.openDrawer();
-              } else {
-                scaffoldKey.currentState!.closeDrawer();
-              }
-            } else if (index == 1) {
-              // '홈' 페이지로 이동
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (BuildContext context) => MainPage(),
-                ),
-              );
-            } else if (index == 2) {
-              // '마이페이지' 페이지로 이동
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyPageScreen()),
-              );
-            }
-          },
-          items: [
-            BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: '목록'),
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: '마이페이지',
-            ),
-          ],
-        ),
+          )),
         body: Column(
           children: [
             Text(
@@ -164,6 +125,7 @@ class ProgramApply extends StatelessWidget {
             )
           ],
         ),
+          bottomNavigationBar: WidgetBottomNavigationBar()
       ),
     );
   }
