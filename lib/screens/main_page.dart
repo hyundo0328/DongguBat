@@ -45,7 +45,7 @@ class _MainPageState extends State<MainPage> {
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "동구밭"),
         ),
-        drawer: WidgetDrawer(),
+        // drawer: WidgetDrawer(),
         body: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
           child: Column(

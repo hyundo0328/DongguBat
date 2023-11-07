@@ -21,7 +21,7 @@ class MyPageScreen extends StatelessWidget {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
+            padding: EdgeInsetsDirectional.fromSTEB(25, 15, 15, 15),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -60,7 +60,7 @@ class MyPageScreen extends StatelessWidget {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 15, 0),
                                       child: Text(
-                                        '김성동 님',
+                                        '김민종 님',
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontFamily: 'Readex Pro'),
@@ -99,7 +99,7 @@ class MyPageScreen extends StatelessWidget {
                                     ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          5, 5, 5, 5),
+                                          5, 0, 0, 0),
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             fixedSize: Size(75, 20),

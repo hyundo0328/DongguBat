@@ -13,15 +13,17 @@ class WidgetBottomNavigationBar extends StatefulWidget {
 class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  PageController _pageController = PageController(initialPage: 0);
+  // _pageController = PageController(initialPage: 0);
+
+  int _selectedIndex = 1;
+
+  final List<Widget> tabs = [ProgramApply(), MainPage(), MyPageScreen()];
 
   @override
   void dispose() {
-    _pageController.dispose();
+    // _pageController.dispose();
     super.dispose();
   }
-
-  int _selectedIndex = 1;
 
   // Drawer의 상태를 저장할 변수
   // SharedPreferences? _prefs;
@@ -47,36 +49,37 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
+      // type: BottomNavigationBarType.fixed,
       iconSize: 35,
 
       selectedItemColor: const Color.fromARGB(255, 44, 96, 68),
       unselectedItemColor: Colors.grey,
       selectedLabelStyle: TextStyle(fontSize: 10),
-      items: [
+      items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: Icon(Icons.event), label: '프로그램'),
         BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
         BottomNavigationBarItem(icon: Icon(Icons.person), label: '마이페이지'),
       ],
+
       currentIndex: _selectedIndex,
       onTap: (int index) {
         if (index == 0) {
           _onItemTapped(index);
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => ProgramApply()),
+            MaterialPageRoute(builder: (context) => tabs[index]),
           );
         } else if (index == 1) {
           _onItemTapped(index);
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => MainPage()),
+            MaterialPageRoute(builder: (context) => tabs[index]),
           );
         } else if (index == 2) {
           _onItemTapped(index);
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => MyPageScreen()),
+            MaterialPageRoute(builder: (context) => tabs[index]),
           );
         }
       },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
-import 'signup.dart';
-import 'find_IDPW.dart';
+import '../login/signup.dart';
+import '../login/find_IDPW.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -42,8 +42,8 @@ class _LogInstate extends State<LogIn> {
                       child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(50, 70, 50, 15),
                     child: TextFormField(
-// 아이디 입력칸
-                        autofocus: true,
+                        // 아이디 입력칸
+                        // autofocus: true,
                         controller: controller1,
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -56,9 +56,10 @@ class _LogInstate extends State<LogIn> {
                       padding: EdgeInsetsDirectional.fromSTEB(50, 0, 50, 30),
                       child: TextFormField(
                         decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                            hintText: 'Password'),
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                          hintText: 'Password',
+                        ),
                         controller: controller2,
                         keyboardType: TextInputType.text,
                         obscureText: true,
