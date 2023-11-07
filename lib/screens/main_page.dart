@@ -51,9 +51,20 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              Align(
+                // 아이디 텍스트
+                alignment: AlignmentDirectional(-1.00, 0.00),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
+                  child: Text(
+                    '당신을 위한 추천 (Recommand for you)',
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ),
               Container(
-                width: double.infinity,
-                height: 240,
+                width: MediaQuery.of(context).size.width,
+                height: 145,
                 child: Stack(
                   fit: StackFit.loose,
                   children: [
@@ -75,7 +86,7 @@ class _MainPageState extends State<MainPage> {
                             child: Image.asset(
                               'assets/SNS 인증샷.jpg',
                               width: double.infinity,
-                              height: 250,
+                              height: 130,
                               fit: BoxFit.contain,
                               alignment: Alignment(0.00, -1.00),
                             ),
@@ -88,7 +99,7 @@ class _MainPageState extends State<MainPage> {
                             child: Image.asset(
                               'assets/세이프 라이딩.jpg',
                               width: double.infinity,
-                              height: 250,
+                              height: 130,
                               fit: BoxFit.contain,
                               alignment: Alignment(0.00, -1.00),
                             ),
@@ -101,7 +112,7 @@ class _MainPageState extends State<MainPage> {
                             child: Image.asset(
                               'assets/플로깅플레져.jpg',
                               width: double.infinity,
-                              height: 225,
+                              height: 130,
                               fit: BoxFit.contain,
                             ),
                           ),
@@ -139,6 +150,36 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              Align(
+                // 아이디 텍스트
+                alignment: AlignmentDirectional(-1.00, 0.00),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
+                  child: Text(
+                    '대관 신청 (Rental Application)',
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 200,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  color: Color(0xFFC2C2C2),
+                ),
+              ),
+              Align(
+                // 아이디 텍스트
+                alignment: AlignmentDirectional(-1.00, 0.00),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
+                  child: Text(
+                    '월간 프로그램 안내 (Monthly Program)',
+                    textAlign: TextAlign.start,
+                  ),
                 ),
               ),
             ],

@@ -1,9 +1,6 @@
 import 'package:donggu_bat/widgets/widget_bottombar.dart';
 import 'package:flutter/material.dart';
-import 'my_page.dart';
-import 'communicate.dart';
-import '../main.dart';
-import 'main_page.dart';
+import '../widgets/widget_appbar.dart';
 
 class ProgramApply extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -13,57 +10,10 @@ class ProgramApply extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         // 상단바, 하단바, 메인화면으로 나눌때 주로 사용
-        appBar: AppBar(
-          title: Text('프로그램 대관'),
-          centerTitle: true,
-          backgroundColor: const Color.fromARGB(255, 44, 96, 68),
-
-          // leading : 아이콘 버튼이나 간단한 위젯을 왼쪽에 배치할 때 사용
-
-          // actions : 복수의 아이콘 버튼 등을 오른쪽에 배치할 때 사용
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                print("search button is clicked");
-              },
-            ),
-          ],
-        ),
-        drawer: Drawer(
-            child: ListView(
-          padding: EdgeInsets.all(10),
-          children: <Widget>[
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/vertical_symnbol.jpg'),
-              ),
-              accountName: Text('hyundo'),
-              accountEmail: Text('hyundo13@naver.com'),
-              onDetailsPressed: () {
-                print('arrow is clicked');
-              },
-            ),
-            ListTile(
-              title: Text('소통'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => Communicate()));
-              },
-            ),
-            ListTile(
-              title: Text('프로그램/대관'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => ProgramApply()));
-              },
-            ),
-          ],
-          )),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
+            child: WidgetAppBar(title: "프로그램 신청"),
+          ),
         body: Column(
           children: [
             Text(
