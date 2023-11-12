@@ -1,3 +1,4 @@
+import 'package:donggu_bat/widgets/widget_bottombar.dart';
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
 import '../login/signup.dart';
@@ -73,11 +74,11 @@ class _LogInstate extends State<LogIn> {
                       ),
                       onPressed: () {
                         if (controller1.text == '' && controller2.text == '') {
-                          Navigator.push(
+                          Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      MainPage()));
+                                  builder: (context) => MainPage()),
+                              (route) => false);
                         } else if (controller1.text == 'hyundo' &&
                             controller2.text != '1234') {
                         } else if (controller2.text != 'hyundo' &&

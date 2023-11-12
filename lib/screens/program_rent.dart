@@ -2,18 +2,26 @@ import 'package:donggu_bat/widgets/widget_bottombar.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 
-class ProgramApply extends StatelessWidget {
+class ProgramApply extends StatefulWidget {
+  @override
+  State<ProgramApply> createState() => _ProgramApplyState();
+}
+
+class _ProgramApplyState extends State<ProgramApply> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     int _currentIndex = 0;
     return MaterialApp(
       home: Scaffold(
         // 상단바, 하단바, 메인화면으로 나눌때 주로 사용
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
-            child: WidgetAppBar(title: "프로그램 신청"),
-          ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
+          child: WidgetAppBar(title: "프로그램 신청"),
+        ),
         body: Column(
           children: [
             Text(
@@ -75,7 +83,14 @@ class ProgramApply extends StatelessWidget {
             )
           ],
         ),
-          bottomNavigationBar: WidgetBottomNavigationBar()
+        bottomNavigationBar: WidgetBottomNavigationBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ),
       ),
     );
   }

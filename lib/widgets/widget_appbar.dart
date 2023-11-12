@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class WidgetAppBar extends StatelessWidget {
   final String title; // Add a title parameter
 
-  WidgetAppBar({required this.title}); // Constructor to receive the title
+  WidgetAppBar({required this.title});
 
   @override
   Widget build(BuildContext context) {

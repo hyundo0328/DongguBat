@@ -5,8 +5,16 @@ import '../widgets/widget_bottombar.dart';
 import 'email_change.dart';
 import 'phone_change.dart';
 
-class MyPageScreen extends StatelessWidget {
+class MyPageScreen extends StatefulWidget {
+  @override
+  State<MyPageScreen> createState() => _MyPageScreenState();
+}
+
+class _MyPageScreenState extends State<MyPageScreen> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  int _selectedIndex = 2;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -155,7 +163,14 @@ class MyPageScreen extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: WidgetBottomNavigationBar(),
+        bottomNavigationBar: WidgetBottomNavigationBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ),
       ),
     );
   }

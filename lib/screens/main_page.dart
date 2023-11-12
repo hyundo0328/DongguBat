@@ -16,21 +16,36 @@ class _MainPageState extends State<MainPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   PageController _pageController = PageController(initialPage: 0);
+  late Timer _timer;
+
+  ScrollController _scrollController = ScrollController();
 
   int _activePage = 0;
   int _currentPage = 0;
+  int _selectedIndex = 1;
 
   @override
   void initState() {
     super.initState();
+
+    _pageController = PageController(initialPage: 0);
+
     // 타이머를 사용하여 페이지 자동으로 넘기기
-    Timer.periodic(Duration(milliseconds: 2000), (Timer timer) {
+    _timer = Timer.periodic(Duration(milliseconds: 2000), (Timer timer) {
       _currentPage++;
       _currentPage = _currentPage % 3;
 
       _pageController.animateToPage(_currentPage,
           duration: Duration(milliseconds: 500), curve: Curves.ease);
     });
+  }
+
+  @override
+  void dispose() {
+    // 상태가 해제된 위젯에서 setState를 호출하지 않도록 타이머를 취소합니다.
+    _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -185,7 +200,14 @@ class _MainPageState extends State<MainPage> {
             ],
           ),
         ),
-        bottomNavigationBar: WidgetBottomNavigationBar(),
+        bottomNavigationBar: WidgetBottomNavigationBar(
+          selectedIndex: _selectedIndex,
+          onItemTapped: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+        ),
       ),
     );
   }
