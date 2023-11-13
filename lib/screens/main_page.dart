@@ -157,7 +157,7 @@ class _MainPageState extends State<MainPage> {
                                         radius: 3,
                                         backgroundColor: _activePage == index
                                             ? Colors.grey
-                                            : Colors.grey.withOpacity(0.5),
+                                            : Colors.grey.withOpacity(0.7),
                                       ),
                                     ),
                                   )),
