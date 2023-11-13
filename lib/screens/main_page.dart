@@ -173,7 +173,7 @@ class _MainPageState extends State<MainPage> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
                   child: Text(
-                    '대관 신청 (Rental Application)',
+                    '공지사항 (Notice)',
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -192,7 +192,7 @@ class _MainPageState extends State<MainPage> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
                   child: Text(
-                    '월간 프로그램 안내 (Monthly Program)',
+                    '성동구 날씨 (Seongdong\'s Weather)',
                     textAlign: TextAlign.start,
                   ),
                 ),

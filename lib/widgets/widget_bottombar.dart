@@ -46,17 +46,7 @@ class _WidgetBottomNavigationBarState extends State<WidgetBottomNavigationBar> {
       ],
       currentIndex: widget.selectedIndex,
       onTap: (int index) {
-        if (index == 0) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => tabs[index]),
-          );
-        } else if (index == 1) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => tabs[index]),
-          );
-        } else if (index == 2) {
+        if (index != widget.selectedIndex) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => tabs[index]),
