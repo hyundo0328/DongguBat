@@ -1,28 +1,31 @@
 //main.dart
 import 'package:flutter/material.dart';
-import 'package:donggu_bat/screens/screen_index.dart';
-import 'package:donggu_bat/screens/screen_login.dart';
-// import 'package:donggu_bat/screens/screen_splash.dart';
-import 'package:donggu_bat/tabs/tab_home.dart';
-import 'package:donggu_bat/tabs/tab_list.dart';
-import 'package:donggu_bat/tabs/tab_profile.dart';
+import 'login/login.dart';
 
-void main (){
+void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '성동구 1인가구 지원센터',
-      routes: {
-        '/index': (context) => IndexScreen(),
-        '/login': (context) => LoginScreen(),
-        // '/splash': (context) => SplashScreen(),
-      },
-      initialRoute: '/splash',
+      debugShowCheckedModeBanner: false,
+      title: 'DongguBat',
+      home: LogIn(),
     );
   }
 }
+
+
+// class MyApp extends StatelessWidget {
+//   // 여기에서 로그인 여부를 확인하는 로직을 작성합니다.
+//   bool isLoggedIn = false; // 사용자가 로그인한 여부를 저장하는 변수
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: isLoggedIn ? MainPage() : LoginScreen(),
+//     );
+//   }
+// }
