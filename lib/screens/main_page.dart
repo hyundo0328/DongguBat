@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
 import '../widgets/widget_drawer.dart';
+import '../notice/notice_page.dart';
+import '../notice/notice1.dart';
+import '../notice/notice2.dart';
+import '../notice/notice3.dart';
 import 'dart:async';
-
 
 class MainPage extends StatefulWidget {
   @override
@@ -67,7 +70,6 @@ class _MainPageState extends State<MainPage> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                // 아이디 텍스트
                 alignment: AlignmentDirectional(-1.00, 0.00),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
@@ -168,7 +170,6 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               Align(
-                // 아이디 텍스트
                 alignment: AlignmentDirectional(-1.00, 0.00),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
@@ -179,15 +180,103 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width,
-                height: 200,
                 decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Color(0xFFC2C2C2),
+                    border: Border.all(color: Colors.black45, width: 1.5)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListTile(
+                      // title: Text(
+                      //   "공지사항",
+                      //   style: TextStyle(fontSize: 17),
+                      // ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.keyboard_arrow_right),
+                        iconSize: 25,
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Notice()),
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15, right: 15),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.black45, // 아래 테두리의 색상 설정
+                              width: 1.5, // 아래 테두리의 두께 설정
+                            ),
+                          ),
+                        ),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NoticePage1()),
+                            );
+                          },
+                          child: Text(
+                            "공지사항 1 제목",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15, right: 15),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: Colors.black45, // 아래 테두리의 색상 설정
+                              width: 1.5, // 아래 테두리의 두께 설정
+                            ),
+                          ),
+                        ),
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NoticePage2()),
+                            );
+                          },
+                          child: Text(
+                            "공지사항 2 제목",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NoticePage3()),
+                          );
+                        },
+                        child: Text(
+                          "공지사항 3 제목",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Align(
-                // 아이디 텍스트
                 alignment: AlignmentDirectional(-1.00, 0.00),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
