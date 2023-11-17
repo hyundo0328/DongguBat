@@ -5,7 +5,6 @@ import '../widgets/widget_bottombar.dart';
 import '../widgets/widget_drawer.dart';
 import 'dart:async';
 
-
 class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
@@ -72,7 +71,7 @@ class _MainPageState extends State<MainPage> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
                   child: Text(
-                    '당신을 위한 추천 (Recommand for you)',
+                    '지금 성동구에선?',
                     textAlign: TextAlign.start,
                   ),
                 ),
