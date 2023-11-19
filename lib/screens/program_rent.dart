@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProgramApply extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _ProgramApplyState extends State<ProgramApply> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _selectedIndex = 0;
-  int _currentMonthIndex = 1;
+  int _currentMonthIndex = 0;
   int _rentIndex = 0;
   String selectedLocation = '';
 
@@ -154,7 +155,8 @@ class _ProgramApplyState extends State<ProgramApply> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  // 신청 버튼 동작
+                                  launch(
+                                      'https://sd1in.net/program/application-for-rental');
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white,
@@ -189,7 +191,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                     children: [
                       SizedBox(height: 10),
                       Text(
-                        '$_currentMonthIndex 월 추천 프로그램',
+                        '${_currentMonthIndex + 1} 월 추천 프로그램',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 18.0, fontWeight: FontWeight.bold),
