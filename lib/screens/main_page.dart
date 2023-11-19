@@ -2,7 +2,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import '../widgets/widget_drawer.dart';
+import '../data/loading_practice.dart';
+// import 'weather_screen.dart';
 import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
 import '../notice/notice2.dart';
@@ -10,6 +11,9 @@ import '../notice/notice3.dart';
 import 'dart:async';
 
 class MainPage extends StatefulWidget {
+  MainPage({this.parseWeatherData});
+  final dynamic parseWeatherData;
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -21,15 +25,22 @@ class _MainPageState extends State<MainPage> {
   PageController _pageController = PageController(initialPage: 0);
   late Timer _timer;
 
-  ScrollController _scrollController = ScrollController();
+  // ScrollController _scrollController = ScrollController();
 
   int _activePage = 0;
   int _currentPage = 0;
   int _selectedIndex = 1;
 
+  String? cityName;
+  int? temp;
+  dynamic parseWeatherData;
+
   @override
   void initState() {
-    super.initState();
+    // super.initState();
+
+    updateData(widget.parseWeatherData);
+    print(parseWeatherData);
 
     _pageController = PageController(initialPage: 0);
 
@@ -51,6 +62,16 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
+  void updateData(dynamic weatherData) {
+    // temp = double.parse(temp2.toStringAsFixed(1));
+    double temp2 = weatherData['main']['temp'];
+    temp = temp2.round();
+    cityName = weatherData['name'];
+
+    print(temp);
+    print(cityName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -63,7 +84,6 @@ class _MainPageState extends State<MainPage> {
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "동구밭"),
         ),
-        // drawer: WidgetDrawer(),
         body: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
           child: Column(
@@ -74,7 +94,7 @@ class _MainPageState extends State<MainPage> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
                   child: Text(
-                    '당신을 위한 추천 (Recommand for you)',
+                    '지금 성동구에선?',
                     textAlign: TextAlign.start,
                   ),
                 ),
@@ -172,7 +192,7 @@ class _MainPageState extends State<MainPage> {
               Align(
                 alignment: AlignmentDirectional(-1.00, 0.00),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 20, 0, 7),
                   child: Text(
                     '공지사항 (Notice)',
                     textAlign: TextAlign.start,
@@ -181,16 +201,14 @@ class _MainPageState extends State<MainPage> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black45, width: 1.5),
+                    border: Border.all(color: Colors.black38, width: 1.5),
                     borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
-                      // title: Text(
-                      //   "공지사항",
-                      //   style: TextStyle(fontSize: 17),
-                      // ),
+                      dense: true,
+                      contentPadding: EdgeInsets.all(0),
                       trailing: IconButton(
                         icon: Icon(Icons.keyboard_arrow_right),
                         iconSize: 25,
@@ -210,7 +228,7 @@ class _MainPageState extends State<MainPage> {
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: Colors.black45, // 아래 테두리의 색상 설정
+                              color: Colors.black38, // 아래 테두리의 색상 설정
                               width: 1.5, // 아래 테두리의 두께 설정
                             ),
                           ),
@@ -238,7 +256,7 @@ class _MainPageState extends State<MainPage> {
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: Colors.black45, // 아래 테두리의 색상 설정
+                              color: Colors.black38, // 아래 테두리의 색상 설정
                               width: 1.5, // 아래 테두리의 두께 설정
                             ),
                           ),
@@ -274,6 +292,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                     ),
+                    // Divider()
                   ],
                 ),
               ),
@@ -287,6 +306,45 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black38, width: 1.5),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 15, right: 15),
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          children: [
+                            Icon(Icons.cloud, size: 100),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '$cityName',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                Text(
+                                  '$temp',
+                                  style: TextStyle(fontSize: 15.0),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    // Divider()
+                  ],
+                ),
+              )
             ],
           ),
         ),
