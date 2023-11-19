@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import '../data/loading_practice.dart';
+import '../data/loading.dart';
 // import 'weather_screen.dart';
 import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
@@ -37,9 +37,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    // super.initState();
+    super.initState();
 
-    updateData(widget.parseWeatherData);
+    // updateData(widget.parseWeatherData);
     print(parseWeatherData);
 
     _pageController = PageController(initialPage: 0);
