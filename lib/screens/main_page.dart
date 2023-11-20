@@ -2,18 +2,18 @@
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import '../data/loading.dart';
-// import 'weather_screen.dart';
+// import '../data/loading.dart';
+import '../data/network.dart';
+import 'weather_screen.dart';
 import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
 import 'dart:async';
 
-class MainPage extends StatefulWidget {
-  MainPage({this.parseWeatherData});
-  final dynamic parseWeatherData;
+const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
+class MainPage extends StatefulWidget {
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -33,14 +33,13 @@ class _MainPageState extends State<MainPage> {
 
   String? cityName;
   int? temp;
-  dynamic parseWeatherData;
+  // dynamic parseWeatherData = Loading().getLocation();
 
   @override
   void initState() {
     super.initState();
 
-    // updateData(widget.parseWeatherData);
-    print(parseWeatherData);
+    getLocation();
 
     _pageController = PageController(initialPage: 0);
 
@@ -54,22 +53,34 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  dynamic getLocation() async {
+    // MyLocation myLocation = MyLocation();
+    // await myLocation.getMyCurrentLocation();
+    // latitude3 = myLocation.latitude2;
+    // longitude3 = myLocation.longitude2;
+    // print(latitude3);
+    // print(longitude3);
+
+    Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
+        'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
+    // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
+
+    var weatherData = await network.getJsonData();
+    print("메인페이지");
+    print(weatherData);
+    print(weatherData['main']['temp']);
+    print(weatherData['name']);
+    return WeatherScreen(
+      parseWeatherData: weatherData,
+    );
+  }
+
   @override
   void dispose() {
     // 상태가 해제된 위젯에서 setState를 호출하지 않도록 타이머를 취소합니다.
     _timer.cancel();
     _pageController.dispose();
     super.dispose();
-  }
-
-  void updateData(dynamic weatherData) {
-    // temp = double.parse(temp2.toStringAsFixed(1));
-    double temp2 = weatherData['main']['temp'];
-    temp = temp2.round();
-    cityName = weatherData['name'];
-
-    print(temp);
-    print(cityName);
   }
 
   @override
@@ -313,34 +324,37 @@ class _MainPageState extends State<MainPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: 15, right: 15),
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          children: [
-                            Icon(Icons.cloud, size: 100),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '$cityName',
-                                  style: TextStyle(fontSize: 15.0),
-                                ),
-                                SizedBox(
-                                  height: 20.0,
-                                ),
-                                Text(
-                                  '$temp',
-                                  style: TextStyle(fontSize: 15.0),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    WeatherScreen()
+                    // Padding(
+                    //   padding: EdgeInsets.only(left: 15, right: 15),
+                    //     child: WeatherScreen()
+                    //     // child: Container(
+                    //     //   alignment: Alignment.centerLeft,
+                    //     //   width: MediaQuery.of(context).size.width,
+                    //     //   child: Row(
+                    //     //     children: [
+                    //     //       Icon(Icons.cloud, size: 100),
+                    //     //       Column(
+                    //     //         crossAxisAlignment: CrossAxisAlignment.center,
+                    //     //         children: [
+                    //     //           Text(
+                    //     //             '$cityName',
+                    //     //             style: TextStyle(fontSize: 15.0),
+                    //     //           ),
+                    //     //           SizedBox(
+                    //     //             height: 20.0,
+                    //     //           ),
+                    //     //           Text(
+                    //     //             '$temp',
+                    //     //             style: TextStyle(fontSize: 15.0),
+                    //     //           ),
+                    //     //         ],
+                    //     //       ),
+                    //     //       // WeatherScreen()
+                    //     //     ],
+                    //     //   ),
+                    //     // ),
+                    // ),
                     // Divider()
                   ],
                 ),

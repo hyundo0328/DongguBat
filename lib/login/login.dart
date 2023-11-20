@@ -1,11 +1,7 @@
-import 'package:donggu_bat/widgets/widget_bottombar.dart';
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
 import '../login/signup.dart';
 import '../login/find_IDPW.dart';
-import '../data/loading.dart';
-import '../data/network.dart';
-import '../screens/weather_screen.dart';
 
 const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
@@ -19,53 +15,11 @@ class _LogInstate extends State<LogIn> {
   TextEditingController controller2 = TextEditingController();
   // 더 이상 사용하지 않으면 메모리 낭비 방지를 위해서 dispose method를 사용 (추가)
 
-  dynamic parseWeatherData;
+  // dynamic parseWeatherData;
 
   @override
   void initState() {
-    super.initState();
-    getLocation();
-
-    //updateData(parseWeatherData);
-    // print(parseWeatherData);
-  }
-
-  dynamic getLocation() async {
-    // MyLocation myLocation = MyLocation();
-    // await myLocation.getMyCurrentLocation();
-    // latitude3 = myLocation.latitude2;
-    // longitude3 = myLocation.longitude2;
-    // print(latitude3);
-    // print(longitude3);
-
-    Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
-        'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
-    // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
-
-    var weatherData = await network.getJsonData();
-    print(weatherData);
-    print(weatherData['main']['temp']);
-    print(weatherData['name']);
-    return MainPage(
-      parseWeatherData: weatherData,
-    );
-  }
-
-  String? cityName;
-  double? temp;
-
-  void updateData(dynamic weatherData) {
-    // double temp2 = weatherData['main']['temp'];
-    if (weatherData != null && weatherData['main'] != null) {
-      double temp2 = weatherData['main']['temp'];
-      temp = double.parse(temp2.toStringAsFixed(1));
-      cityName = weatherData['name'];
-
-      print(temp);
-      print(cityName);
-    } else {
-      print("날씨 정보를 불러오지 못함");
-    }
+    // super.initState();
   }
 
   @override

@@ -10,6 +10,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _RepasswordController = TextEditingController();
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _PnumController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
@@ -197,7 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: TextFormField(
                       // 비밀번호 재입력칸
                       // autofocus: true,
-                      controller: _passwordController,
+                      controller: _RepasswordController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
