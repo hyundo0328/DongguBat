@@ -120,6 +120,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                 ),
                 //추천 하려고 하는 프로그램 띄우기 위한 container
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -131,7 +132,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                             children: [
                               Image.asset(
                                 'assets/${recommended[0]['location']}',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                                 height: 200,
                               ),
                               SizedBox(height: 20),
