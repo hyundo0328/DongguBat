@@ -222,6 +222,44 @@ class _SignUpPageState extends State<SignUpPage> {
                       keyboardType: TextInputType.text),
                 )),
                 Align(
+                  // 아이디 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    child: Text(
+                      '아이디',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  child: TextFormField(
+                      // 전화번호 입력칸
+                      // autofocus: true,
+                      controller: _PnumController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      keyboardType: TextInputType.text),
+                )),
+                Align(
                   // 이메일 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
