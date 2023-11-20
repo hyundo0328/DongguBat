@@ -47,32 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCB5ENogKuLBI1QvdnwTNG1Y0cR5hLmYzk',
-    appId: '1:807502359011:web:f380ee2a8a2376f11ad8d6',
-    messagingSenderId: '807502359011',
-    projectId: 'donggubat-a0c1b',
-    authDomain: 'donggubat-a0c1b.firebaseapp.com',
-    databaseURL: 'https://donggubat-a0c1b-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'donggubat-a0c1b.appspot.com',
-    measurementId: 'G-FKNYGS4QG9',
+    apiKey: 'AIzaSyDGJLNPsUKPs3gP8HH8b3YjYiPeKExDCQY',
+    appId: '1:633234134006:web:21989bae470cf3f758edd7',
+    messagingSenderId: '633234134006',
+    projectId: 'donggubatreal',
+    authDomain: 'donggubatreal.firebaseapp.com',
+    storageBucket: 'donggubatreal.appspot.com',
+    measurementId: 'G-WMPCQQVZY2',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC5zNW2QvS4LeXf8P6GhtShrAzWMeeBOSg',
-    appId: '1:807502359011:android:3d1f34b44daf06971ad8d6',
-    messagingSenderId: '807502359011',
-    projectId: 'donggubat-a0c1b',
-    databaseURL: 'https://donggubat-a0c1b-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'donggubat-a0c1b.appspot.com',
+    apiKey: 'AIzaSyDdSyslI1dTBI8rZsq0FwnRyUORQej4RiA',
+    appId: '1:633234134006:android:cecb1f986c44086358edd7',
+    messagingSenderId: '633234134006',
+    projectId: 'donggubatreal',
+    storageBucket: 'donggubatreal.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBQscEDZxBxQ0RlhAyrCAWgtfNys-DzoVQ',
-    appId: '1:807502359011:ios:76451db9fab0c26a1ad8d6',
-    messagingSenderId: '807502359011',
-    projectId: 'donggubat-a0c1b',
-    databaseURL: 'https://donggubat-a0c1b-default-rtdb.asia-southeast1.firebasedatabase.app',
-    storageBucket: 'donggubat-a0c1b.appspot.com',
+    apiKey: 'AIzaSyCkvYRlnpEFKmSiDkSFhUERz4-mm3oJBX0',
+    appId: '1:633234134006:ios:b580e989a5f9211958edd7',
+    messagingSenderId: '633234134006',
+    projectId: 'donggubatreal',
+    storageBucket: 'donggubatreal.appspot.com',
     iosBundleId: 'com.example.dongguBat',
   );
 }

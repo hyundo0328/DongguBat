@@ -1,14 +1,13 @@
 {
   "project_info": {
-    "project_number": "807502359011",
-    "firebase_url": "https://donggubat-a0c1b-default-rtdb.asia-southeast1.firebasedatabase.app",
-    "project_id": "donggubat-a0c1b",
-    "storage_bucket": "donggubat-a0c1b.appspot.com"
+    "project_number": "633234134006",
+    "project_id": "donggubatreal",
+    "storage_bucket": "donggubatreal.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:807502359011:android:3d1f34b44daf06971ad8d6",
+        "mobilesdk_app_id": "1:633234134006:android:cecb1f986c44086358edd7",
         "android_client_info": {
           "package_name": "com.example.donggu_bat"
         }
@@ -16,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC5zNW2QvS4LeXf8P6GhtShrAzWMeeBOSg"
+          "current_key": "AIzaSyDdSyslI1dTBI8rZsq0FwnRyUORQej4RiA"
         }
       ],
       "services": {
