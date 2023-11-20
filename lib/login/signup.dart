@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/main_page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -222,6 +223,44 @@ class _SignUpPageState extends State<SignUpPage> {
                       keyboardType: TextInputType.text),
                 )),
                 Align(
+                  // 아이디 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    child: Text(
+                      '전화번호',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                Center(
+                    child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                  child: TextFormField(
+                      // 전화번호 입력칸
+                      // autofocus: true,
+                      controller: _PnumController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                          //borderRadius: BorderRadius.circular(12),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Color.fromARGB(100, 255, 89, 99),
+                            width: 1,
+                          ),
+                          // borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      keyboardType: TextInputType.text),
+                )),
+                Align(
                   // 이메일 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
@@ -368,7 +407,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: _handleSignUp,
+                  onPressed: () {
+                    _handleSignUp(); // Call _handleSignUp function first
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                  },
                   child: Text('가입 하기'),
                   style: ElevatedButton.styleFrom(
                     primary: const Color.fromARGB(255, 44, 96, 68),
