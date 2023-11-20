@@ -227,7 +227,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
                     child: Text(
-                      '아이디',
+                      '전화번호',
                       textAlign: TextAlign.start,
                     ),
                   ),
