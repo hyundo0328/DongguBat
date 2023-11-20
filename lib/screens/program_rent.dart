@@ -34,6 +34,24 @@ class _ProgramApplyState extends State<ProgramApply> {
     '플로깅플레져.jpg'
   ];
 
+  List<Map<String, String>> month = [
+    {
+      'photo': '1.png',
+      'url': 'https://sd1in.net/product/stationery-collection'
+    },
+    {'photo': '2.png', 'url': 'https://sd1in.net/product/1inseoul'},
+    {'photo': '3.png', 'url': 'https://sd1in.net/product/living-woodworking'},
+    {'photo': '4.png', 'url': 'https://sd1in.net/product/1inseoul'},
+    {'photo': '5.png', 'url': 'https://sd1in.net/product/living-woodworking'},
+    {'photo': 'image.png', 'url': 'https://sd1in.net/product/1inseoul'},
+    {'photo': '1.png', 'url': 'https://sd1in.net/product/living-woodworking'},
+    {'photo': '2.png', 'url': 'https://sd1in.net/product/1inseoul'},
+    {'photo': '3.png', 'url': 'https://sd1in.net/product/living-woodworking'},
+    {'photo': '4.png', 'url': 'https://sd1in.net/product/1inseoul'},
+    {'photo': '5.png', 'url': 'https://sd1in.net/product/living-woodworking'},
+    {'photo': 'image.png', 'url': 'https://sd1in.net/product/1inseoul'},
+  ];
+
   List<String> programurl = [
     'https://sd1in.net/product/stationery-collection',
     'https://sd1in.net/product/1inseoul',
@@ -341,10 +359,21 @@ class _ProgramApplyState extends State<ProgramApply> {
                             },
                           ),
                           itemBuilder: (BuildContext context, int index, _) {
-                            return Image.asset(
-                              'assets/${_monthlyImages[index]}',
-                              fit: BoxFit.cover,
+                            return GestureDetector(
+                              onTap: () {
+                                String url =
+                                    month[_currentMonthIndex]['url'] ?? '';
+                                if (url.isNotEmpty) {
+                                  launch(url);
+                                }
+                              },
+                              child: Image.asset(
+                                  'assets/${month[_currentMonthIndex]['photo']}'),
                             );
+                            // return Image.asset(
+                            //   'assets/${_monthlyImages[index]}',
+                            //   fit: BoxFit.cover,
+                            // );
                           },
                         ),
                       ),

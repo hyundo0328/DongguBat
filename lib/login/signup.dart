@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/main_page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -367,7 +368,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: _handleSignUp,
+                  onPressed: () {
+                    _handleSignUp(); // Call _handleSignUp function first
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                  },
                   child: Text('가입 하기'),
                   style: ElevatedButton.styleFrom(
                     primary: const Color.fromARGB(255, 44, 96, 68),
