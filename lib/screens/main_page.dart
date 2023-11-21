@@ -213,7 +213,7 @@ class _MainPageState extends State<MainPage> {
               ),
               Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black38, width: 1.5),
+                    border: Border.all(color: Colors.black38, width: 1.0),
                     borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,7 +241,7 @@ class _MainPageState extends State<MainPage> {
                           border: Border(
                             bottom: BorderSide(
                               color: Colors.black38, // 아래 테두리의 색상 설정
-                              width: 1.5, // 아래 테두리의 두께 설정
+                              width: 1.0, // 아래 테두리의 두께 설정
                             ),
                           ),
                         ),
@@ -269,7 +269,7 @@ class _MainPageState extends State<MainPage> {
                           border: Border(
                             bottom: BorderSide(
                               color: Colors.black38, // 아래 테두리의 색상 설정
-                              width: 1.5, // 아래 테두리의 두께 설정
+                              width: 1.0, // 아래 테두리의 두께 설정
                             ),
                           ),
                         ),

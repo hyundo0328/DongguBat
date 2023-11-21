@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
 import '../login/signup.dart';
 import '../login/find_IDPW.dart';
+import 'recommand.dart';
 
 const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
@@ -85,8 +86,10 @@ class _LogInstate extends State<LogIn> {
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MainPage()),
-                              (route) => false);
+                              builder: (context) => MainPage(),
+                            ),
+                            (route) => false,
+                          );
                         } else if (controller1.text == 'hyundo' &&
                             controller2.text != '1234') {
                         } else if (controller2.text != 'hyundo' &&

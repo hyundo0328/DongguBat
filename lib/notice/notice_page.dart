@@ -24,7 +24,7 @@ class Notice extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black38, width: 1.5),
+                  border: Border.all(color: Colors.black38, width: 1.0),
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -70,7 +70,7 @@ class Notice extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black38, width: 1.5),
+                  border: Border.all(color: Colors.black38, width: 1.0),
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -116,7 +116,7 @@ class Notice extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black38, width: 1.5),
+                  border: Border.all(color: Colors.black38, width: 1.0),
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -162,7 +162,7 @@ class Notice extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black38, width: 1.5),
+                  border: Border.all(color: Colors.black38, width: 1.0),
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -208,7 +208,7 @@ class Notice extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black38, width: 1.5),
+                  border: Border.all(color: Colors.black38, width: 1.0),
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -254,7 +254,7 @@ class Notice extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black38, width: 1.5),
+                  border: Border.all(color: Colors.black38, width: 1.0),
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(
@@ -297,12 +297,11 @@ class Notice extends StatelessWidget {
               padding:
                   EdgeInsets.only(left: 15, right: 15, top: 20, bottom: 20),
               child: Container(
-                // color: Colors.white,
                 alignment: Alignment.centerLeft,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black38, width: 1.5),
+                  border: Border.all(color: Colors.black38, width: 1.0),
                   borderRadius: BorderRadius.circular(6),
                   boxShadow: [
                     BoxShadow(

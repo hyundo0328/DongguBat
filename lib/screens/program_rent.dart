@@ -323,7 +323,6 @@ class _ProgramApplyState extends State<ProgramApply> {
                 ),
 
                 Align(
-                  // 아이디 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
+import 'recommand.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -89,32 +90,33 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Center(
-                    child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  child: TextFormField(
-                      // 이름 입력칸
-                      // autofocus: true,
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    child: TextFormField(
+                        // 이름 입력칸
+                        // autofocus: true,
+                        controller: _nameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(100, 0, 0, 0),
+                              width: 1,
+                            ),
+                            //borderRadius: BorderRadius.circular(12),
                           ),
-                          //borderRadius: BorderRadius.circular(12),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 255, 89, 99),
-                            width: 1,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(100, 255, 89, 99),
+                              width: 1,
+                            ),
+                            // borderRadius: BorderRadius.circular(12),
                           ),
-                          // borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                      keyboardType: TextInputType.text),
-                )),
+                        keyboardType: TextInputType.text),
+                  ),
+                ),
                 Align(
                   // 아이디 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
@@ -127,32 +129,33 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Center(
-                    child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  child: TextFormField(
-                      // 아이디 입력칸
-                      // autofocus: true,
-                      controller: _idController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    child: TextFormField(
+                        // 아이디 입력칸
+                        // autofocus: true,
+                        controller: _idController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(100, 0, 0, 0),
+                              width: 1,
+                            ),
+                            //borderRadius: BorderRadius.circular(12),
                           ),
-                          //borderRadius: BorderRadius.circular(12),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 255, 89, 99),
-                            width: 1,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(100, 255, 89, 99),
+                              width: 1,
+                            ),
+                            // borderRadius: BorderRadius.circular(12),
                           ),
-                          // borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                      keyboardType: TextInputType.text),
-                )),
+                        keyboardType: TextInputType.text),
+                  ),
+                ),
                 Align(
                   // 비밀번호 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
@@ -165,63 +168,65 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Center(
-                    child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  child: TextFormField(
-                      // 비밀번호 입력칸
-                      // autofocus: true,
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(100, 0, 0, 0),
-                              width: 1,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    child: TextFormField(
+                        // 비밀번호 입력칸
+                        // autofocus: true,
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 0, 0, 0),
+                                width: 1,
+                              ),
+                              //borderRadius: BorderRadius.circular(12),
                             ),
-                            //borderRadius: BorderRadius.circular(12),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(100, 255, 89, 99),
-                              width: 1,
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 255, 89, 99),
+                                width: 1,
+                              ),
+                              // borderRadius: BorderRadius.circular(12),
                             ),
-                            // borderRadius: BorderRadius.circular(12),
-                          ),
-                          hintText: "비밀번호를 입력해주세요.",
-                          hintStyle:
-                              TextStyle(fontSize: 12, color: Colors.black54)),
-                      keyboardType: TextInputType.text),
-                )),
+                            hintText: "비밀번호를 입력해주세요.",
+                            hintStyle:
+                                TextStyle(fontSize: 12, color: Colors.black54)),
+                        keyboardType: TextInputType.text),
+                  ),
+                ),
                 Center(
-                    child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
-                  child: TextFormField(
-                      // 비밀번호 재입력칸
-                      // autofocus: true,
-                      controller: _RepasswordController,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(100, 0, 0, 0),
-                              width: 1,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
+                    child: TextFormField(
+                        // 비밀번호 재입력칸
+                        // autofocus: true,
+                        controller: _RepasswordController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 0, 0, 0),
+                                width: 1,
+                              ),
+                              //borderRadius: BorderRadius.circular(12),
                             ),
-                            //borderRadius: BorderRadius.circular(12),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(100, 255, 89, 99),
-                              width: 1,
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 255, 89, 99),
+                                width: 1,
+                              ),
+                              // borderRadius: BorderRadius.circular(12),
                             ),
-                            // borderRadius: BorderRadius.circular(12),
-                          ),
-                          hintText: "입력한 비밀번호를 다시 입력해주세요.",
-                          hintStyle:
-                              TextStyle(fontSize: 12, color: Colors.black54)),
-                      keyboardType: TextInputType.text),
-                )),
+                            hintText: "입력한 비밀번호를 다시 입력해주세요.",
+                            hintStyle:
+                                TextStyle(fontSize: 12, color: Colors.black54)),
+                        keyboardType: TextInputType.text),
+                  ),
+                ),
                 Align(
                   // 아이디 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
@@ -264,7 +269,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   // 이메일 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
                     child: Text(
                       '이메일',
                       textAlign: TextAlign.start,
@@ -310,32 +315,33 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Center(
-                    child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
-                  child: TextFormField(
-                      // 주소 입력칸
-                      // autofocus: true,
-                      controller: _addressController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
+                    child: TextFormField(
+                        // 주소 입력칸
+                        // autofocus: true,
+                        controller: _addressController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(100, 0, 0, 0),
+                              width: 1,
+                            ),
+                            //borderRadius: BorderRadius.circular(12),
                           ),
-                          //borderRadius: BorderRadius.circular(12),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 255, 89, 99),
-                            width: 1,
+                          errorBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(100, 255, 89, 99),
+                              width: 1,
+                            ),
+                            // borderRadius: BorderRadius.circular(12),
                           ),
-                          // borderRadius: BorderRadius.circular(12),
                         ),
-                      ),
-                      keyboardType: TextInputType.text),
-                )),
+                        keyboardType: TextInputType.text),
+                  ),
+                ),
                 if (!_passwordsMatch)
                   Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -409,9 +415,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 ElevatedButton(
                   onPressed: () {
                     _handleSignUp(); // Call _handleSignUp function first
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => MainPage()),
+                      MaterialPageRoute(
+                        builder: (context) => RecommandPage(),
+                      ),
+                      (route) => false,
                     );
                   },
                   child: Text('가입 하기'),
