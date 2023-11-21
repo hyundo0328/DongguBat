@@ -15,24 +15,66 @@ class _RecommandPageState extends State<RecommandPage> {
   bool check_support = false;
   bool check_nothing = false;
 
-  final List<bool> check = <bool>[false, false, false, false, false];
-
-  final List<String> checklist = <String>[
-    '몸 건강',
-    '마음 건강',
-    '관계 건강',
-    '재무 건강',
-    "지원사업",
-    "관심없음"
-  ];
-
-  final List<String> check_image = <String>[
-    'assets/sport.jpeg',
-    'assets/health.jpeg',
-    'assets/friendly.jpeg',
-    'assets/finance.jpeg',
-    'assets/book.jpeg'
-  ];
+  Widget buildButton({
+    required String imagePath,
+    required String label,
+    required bool checkValue,
+    required Function() onPressed,
+  }) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 30, 0, 0),
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            onPressed();
+          });
+          print(checkValue);
+        },
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.all(0.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(4.0),
+          ),
+          elevation: checkValue ? 6.0 : 0.0,
+          shadowColor: Colors.black,
+        ),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4.0),
+              child: Image.asset(
+                imagePath,
+                width: (MediaQuery.of(context).size.width - 80) / 3,
+                height: 170,
+                fit: BoxFit.cover,
+              ),
+            ),
+            if (checkValue)
+              Positioned(
+                child: Icon(
+                  Icons.check,
+                  color: Colors.white,
+                  size: 40.0,
+                ),
+              ),
+            Positioned(
+              child: Opacity(
+                opacity: checkValue ? 0.0 : 1.0,
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,170 +90,23 @@ class _RecommandPageState extends State<RecommandPage> {
             Expanded(
               child: Row(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          check_body = !check_body;
-                        });
-                        print(check_body);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        elevation: check_body ? 6.0 : 0.0,
-                        shadowColor: Colors.black,
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(4.0), // 테두리의 radius 값
-                            child: Image.asset(
-                              'assets/sport.jpeg',
-                              width:
-                                  (MediaQuery.of(context).size.width - 80) / 3,
-                              height: 170,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          if (check_body)
-                            Positioned(
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 40.0, // 체크 아이콘의 크기 조절
-                              ),
-                            ),
-                          Positioned(
-                            child: Opacity(
-                              opacity: check_body ? 0.0 : 1.0,
-                              child: Text(
-                                '몸 건강',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  buildButton(
+                    imagePath: 'assets/sport.jpeg',
+                    label: '몸 건강',
+                    checkValue: check_body,
+                    onPressed: () => check_body = !check_body,
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          check_mind = !check_mind;
-                        });
-                        print(check_mind);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        elevation: check_mind ? 6.0 : 0.0,
-                        shadowColor: Colors.black,
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(4.0), // 테두리의 radius 값
-                            child: Image.asset(
-                              'assets/heart.jpg',
-                              width:
-                                  (MediaQuery.of(context).size.width - 80) / 3,
-                              height: 170,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          if (check_mind)
-                            Positioned(
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 40.0, // 체크 아이콘의 크기 조절
-                              ),
-                            ),
-                          Positioned(
-                            child: Opacity(
-                              opacity: check_mind ? 0.0 : 1.0,
-                              child: Text(
-                                '마음 건강',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  buildButton(
+                    imagePath: 'assets/heart.jpg',
+                    label: '마음 건강',
+                    checkValue: check_mind,
+                    onPressed: () => check_mind = !check_mind,
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 50, 0, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          check_relationship = !check_relationship;
-                        });
-                        print(check_relationship);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        elevation: check_body ? 6.0 : 0.0,
-                        shadowColor: Colors.black,
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(4.0), // 테두리의 radius 값
-                            child: Image.asset(
-                              'assets/friendly.jpeg',
-                              width:
-                                  (MediaQuery.of(context).size.width - 80) / 3,
-                              height: 170,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          if (check_relationship)
-                            Positioned(
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 40.0, // 체크 아이콘의 크기 조절
-                              ),
-                            ),
-                          Positioned(
-                            child: Opacity(
-                              opacity: check_relationship ? 0.0 : 1.0,
-                              child: Text(
-                                '관계 건강',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  buildButton(
+                    imagePath: 'assets/friendly.jpeg',
+                    label: '관계 건강',
+                    checkValue: check_relationship,
+                    onPressed: () => check_relationship = !check_relationship,
                   ),
                 ],
               ),
@@ -220,137 +115,26 @@ class _RecommandPageState extends State<RecommandPage> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          check_finance = !check_finance;
-                        });
-                        print(check_finance);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        elevation: check_finance ? 6.0 : 0.0,
-                        shadowColor: Colors.black,
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(4.0), // 테두리의 radius 값
-                            child: Image.asset(
-                              'assets/finance.jpeg',
-                              width:
-                                  (MediaQuery.of(context).size.width - 80) / 3,
-                              height: 170,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          if (check_finance)
-                            Positioned(
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 40.0, // 체크 아이콘의 크기 조절
-                              ),
-                            ),
-                          Positioned(
-                            child: Opacity(
-                              opacity: check_finance ? 0.0 : 1.0,
-                              child: Text(
-                                '재무 건강',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  buildButton(
+                    imagePath: 'assets/finance.jpeg',
+                    label: '재무 건강',
+                    checkValue: check_finance,
+                    onPressed: () => check_finance = !check_finance,
+                  ),
+                  buildButton(
+                    imagePath: 'assets/support.jpg',
+                    label: '지원사업',
+                    checkValue: check_support,
+                    onPressed: () => check_support = !check_support,
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(20, 30, 20, 0),
                     child: ElevatedButton(
                       onPressed: () {
-                        setState(() {
-                          check_support = !check_support;
-                        });
-                        print(check_support);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.all(0.0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0),
-                        ),
-                        elevation: check_support ? 6.0 : 0.0,
-                        shadowColor: Colors.black,
-                      ),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          ClipRRect(
-                            borderRadius:
-                                BorderRadius.circular(4.0), // 테두리의 radius 값
-                            child: Image.asset(
-                              'assets/support.jpg',
-                              width:
-                                  (MediaQuery.of(context).size.width - 80) / 3,
-                              height: 170,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          if (check_support)
-                            Positioned(
-                              child: Icon(
-                                Icons.check,
-                                color: Colors.white,
-                                size: 40.0, // 체크 아이콘의 크기 조절
-                              ),
-                            ),
-                          Positioned(
-                            child: Opacity(
-                              opacity: check_support ? 0.0 : 1.0,
-                              child: Text(
-                                '지원사업',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (check_body) {
-                          check_body = !check_body;
-                        }
-                        if (check_mind) {
-                          check_mind = !check_mind;
-                        }
-                        if (check_relationship) {
-                          check_relationship = !check_relationship;
-                        }
-                        if (check_finance) {
-                          check_finance = !check_finance;
-                        }
-                        if (check_support) {
-                          check_support = !check_support;
-                        }
                         setState(() {
                           check_nothing = !check_nothing;
+                          check_body = check_mind = check_relationship =
+                              check_finance = check_support = false;
                         });
                         print(check_nothing);
                       },
