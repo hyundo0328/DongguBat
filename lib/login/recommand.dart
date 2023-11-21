@@ -127,7 +127,7 @@ class _RecommandPageState extends State<RecommandPage> {
                             borderRadius:
                                 BorderRadius.circular(4.0), // 테두리의 radius 값
                             child: Image.asset(
-                              'assets/health.jpeg',
+                              'assets/heart.jpg',
                               width:
                                   (MediaQuery.of(context).size.width - 80) / 3,
                               height: 170,
@@ -299,7 +299,7 @@ class _RecommandPageState extends State<RecommandPage> {
                             borderRadius:
                                 BorderRadius.circular(4.0), // 테두리의 radius 값
                             child: Image.asset(
-                              'assets/book.jpeg',
+                              'assets/support.jpg',
                               width:
                                   (MediaQuery.of(context).size.width - 80) / 3,
                               height: 170,
