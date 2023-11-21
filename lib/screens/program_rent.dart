@@ -121,6 +121,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                 ),
                 //추천 하려고 하는 프로그램 띄우기 위한 container
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -328,7 +329,6 @@ class _ProgramApplyState extends State<ProgramApply> {
                 ),
 
                 Align(
-                  // 아이디 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),

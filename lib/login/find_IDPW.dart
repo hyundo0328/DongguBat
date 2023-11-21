@@ -27,13 +27,9 @@ class _FindIDPWState extends State<FindIDPW> {
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "아이디/비밀번호 찾기"),
         ),
-        body: Align(
-          child: Flexible(
-            flex: 1,
-            fit: FlexFit.loose,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
+          body: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
                 ToggleButtons(
                   color: Colors.black.withOpacity(0.60),
                   selectedColor: Color.fromARGB(255, 44, 96, 68),
@@ -64,12 +60,14 @@ class _FindIDPWState extends State<FindIDPW> {
                   children: <Widget>[
                     Container(
                       width:
-                          MediaQuery.of(context).size.width / 2, // 화면 가로 크기의 절반
+                          (MediaQuery.of(context).size.width - 3) /
+                        2, // 화면 가로 크기의 절반
                       child: Center(child: Text('아이디 찾기')),
                     ),
                     Container(
                       width:
-                          MediaQuery.of(context).size.width / 2, // 화면 가로 크기의 절반
+                          (MediaQuery.of(context).size.width - 3) /
+                        2, // 화면 가로 크기의 절반
                       child: Center(child: Text('비밀번호 찾기')),
                     ),
                   ],
@@ -77,10 +75,64 @@ class _FindIDPWState extends State<FindIDPW> {
                 Expanded(
                   child: pages[selectedPageIndex],
                 ),
-              ],
-            ),
-          ),
-        ),
+            ],
+          )
+          // Align(
+          //   child: Flexible(
+          //     flex: 1,
+          //     fit: FlexFit.loose,
+          //     child: Column(
+          //       mainAxisSize: MainAxisSize.max,
+          //       children: [
+          // ToggleButtons(
+          //   color: Colors.black.withOpacity(0.60),
+          //   selectedColor: Color.fromARGB(255, 44, 96, 68),
+          //   selectedBorderColor: Color.fromARGB(255, 44, 96, 68),
+          //   fillColor: Color.fromARGB(255, 44, 96, 68).withOpacity(0.08),
+          //   splashColor:
+          //       Color.fromARGB(255, 44, 96, 68).withOpacity(0.12),
+          //   hoverColor: Color.fromARGB(255, 44, 96, 68).withOpacity(0.04),
+          //   // borderRadius: BorderRadius.circular(4.0),
+
+          //   constraints: BoxConstraints(minHeight: 40.0),
+          //   isSelected: [selectedPageIndex == 0, selectedPageIndex == 1],
+          //   onPressed: (int newIndex) {
+          //     setState(() {
+          //       // 토글 버튼 상태 업데이트
+          //       for (int buttonIndex = 0;
+          //           buttonIndex < isSelected.length;
+          //           buttonIndex++) {
+          //         if (buttonIndex == newIndex) {
+          //           isSelected[buttonIndex] = true;
+          //         } else {
+          //           isSelected[buttonIndex] = false;
+          //         }
+          //       }
+          //       selectedPageIndex = newIndex;
+          //     });
+          //   },
+          //   children: <Widget>[
+          //     Container(
+          //       width:
+          //           (MediaQuery.of(context).size.width - 3) /
+          //           2, // 화면 가로 크기의 절반
+          //       child: Center(child: Text('아이디 찾기')),
+          //     ),
+          //     Container(
+          //       width:
+          //           (MediaQuery.of(context).size.width - 3) /
+          //           2, // 화면 가로 크기의 절반
+          //       child: Center(child: Text('비밀번호 찾기')),
+          //     ),
+          //   ],
+          // ),
+          // Expanded(
+          //   child: pages[selectedPageIndex],
+          // ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
       ),
     );
   }
