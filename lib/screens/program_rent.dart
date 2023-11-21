@@ -4,6 +4,7 @@ import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../program/rent.dart';
 
 class ProgramApply extends StatefulWidget {
   @override
@@ -131,7 +132,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                             children: [
                               Image.asset(
                                 'assets/${recommended[0]['location']}',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                                 height: 200,
                               ),
                               SizedBox(height: 20),
@@ -262,8 +263,13 @@ class _ProgramApplyState extends State<ProgramApply> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  launch(
-                                      'https://sd1in.net/program/application-for-rental');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => rentPage()),
+                                  );
+                                  // launch(
+                                  //     'https://sd1in.net/program/application-for-rental');
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white,
