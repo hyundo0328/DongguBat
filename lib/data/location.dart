@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 
+// 본인의 위치에 따라 날씨를 보여주고 싶을 때 위치 정보 가져오는 위젯
 class MyLocation {
   late double latitude2;
   late double longitude2;

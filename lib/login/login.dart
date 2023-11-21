@@ -1,8 +1,9 @@
-import 'package:donggu_bat/widgets/widget_bottombar.dart';
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
 import '../login/signup.dart';
 import '../login/find_IDPW.dart';
+
+const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
 class LogIn extends StatefulWidget {
   @override
@@ -13,6 +14,13 @@ class _LogInstate extends State<LogIn> {
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   // 더 이상 사용하지 않으면 메모리 낭비 방지를 위해서 dispose method를 사용 (추가)
+
+  // dynamic parseWeatherData;
+
+  @override
+  void initState() {
+    // super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
