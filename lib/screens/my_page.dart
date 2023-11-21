@@ -345,7 +345,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   Row(
                     children: [
                       Spacer(),
