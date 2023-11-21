@@ -282,7 +282,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => MyRentPageScreen()),
+                                      builder: (context) =>
+                                          MyProgramPageScreen()),
                                 );
                                 // Handle the action when "View All" button is pressed
                               },
