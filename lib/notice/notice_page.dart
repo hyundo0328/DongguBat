@@ -38,7 +38,7 @@ class Notice extends StatelessWidget {
                     BoxShadow(
                       blurRadius: 5,
                       color: Color(0x33000000),
-                      offset: Offset(5, 5),
+                      offset: Offset(3, 3),
                     )
                   ],
                 ),
