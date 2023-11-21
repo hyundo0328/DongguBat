@@ -10,6 +10,7 @@ import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
+import 'main_banner.dart';
 import 'dart:async';
 
 const apiKey = '895c7d17476c72440ce44ba845661bbc';
@@ -25,33 +26,18 @@ class _MainPageState extends State<MainPage> {
 
   PageController _pageController = PageController(initialPage: 0);
   late Timer _timer;
-
-  // ScrollController _scrollController = ScrollController();
-
   int _activePage = 0;
   int _currentPage = 0;
   int _selectedIndex = 1;
 
   String? cityName;
   int? temp;
-  // dynamic parseWeatherData = Loading().getLocation();
 
   @override
   void initState() {
     super.initState();
 
-    getLocation();
-
-    _pageController = PageController(initialPage: 0);
-
-    // 타이머를 사용하여 페이지 자동으로 넘기기
-    _timer = Timer.periodic(Duration(milliseconds: 2000), (Timer timer) {
-      _currentPage++;
-      _currentPage = _currentPage % 3;
-
-      _pageController.animateToPage(_currentPage,
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
-    });
+    // getLocation();
   }
 
   dynamic getLocation() async {
@@ -84,15 +70,9 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
-  final String naverUrl = 'https://www.naver.com';
-  final List<String> url_list = [
-    'https://1in.seoul.go.kr/front/board/boardContentsView.do?board_id=1&contents_id=3154ac07f1444304acf393c00bf0982f',
-    'https://sd1in.net/',
-    'https://form.office.naver.com/form/responseView.cmd?formkey=MzBjMWY3MmMtMTM0Yy00NjRlLThlYTEtYzQwN2VhZGEyMTcy&sourceId=urlshare'
-  ];
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+  _launchURL(String url) {
+    if (url.isNotEmpty) {
+      launch(url);
     } else {
       print("없는 주소");
     }
@@ -129,107 +109,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 165,
-                child: Stack(
-                  fit: StackFit.loose,
-                  children: [
-                    PageView(
-                      // controller: _pageController,
-                      controller: _pageController ??=
-                          PageController(initialPage: 0),
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (int page) {
-                        setState(() {
-                          _activePage = page;
-                        });
-                      },
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            // 이미지를 클릭할 때 naverUrl로 이동
-                            _launchURL(naverUrl);
-                          },
-                          child: Align(
-                            alignment: AlignmentDirectional(0.00, -1.00),
-                            child: ClipRRect(
-                              child: Image.asset(
-                                'assets/지원사업 참여 우수 수기 공모.png',
-                                width: double.infinity,
-                                height: 150,
-                                fit: BoxFit.contain,
-                                alignment: Alignment(0.00, -1.00),
-                              ),
-                            ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            // 이미지를 클릭할 때 naverUrl로 이동
-                            _launchURL(url_list[0]);
-                          },
-                          child: Align(
-                            alignment: AlignmentDirectional(0.00, -1.00),
-                            child: ClipRRect(
-                              // borderRadius: BorderRadius.circular(8),
-                              child: Image.asset(
-                                'assets/세이프 라이딩.jpg',
-                                width: double.infinity,
-                                height: 150,
-                                fit: BoxFit.contain,
-                                alignment: Alignment(0.00, -1.00),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.00, -1.00),
-                          child: ClipRRect(
-                            // borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/실태조사.jpg',
-                              width: double.infinity,
-                              height: 150,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Center(
-                      // heightFactor: 190,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          verticalDirection: VerticalDirection.down,
-                          children: List<Widget>.generate(
-                            3,
-                            (index) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 3),
-                              child: InkWell(
-                                onTap: () {
-                                  _pageController.animateToPage(index,
-                                      duration: Duration(milliseconds: 300),
-                                      curve: Curves.easeIn);
-                                },
-                                child: CircleAvatar(
-                                  radius: 3,
-                                  backgroundColor: _activePage == index
-                                      ? Colors.grey
-                                      : Colors.grey.withOpacity(0.7),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              BannerPage(),
               Padding(
                 padding: EdgeInsets.only(top: 20),
                 child: Container(
@@ -431,4 +311,11 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+
+class PageInfo {
+  final String imageUrl;
+  final String linkUrl;
+
+  PageInfo({required this.imageUrl, required this.linkUrl});
 }
