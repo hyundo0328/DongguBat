@@ -4,6 +4,7 @@ import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
 // import '../data/loading.dart';
 import '../data/network.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'weather_screen.dart';
 import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
@@ -83,6 +84,20 @@ class _MainPageState extends State<MainPage> {
     super.dispose();
   }
 
+  final String naverUrl = 'https://www.naver.com';
+  final List<String> url_list = [
+    'https://1in.seoul.go.kr/front/board/boardContentsView.do?board_id=1&contents_id=3154ac07f1444304acf393c00bf0982f',
+    'https://sd1in.net/',
+    'https://form.office.naver.com/form/responseView.cmd?formkey=MzBjMWY3MmMtMTM0Yy00NjRlLThlYTEtYzQwN2VhZGEyMTcy&sourceId=urlshare'
+  ];
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print("없는 주소");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -112,7 +127,7 @@ class _MainPageState extends State<MainPage> {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 145,
+                height: 165,
                 child: Stack(
                   fit: StackFit.loose,
                   children: [
@@ -127,16 +142,40 @@ class _MainPageState extends State<MainPage> {
                         });
                       },
                       children: [
-                        Align(
-                          alignment: AlignmentDirectional(0.00, -1.00),
-                          child: ClipRRect(
-                            // borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/SNS 인증샷.jpg',
-                              width: double.infinity,
-                              height: 130,
-                              fit: BoxFit.contain,
-                              alignment: Alignment(0.00, -1.00),
+                        InkWell(
+                          onTap: () {
+                            // 이미지를 클릭할 때 naverUrl로 이동
+                            _launchURL(naverUrl);
+                          },
+                          child: Align(
+                            alignment: AlignmentDirectional(0.00, -1.00),
+                            child: ClipRRect(
+                              child: Image.asset(
+                                'assets/지원사업 참여 우수 수기 공모.png',
+                                width: double.infinity,
+                                height: 150,
+                                fit: BoxFit.contain,
+                                alignment: Alignment(0.00, -1.00),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            // 이미지를 클릭할 때 naverUrl로 이동
+                            _launchURL(url_list[0]);
+                          },
+                          child: Align(
+                            alignment: AlignmentDirectional(0.00, -1.00),
+                            child: ClipRRect(
+                              // borderRadius: BorderRadius.circular(8),
+                              child: Image.asset(
+                                'assets/세이프 라이딩.jpg',
+                                width: double.infinity,
+                                height: 150,
+                                fit: BoxFit.contain,
+                                alignment: Alignment(0.00, -1.00),
+                              ),
                             ),
                           ),
                         ),
@@ -145,22 +184,9 @@ class _MainPageState extends State<MainPage> {
                           child: ClipRRect(
                             // borderRadius: BorderRadius.circular(8),
                             child: Image.asset(
-                              'assets/세이프 라이딩.jpg',
+                              'assets/실태조사.jpg',
                               width: double.infinity,
-                              height: 130,
-                              fit: BoxFit.contain,
-                              alignment: Alignment(0.00, -1.00),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.00, -1.00),
-                          child: ClipRRect(
-                            // borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/플로깅플레져.jpg',
-                              width: double.infinity,
-                              height: 130,
+                              height: 150,
                               fit: BoxFit.contain,
                             ),
                           ),
@@ -175,24 +201,23 @@ class _MainPageState extends State<MainPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           verticalDirection: VerticalDirection.down,
                           children: List<Widget>.generate(
-                              3,
-                              (index) => Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3),
-                                    child: InkWell(
-                                      onTap: () {
-                                        _pageController.animateToPage(index,
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            curve: Curves.easeIn);
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 3,
-                                        backgroundColor: _activePage == index
-                                            ? Colors.grey
-                                            : Colors.grey.withOpacity(0.7),
-                                      ),
-                                    ),
+                            3,
+                            (index) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 3),
+                              child: InkWell(
+                                onTap: () {
+                                  _pageController.animateToPage(index,
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeIn);
+                                },
+                                child: CircleAvatar(
+                                  radius: 3,
+                                  backgroundColor: _activePage == index
+                                      ? Colors.grey
+                                      : Colors.grey.withOpacity(0.7),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -201,17 +226,9 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
               ),
-              Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 20, 0, 7),
-                  child: Text(
-                    '공지사항 (Notice)',
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ),
-              Container(
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.black38, width: 1.0),
                     borderRadius: BorderRadius.circular(8)),
@@ -219,17 +236,36 @@ class _MainPageState extends State<MainPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
+                        title: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                          child: Text(
+                            "공지사항 (Notice)",
+                            style: TextStyle(fontSize: 17),
+                          ),
+                        ),
                       dense: true,
                       contentPadding: EdgeInsets.all(0),
-                      trailing: IconButton(
-                        icon: Icon(Icons.keyboard_arrow_right),
-                        iconSize: 25,
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => Notice()),
-                          );
-                        },
+                        trailing: Padding(
+                          padding: EdgeInsets.all(5),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_right),
+                            iconSize: 25,
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Notice()),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Divider(
+                          height: 2,
+                          thickness: 1,
+                          color: Colors.black38,
                       ),
                     ),
                     Padding(
@@ -305,7 +341,8 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                     // Divider()
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Align(

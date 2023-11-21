@@ -41,61 +41,66 @@ class _MyPageScreenState extends State<MyPageScreen> {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
-          child: WidgetAppBar(title: "동구밭"),
+          child: WidgetAppBar(title: "마이페이지"),
         ),
         body: SingleChildScrollView(
           child: SafeArea(
             top: true,
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(25, 15, 15, 15),
+              padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Row(
-                    // mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 80,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 5, 0, 10),
+                    child: Row(
+                      // mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.asset(
+                            'assets/user_profile.jpg',
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        child: Image.asset(
-                          'assets/user_profile.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(-1.00, 0.00),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Align(
-                                alignment: AlignmentDirectional(0.00, -1.00),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5, 5, 5, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 15, 0),
-                                        child: Text(
-                                          '김민종 님',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontFamily: 'Readex Pro'),
+                        Align(
+                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Align(
+                                  alignment: AlignmentDirectional(0.00, -1.00),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 5, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 15, 0),
+                                          child: Text(
+                                            '김민종 님',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: 'Readex Pro'),
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            5, 5, 5, 5),
-                                        child: ElevatedButton(
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5, 5, 5, 5),
+                                          child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               fixedSize: Size(75, 20),
                                               padding: EdgeInsetsDirectional
@@ -120,12 +125,14 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                                 color: Color(0xFFC2C2C2),
                                                 fontSize: 11,
                                               ),
-                                            )),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            5, 0, 0, 0),
-                                        child: ElevatedButton(
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5, 0, 0, 0),
+                                          child: ElevatedButton(
                                             style: ElevatedButton.styleFrom(
                                               fixedSize: Size(75, 20),
                                               padding: EdgeInsetsDirectional
@@ -150,32 +157,33 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                                 color: Color(0xFFC2C2C2),
                                                 fontSize: 11,
                                               ),
-                                            )),
-                                      ),
-                                    ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(-1.00, 0.00),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      5, 0, 5, 15),
-                                  child: Text('이메일 : donggubat@dgu.kr',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontFamily: 'Readex Pro',
-                                        color: Color(0xFFC2C2C2),
-                                      )),
+                                Align(
+                                  alignment: AlignmentDirectional(-1.00, 0.00),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 5, 20),
+                                    child: Text('이메일 : donggubat@dgu.kr',
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          fontFamily: 'Readex Pro',
+                                          color: Color(0xFFC2C2C2),
+                                        )),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 30),
                   Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black38, width: 1.5),
@@ -207,11 +215,14 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                 );
                                 // Handle the action when "View All" button is pressed
                               },
-                              child: Text(
-                                '전체보기',
-                                style: TextStyle(
-                                  color:
-                                      Colors.grey, // Set the color you desire
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                child: Text(
+                                  '전체보기',
+                                  style: TextStyle(
+                                    color:
+                                        Colors.grey, // Set the color you desire
+                                  ),
                                 ),
                               ),
                             ),
@@ -287,11 +298,14 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                 );
                                 // Handle the action when "View All" button is pressed
                               },
-                              child: Text(
-                                '전체보기',
-                                style: TextStyle(
-                                  color:
-                                      Colors.grey, // Set the color you desire
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                child: Text(
+                                  '전체보기',
+                                  style: TextStyle(
+                                    color:
+                                        Colors.grey, // Set the color you desire
+                                  ),
                                 ),
                               ),
                             ),
