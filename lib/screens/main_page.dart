@@ -122,6 +122,10 @@ class _MainPageState extends State<MainPage> {
                   child: Text(
                     '지금 성동구에선?',
                     textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
@@ -240,7 +244,10 @@ class _MainPageState extends State<MainPage> {
                           padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                           child: Text(
                             "공지사항 (Notice)",
-                            style: TextStyle(fontSize: 17),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       dense: true,
@@ -264,7 +271,7 @@ class _MainPageState extends State<MainPage> {
                         padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
                         child: Divider(
                           height: 2,
-                          thickness: 1,
+                          thickness: 0.8,
                           color: Colors.black38,
                       ),
                     ),
@@ -291,7 +298,10 @@ class _MainPageState extends State<MainPage> {
                           },
                           child: Text(
                             "공지사항 1 제목",
-                            style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                           ),
                         ),
                       ),
@@ -319,7 +329,10 @@ class _MainPageState extends State<MainPage> {
                           },
                           child: Text(
                             "공지사항 2 제목",
-                            style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                           ),
                         ),
                       ),
@@ -336,7 +349,10 @@ class _MainPageState extends State<MainPage> {
                         },
                         child: Text(
                           "공지사항 3 제목",
-                          style: TextStyle(color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                         ),
                       ),
                     ),
@@ -352,6 +368,10 @@ class _MainPageState extends State<MainPage> {
                   child: Text(
                     '성동구 날씨 (Seongdong\'s Weather)',
                     textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
