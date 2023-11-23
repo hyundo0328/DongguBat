@@ -1,17 +1,16 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-// import '../data/loading.dart';
 import '../data/network.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'weather_screen.dart';
+import '../weather/weather_screen.dart';
+import '../weather/loading.dart';
 import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
 import 'main_banner.dart';
-import 'dart:async';
 
 const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
@@ -25,9 +24,6 @@ class _MainPageState extends State<MainPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   PageController _pageController = PageController(initialPage: 0);
-  late Timer _timer;
-  int _activePage = 0;
-  int _currentPage = 0;
   int _selectedIndex = 1;
 
   String? cityName;
@@ -36,36 +32,25 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-
-    // getLocation();
   }
 
-  dynamic getLocation() async {
-    // MyLocation myLocation = MyLocation();
-    // await myLocation.getMyCurrentLocation();
-    // latitude3 = myLocation.latitude2;
-    // longitude3 = myLocation.longitude2;
-    // print(latitude3);
-    // print(longitude3);
+  // dynamic getLocation() async {
 
-    Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
-        'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
-    // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
+  //   Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
+  //       'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
+  //   // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
 
-    var weatherData = await network.getJsonData();
-    print("메인페이지");
-    print(weatherData);
-    print(weatherData['main']['temp']);
-    print(weatherData['name']);
-    return WeatherScreen(
-      parseWeatherData: weatherData,
-    );
-  }
+  //   var weatherData = await network.getJsonData();
+  //   print("메인페이지");
+  //   // print(weatherData);
+  //   // print(weatherData['main']['temp']);
+  //   // print(weatherData['name']);
+  //   return weatherData;
+  // }
 
   @override
   void dispose() {
     // 상태가 해제된 위젯에서 setState를 호출하지 않도록 타이머를 취소합니다.
-    _timer.cancel();
     _pageController.dispose();
     super.dispose();
   }
@@ -255,48 +240,17 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black38, width: 1.5),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WeatherScreen()
-                    // Padding(
-                    //   padding: EdgeInsets.only(left: 15, right: 15),
-                    //     child: WeatherScreen()
-                    //     // child: Container(
-                    //     //   alignment: Alignment.centerLeft,
-                    //     //   width: MediaQuery.of(context).size.width,
-                    //     //   child: Row(
-                    //     //     children: [
-                    //     //       Icon(Icons.cloud, size: 100),
-                    //     //       Column(
-                    //     //         crossAxisAlignment: CrossAxisAlignment.center,
-                    //     //         children: [
-                    //     //           Text(
-                    //     //             '$cityName',
-                    //     //             style: TextStyle(fontSize: 15.0),
-                    //     //           ),
-                    //     //           SizedBox(
-                    //     //             height: 20.0,
-                    //     //           ),
-                    //     //           Text(
-                    //     //             '$temp',
-                    //     //             style: TextStyle(fontSize: 15.0),
-                    //     //           ),
-                    //     //         ],
-                    //     //       ),
-                    //     //       // WeatherScreen()
-                    //     //     ],
-                    //     //   ),
-                    //     // ),
-                    // ),
-                    // Divider()
-                  ],
-                ),
-              )
+              // Container(
+              //   decoration: BoxDecoration(
+              //       border: Border.all(color: Colors.black38, width: 1.5),
+              //       borderRadius: BorderRadius.circular(8)),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       WeatherScreen()
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),

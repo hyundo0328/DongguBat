@@ -1,13 +1,13 @@
 // mypage.dart
+import 'package:donggu_bat/login/login.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import 'email_change.dart';
-import 'phone_change.dart';
-import '../mypage/rent.dart';
-import '../mypage/program.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../screens/email_change.dart';
+import '../screens/phone_change.dart';
+import 'rent.dart';
+import 'program.dart';
 
 class MyPageScreen extends StatefulWidget {
   @override
@@ -31,6 +31,39 @@ class _MyPageScreenState extends State<MyPageScreen> {
   ];
 
   int _selectedIndex = 2;
+
+  Future<void> _showConfirmationDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // 사용자가 다이얼로그 외부를 탭하면 닫히지 않도록 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          // title: Text('로그아웃 하시겠습니까?'),
+          content: Text('로그아웃 하시겠습니까?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('아니오'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text('예'),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LogIn(),
+                  ),
+                  (route) => false,
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -143,12 +176,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                                   width: 1),
                                             ),
                                             onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        UserProfilePage()),
-                                              );
+                                              _showConfirmationDialog(context);
                                             },
                                             child: Text(
                                               "로그아웃",
@@ -186,163 +214,186 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black38, width: 1.5),
+                        border: Border.all(color: Colors.black38, width: 1.0),
                         borderRadius: BorderRadius.circular(8)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(15, 15, 0, 5),
-                              child: Text(
-                                '시설대관 현황',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MyRentPageScreen()),
-                                );
-                                // Handle the action when "View All" button is pressed
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 10, 0, 0),
                                 child: Text(
-                                  '전체보기',
+                                  '시설대관 현황',
+                                  textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    color:
-                                        Colors.grey, // Set the color you desire
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MyRentPageScreen()),
+                                  );
+                                  // Handle the action when "View All" button is pressed
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                  child: Text(
+                                    '전체보기',
+                                    style: TextStyle(
+                                      color: Colors
+                                          .grey, // Set the color you desire
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
+                            child: Divider(
+                              height: 2,
+                              thickness: 0.8,
+                              color: Colors.black38,
                             ),
-                          ],
-                        ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: rent.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Color statusColor = Colors.black; // Default color
-                            String status = rent[index]['state'] ?? '';
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: rent.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Color statusColor = Colors.black; // Default color
+                              String status = rent[index]['state'] ?? '';
 
-                            if (status == '접수 완료') {
-                              statusColor = Colors.green;
-                            } else if (status == '이용 완료') {
-                              statusColor = Colors.grey;
-                            } else if (status == '신청 반려') {
-                              statusColor = Colors.red;
-                            } else if (status == '신청 취소') {
-                              statusColor = Colors.black;
-                            }
+                              if (status == '접수 완료') {
+                                statusColor = Colors.green;
+                              } else if (status == '이용 완료') {
+                                statusColor = Colors.grey;
+                              } else if (status == '신청 반려') {
+                                statusColor = Colors.red;
+                              } else if (status == '신청 취소') {
+                                statusColor = Colors.black;
+                              }
 
-                            return ListTile(
-                              title: Text(
-                                '${rent[index]['place'] ?? ''}',
-                                style: TextStyle(
-                                    color: const Color.fromRGBO(
-                                        0, 0, 0, 1)), // For place and time
-                              ),
-                              trailing: Text(
-                                rent[index]['state'] ?? '',
-                                style: TextStyle(color: statusColor),
-                              ),
-                              subtitle: Text(
-                                '이용시간: ${rent[index]['time'] ?? ''} | 상태: ${rent[index]['state'] ?? ''}',
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                              return ListTile(
+                                title: Text(
+                                  '${rent[index]['place'] ?? ''}',
+                                  style: TextStyle(
+                                      color: const Color.fromRGBO(
+                                          0, 0, 0, 1)), // For place and time
+                                ),
+                                trailing: Text(
+                                  rent[index]['state'] ?? '',
+                                  style: TextStyle(color: statusColor),
+                                ),
+                                subtitle: Text(
+                                  '이용시간: ${rent[index]['time'] ?? ''} | 상태: ${rent[index]['state'] ?? ''}',
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
                   Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black38, width: 1.5),
+                        border: Border.all(color: Colors.black38, width: 1.0),
                         borderRadius: BorderRadius.circular(8)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(15, 15, 0, 5),
-                              child: Text(
-                                '프로그램 신청현황',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 19,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          MyProgramPageScreen()),
-                                );
-                                // Handle the action when "View All" button is pressed
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(5, 5, 5, 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    20, 10, 0, 0),
                                 child: Text(
-                                  '전체보기',
+                                  '프로그램 신청현황',
+                                  textAlign: TextAlign.start,
                                   style: TextStyle(
-                                    color:
-                                        Colors.grey, // Set the color you desire
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MyProgramPageScreen()),
+                                  );
+                                  // Handle the action when "View All" button is pressed
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
+                                  child: Text(
+                                    '전체보기',
+                                    style: TextStyle(
+                                      color: Colors
+                                          .grey, // Set the color you desire
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                            child: Divider(
+                              height: 2,
+                              thickness: 0.8,
+                              color: Colors.black38,
                             ),
-                          ],
-                        ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: program.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            Color statusColor = Colors.black; // Default color
-                            String status = program[index]['state'] ?? '';
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: program.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Color statusColor = Colors.black; // Default color
+                              String status = program[index]['state'] ?? '';
 
-                            if (status == '접수 완료') {
-                              statusColor = Colors.green;
-                            } else if (status == '마감') {
-                              statusColor = Colors.grey;
-                            } else if (status == '신청 반려') {
-                              statusColor = Colors.red;
-                            } else if (status == '결과 확인') {
-                              statusColor = Colors.blue;
-                            }
+                              if (status == '접수 완료') {
+                                statusColor = Colors.green;
+                              } else if (status == '마감') {
+                                statusColor = Colors.grey;
+                              } else if (status == '신청 반려') {
+                                statusColor = Colors.red;
+                              } else if (status == '결과 확인') {
+                                statusColor = Colors.blue;
+                              }
 
-                            return ListTile(
-                              title: Text(
-                                '${program[index]['name'] ?? ''}',
-                                style: TextStyle(
-                                    color: const Color.fromRGBO(
-                                        0, 0, 0, 1)), // For place and time
-                              ),
-                              trailing: Text(
-                                rent[index]['state'] ?? '',
-                                style: TextStyle(color: statusColor),
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                              return ListTile(
+                                title: Text(
+                                  '${program[index]['name'] ?? ''}',
+                                  style: TextStyle(
+                                      color: const Color.fromRGBO(
+                                          0, 0, 0, 1)), // For place and time
+                                ),
+                                trailing: Text(
+                                  rent[index]['state'] ?? '',
+                                  style: TextStyle(color: statusColor),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -499,10 +550,9 @@ class UserProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('내 정보 수정'),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 44, 96, 68),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
+        child: WidgetAppBar(title: "내 정보 수정"),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),

@@ -42,6 +42,9 @@ class _BannerPageState extends State<BannerPage> {
   void initState() {
     super.initState();
 
+    _activePage = 0;
+    _currentPage = 0;
+
     _pageController = PageController(initialPage: 0);
 
     // 타이머를 사용하여 페이지 자동으로 넘기기

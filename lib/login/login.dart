@@ -14,13 +14,25 @@ class LogIn extends StatefulWidget {
 class _LogInstate extends State<LogIn> {
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
-  // 더 이상 사용하지 않으면 메모리 낭비 방지를 위해서 dispose method를 사용 (추가)
 
-  // dynamic parseWeatherData;
-
-  @override
-  void initState() {
-    // super.initState();
+  Future<void> _showConfirmationDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // 사용자가 다이얼로그 외부를 탭하면 닫히지 않도록 설정
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text('아이디 또는 비밀번호가 틀렸습니다.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('확인'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -90,11 +102,9 @@ class _LogInstate extends State<LogIn> {
                             ),
                             (route) => false,
                           );
-                        } else if (controller1.text == 'hyundo' &&
-                            controller2.text != '1234') {
-                        } else if (controller2.text != 'hyundo' &&
-                            controller2.text != '1234') {
-                        } else {}
+                        } else {
+                          _showConfirmationDialog(context);
+                        }
                       },
                       child: Text('Login'),
                     ),

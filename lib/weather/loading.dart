@@ -1,17 +1,15 @@
-import 'package:donggu_bat/screens/main_page.dart';
 import 'package:flutter/material.dart';
-// import 'my_location.dart';
-import 'network.dart';
-// import '../screens/weather_screen.dart';
+import '../data/network.dart';
+import '../weather/weather_screen.dart';
 
 const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
-class Loading extends StatelessWidget {
+class Loading {
   // late double latitude3;
   // late double longitude3;
   // dynamic parseWeatherData;
 
-  dynamic getLocation() async {
+  Future<dynamic> getLocation() async {
     // MyLocation myLocation = MyLocation();
     // await myLocation.getMyCurrentLocation();
     // latitude3 = myLocation.latitude2;
@@ -28,10 +26,5 @@ class Loading extends StatelessWidget {
     print(weatherData['main']['temp']);
     print(weatherData['name']);
     return weatherData;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return getLocation();
   }
 }
