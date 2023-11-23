@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
 import 'recommand.dart';
+import '../widgets/widget_appbar.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -63,20 +64,33 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 
+  bool isDuplicate = false;
+  bool isPassword = false;
+  bool isNumber = false;
+  bool isCheck = false;
+
+  void checkForDuplicate() {
+    // 여기에서 아이디 중복 체크 로직을 수행합니다.
+    // 예를 들어, 사용자가 입력한 아이디가 중복되면 isDuplicate 값을 true로 설정합니다.
+    // 여기서는 간단한 예시로 "test"라는 아이디가 중복된 것으로 가정합니다.
+    setState(() {
+      isDuplicate = _idController.text == "test";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('회원가입'),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 44, 96, 68),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
+        child: WidgetAppBar(title: "회원가입"),
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Align(
                   // 이름 텍스트
@@ -106,13 +120,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             //borderRadius: BorderRadius.circular(12),
                           ),
-                          errorBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Color.fromARGB(100, 255, 89, 99),
-                              width: 1,
-                            ),
-                            // borderRadius: BorderRadius.circular(12),
-                          ),
                         ),
                         keyboardType: TextInputType.text),
                   ),
@@ -129,13 +136,81 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Center(
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          // 아이디 입력칸
+                          controller: _idController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: isDuplicate
+                                    ? Colors.red.shade400
+                                    : Color.fromARGB(100, 0, 0, 0),
+                                width: 1,
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(99, 255, 0, 17),
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                          keyboardType: TextInputType.text,
+                        ),
+                      ), // TextFormField와 ElevatedButton 사이에 간격을 주기 위해 SizedBox 추가
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 44, 96, 68),
+                          minimumSize: Size(70, 40),
+                        ),
+                        onPressed: () {
+                          // 여기에서 중복을 확인하고 상태를 업데이트합니다.
+                          setState(() {
+                            isDuplicate = _idController.text == "test";
+                            print('버튼');
+                            print(isDuplicate);
+                          });
+                        },
+                        child: Text('확인'),
+                      ),
+                    ],
+                  ),
+                ),
+                if (isDuplicate)
+                  Align(
+                    alignment: AlignmentDirectional(-1.00, 0.00),
+                    child: Text(
+                      '아이디가 중복됩니다',
+                      style: TextStyle(
+                        color: Colors.red.shade400,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                Align(
+                  // 비밀번호 텍스트
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    child: Text(
+                      '비밀번호',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                Center(
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     child: TextFormField(
-                        // 아이디 입력칸
-                        // autofocus: true,
-                        controller: _idController,
-                        decoration: InputDecoration(
+                      // 비밀번호 입력칸
+                      // autofocus: true,
+                      controller: _passwordController,
+                      decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
                           focusedBorder: OutlineInputBorder(
@@ -152,86 +227,54 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                             // borderRadius: BorderRadius.circular(12),
                           ),
-                        ),
-                        keyboardType: TextInputType.text),
-                  ),
-                ),
-                Align(
-                  // 비밀번호 텍스트
-                  alignment: AlignmentDirectional(-1.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
-                    child: Text(
-                      '비밀번호',
-                      textAlign: TextAlign.start,
+                          hintText: "비밀번호를 입력해주세요.",
+                          hintStyle:
+                              TextStyle(fontSize: 12, color: Colors.black54)),
+                      keyboardType: TextInputType.text,
+                      obscureText: true,
                     ),
                   ),
                 ),
                 Center(
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 15),
                     child: TextFormField(
-                        // 비밀번호 입력칸
-                        // autofocus: true,
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(100, 0, 0, 0),
-                                width: 1,
-                              ),
-                              //borderRadius: BorderRadius.circular(12),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(100, 255, 89, 99),
-                                width: 1,
-                              ),
-                              // borderRadius: BorderRadius.circular(12),
-                            ),
-                            hintText: "비밀번호를 입력해주세요.",
-                            hintStyle:
-                                TextStyle(fontSize: 12, color: Colors.black54)),
-                        keyboardType: TextInputType.text),
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 20),
-                    child: TextFormField(
-                        // 비밀번호 재입력칸
-                        // autofocus: true,
-                        controller: _RepasswordController,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(100, 0, 0, 0),
-                                width: 1,
-                              ),
-                              //borderRadius: BorderRadius.circular(12),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(100, 255, 89, 99),
-                                width: 1,
-                              ),
-                              // borderRadius: BorderRadius.circular(12),
-                            ),
-                            hintText: "입력한 비밀번호를 다시 입력해주세요.",
-                            hintStyle:
-                                TextStyle(fontSize: 12, color: Colors.black54)),
-                        keyboardType: TextInputType.text),
+                      // 비밀번호 재입력칸
+                      // autofocus: true,
+                      controller: _RepasswordController,
+                      onChanged: (value) {
+                        setState(() {
+                          isPassword =
+                              _RepasswordController.text == _passwordController;
+                          print('버튼');
+                          print(isPassword);
+                        });
+                      },
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: isPassword
+                                ? Colors.red.shade400
+                                : Color.fromARGB(100, 0, 0, 0),
+                            width: 1,
+                          ),
+                        ),
+                        hintText: "입력한 비밀번호를 다시 입력해주세요.",
+                        hintStyle:
+                            TextStyle(fontSize: 12, color: Colors.black54),
+                      ),
+                      keyboardType: TextInputType.text,
+                      obscureText: true,
+                    ),
                   ),
                 ),
                 Align(
-                  // 아이디 텍스트
+                  // 전화번호 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
                     child: Text(
                       '전화번호',
                       textAlign: TextAlign.start,
@@ -277,32 +320,106 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Center(
-                    child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                  child: TextFormField(
-                      // 이메일 입력칸
-                      // autofocus: true,
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          // 이메일 입력칸
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 0, 0, 0),
+                                width: 1,
+                              ),
+                              //borderRadius: BorderRadius.circular(12),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 255, 89, 99),
+                                width: 1,
+                              ),
+                              // borderRadius: BorderRadius.circular(12),
+                            ),
                           ),
-                          //borderRadius: BorderRadius.circular(12),
-                        ),
-                        errorBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 255, 89, 99),
-                            width: 1,
-                          ),
-                          // borderRadius: BorderRadius.circular(12),
+                          keyboardType: TextInputType.text,
                         ),
                       ),
-                      keyboardType: TextInputType.text),
-                )),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 44, 96, 68),
+                              minimumSize: Size(100, 40),
+                            ),
+                            onPressed: () {
+                              // 여기에서 중복을 확인하고 상태를 업데이트합니다.
+                              setState(() {
+                                isNumber = !isNumber;
+                                print('버튼');
+                                print(isNumber);
+                              });
+                            },
+                            child: Text('인증번호 받기'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                if (isNumber)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          // 이메일 입력칸
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 0, 0, 0),
+                                width: 1,
+                              ),
+                              //borderRadius: BorderRadius.circular(12),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color.fromARGB(100, 255, 89, 99),
+                                width: 1,
+                              ),
+                              // borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 44, 96, 68),
+                              minimumSize: Size(100, 40),
+                            ),
+                            onPressed: () {
+                              // 여기에서 중복을 확인하고 상태를 업데이트합니다.
+                              setState(() {
+                                isCheck = !isCheck;
+                                print('버튼');
+                                print(isCheck);
+                              });
+                            },
+                            child: Text('확인'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 Align(
                   // 주소 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
