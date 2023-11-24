@@ -85,7 +85,7 @@ class _MainPageState extends State<MainPage> {
                     '지금 성동구에선?',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -107,7 +107,7 @@ class _MainPageState extends State<MainPage> {
                           child: Text(
                             "공지사항 (Notice)",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -163,6 +163,7 @@ class _MainPageState extends State<MainPage> {
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 17,
                               ),
                             ),
                           ),
@@ -194,6 +195,7 @@ class _MainPageState extends State<MainPage> {
                               style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 17,
                               ),
                             ),
                           ),
@@ -214,6 +216,7 @@ class _MainPageState extends State<MainPage> {
                             style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
+                              fontSize: 17,
                             ),
                           ),
                         ),
@@ -231,7 +234,7 @@ class _MainPageState extends State<MainPage> {
                   child: Text(
                     '상담바로가기',
                     style: TextStyle(
-                      fontSize: 19,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -253,8 +256,8 @@ class _MainPageState extends State<MainPage> {
                       children: [
                         SizedBox(height: 5),
                         Container(
-                            width: 50,
-                            height: 50,
+                            width: 80,
+                            height: 80,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
@@ -277,8 +280,8 @@ class _MainPageState extends State<MainPage> {
                       children: [
                         SizedBox(height: 5),
                         Container(
-                            width: 50,
-                            height: 50,
+                            width: 80,
+                            height: 80,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
@@ -301,8 +304,8 @@ class _MainPageState extends State<MainPage> {
                       children: [
                         SizedBox(height: 5),
                         Container(
-                            width: 50,
-                            height: 50,
+                            width: 80,
+                            height: 80,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
