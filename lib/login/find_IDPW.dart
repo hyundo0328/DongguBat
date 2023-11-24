@@ -24,44 +24,42 @@ class _FindIDPWState extends State<FindIDPW> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
-          child: WidgetAppBar(title: "아이디/비밀번호 찾기"),
-        ),
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
+            child: WidgetAppBar(title: "아이디/비밀번호 찾기"),
+          ),
           body: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-                ToggleButtons(
-                  color: Colors.black.withOpacity(0.60),
-                  selectedColor: Color.fromARGB(255, 44, 96, 68),
-                  selectedBorderColor: Color.fromARGB(255, 44, 96, 68),
-                  fillColor: Color.fromARGB(255, 44, 96, 68).withOpacity(0.08),
-                  splashColor:
-                      Color.fromARGB(255, 44, 96, 68).withOpacity(0.12),
-                  hoverColor: Color.fromARGB(255, 44, 96, 68).withOpacity(0.04),
-                  // borderRadius: BorderRadius.circular(4.0),
+              ToggleButtons(
+                color: Colors.black.withOpacity(0.60),
+                selectedColor: Color.fromARGB(255, 44, 96, 68),
+                selectedBorderColor: Color.fromARGB(255, 44, 96, 68),
+                fillColor: Color.fromARGB(255, 44, 96, 68).withOpacity(0.08),
+                splashColor: Color.fromARGB(255, 44, 96, 68).withOpacity(0.12),
+                hoverColor: Color.fromARGB(255, 44, 96, 68).withOpacity(0.04),
+                // borderRadius: BorderRadius.circular(4.0),
 
-                  constraints: BoxConstraints(minHeight: 40.0),
-                  isSelected: [selectedPageIndex == 0, selectedPageIndex == 1],
-                  onPressed: (int newIndex) {
-                    setState(() {
-                      // 토글 버튼 상태 업데이트
-                      for (int buttonIndex = 0;
-                          buttonIndex < isSelected.length;
-                          buttonIndex++) {
-                        if (buttonIndex == newIndex) {
-                          isSelected[buttonIndex] = true;
-                        } else {
-                          isSelected[buttonIndex] = false;
-                        }
+                constraints: BoxConstraints(minHeight: 40.0),
+                isSelected: [selectedPageIndex == 0, selectedPageIndex == 1],
+                onPressed: (int newIndex) {
+                  setState(() {
+                    // 토글 버튼 상태 업데이트
+                    for (int buttonIndex = 0;
+                        buttonIndex < isSelected.length;
+                        buttonIndex++) {
+                      if (buttonIndex == newIndex) {
+                        isSelected[buttonIndex] = true;
+                      } else {
+                        isSelected[buttonIndex] = false;
                       }
-                      selectedPageIndex = newIndex;
-                    });
-                  },
-                  children: <Widget>[
-                    Container(
-                      width:
-                          (MediaQuery.of(context).size.width - 3) /
+                    }
+                    selectedPageIndex = newIndex;
+                  });
+                },
+                children: <Widget>[
+                  Container(
+                    width: (MediaQuery.of(context).size.width - 3) /
                         2, // 화면 가로 크기의 절반
                     child: Center(
                       child: Text(
@@ -71,10 +69,9 @@ class _FindIDPWState extends State<FindIDPW> {
                         ),
                       ),
                     ),
-                    ),
-                    Container(
-                      width:
-                          (MediaQuery.of(context).size.width - 3) /
+                  ),
+                  Container(
+                    width: (MediaQuery.of(context).size.width - 3) /
                         2, // 화면 가로 크기의 절반
                     child: Center(
                       child: Text(
@@ -84,15 +81,14 @@ class _FindIDPWState extends State<FindIDPW> {
                         ),
                       ),
                     ),
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: pages[selectedPageIndex],
-                ),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: pages[selectedPageIndex],
+              ),
             ],
-          )
-      ),
+          )),
     );
   }
 }
@@ -107,17 +103,14 @@ class _Page1State extends State<Page1> {
       TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
-  bool isDuplicate = false;
-  int duplicateCount = 0;
-  bool isPassword = false;
-  int passwordCount = 0;
   bool isPhoneNumber = false;
   int phoneCount = 0;
   bool isCheck = true;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SingleChildScrollView(
+      child: Column(
       children: [
         Center(
           child: Padding(
@@ -208,8 +201,7 @@ class _Page1State extends State<Page1> {
                     setState(() {
                       isCheck = _authenticationController.text == "1234";
                       print('인증번호');
-                      print(isCheck);
-                      phoneCount++;
+                        print(isCheck);
                     });
                   },
                   child: Text('확인'),
@@ -218,6 +210,20 @@ class _Page1State extends State<Page1> {
             ],
           ),
         ),
+          if (!isCheck)
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: Align(
+                alignment: AlignmentDirectional(-1.00, 0.00),
+                child: Text(
+                  '인증번호가 틀렸습니다.',
+                  style: TextStyle(
+                    color: Colors.red.shade400,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+            ),
         Padding(
           padding: EdgeInsets.fromLTRB(30, 50, 30, 50),
           child: Container(
@@ -248,6 +254,7 @@ class _Page1State extends State<Page1> {
           ),
         )
       ],
+      ),
     );
   }
 }
@@ -258,7 +265,6 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _authenticationController =
@@ -280,7 +286,7 @@ class _Page2State extends State<Page2> {
       child: Column(
         children: [
           Center(
-              child: Padding(
+            child: Padding(
               padding: EdgeInsets.fromLTRB(30, 50, 30, 20),
               child: TextFormField(
                   // 아이디 입력칸
@@ -301,7 +307,7 @@ class _Page2State extends State<Page2> {
             ),
           ),
           Center(
-              child: Padding(
+            child: Padding(
               padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
               child: Row(
                 children: [
@@ -440,7 +446,7 @@ class _Page2State extends State<Page2> {
                     keyboardType: TextInputType.text,
                     obscureText: true,
                   ),
-                    ),
+                ),
               ),
               Center(
                 child: Padding(
@@ -474,8 +480,7 @@ class _Page2State extends State<Page2> {
                         ),
                       ),
                       hintText: "입력한 비밀번호를 다시 입력해주세요.",
-                      hintStyle:
-                            TextStyle(fontSize: 17, color: Colors.black54),
+                      hintStyle: TextStyle(fontSize: 17, color: Colors.black54),
                     ),
                     keyboardType: TextInputType.text,
                     obscureText: true,
@@ -495,21 +500,23 @@ class _Page2State extends State<Page2> {
                       actions: [
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Navigator.of(context).pop(); // Close the dialog
                           },
                           child: Text('확인'),
                         ),
                       ],
                     );
                   },
-                );
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LogIn(),
-                  ),
-                  (route) => false,
-                );
+                ).then((value) {
+                  // After the dialog is closed, navigate to the new page
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LogIn(),
+                    ),
+                    (route) => false,
+                  );
+                });
               } else {
                 showDialog(
                   context: context,
