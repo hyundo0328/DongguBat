@@ -25,6 +25,7 @@ class _CameraScreenState extends State<CameraScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Camera'),
+        backgroundColor: const Color.fromARGB(255, 44, 96, 68),
       ),
       body: Center(
         child: Column(
@@ -43,6 +44,10 @@ class _CameraScreenState extends State<CameraScreen> {
               onPressed: () {
                 getImage(ImageSource.camera);
               },
+              style: ElevatedButton.styleFrom(
+                primary: const Color.fromARGB(
+                    255, 44, 96, 68), // Change button color here
+              ),
               child: Text('사진 찍기'),
             ),
             SizedBox(height: 10),
@@ -51,6 +56,10 @@ class _CameraScreenState extends State<CameraScreen> {
                 getImage(
                     ImageSource.gallery); // This opens gallery to select image
               },
+              style: ElevatedButton.styleFrom(
+                primary: const Color.fromARGB(
+                    255, 44, 96, 68), // Change button color here
+              ),
               child: Text('갤러리에서 가져오기'),
             ),
           ],
