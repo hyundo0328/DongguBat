@@ -88,7 +88,6 @@ class _LogInstate extends State<LogIn> {
                       ),
                     ),
                   ),
-                  // 주석추가
                   Padding(
                     padding: const EdgeInsets.only(top: 13),
                     child: Center(

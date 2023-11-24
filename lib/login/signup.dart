@@ -9,36 +9,60 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  bool agreedToTerms = false;
+  bool flag = false;
 
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _RepasswordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _idController = TextEditingController();
-  final TextEditingController _PnumController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _rePasswordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _authenticationController =
       TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
-  bool _passwordsMatch = true;
+  bool agreedToTerms = false;
 
   void _handleSignUp() {
-    String id = _idController.text;
-    String email = _emailController.text;
-    String password = _passwordController.text;
-    String Pnum = _PnumController.text;
-    String address = _addressController.text;
-    String name = _nameController.text;
-    String confirmPassword = _confirmPasswordController.text;
+    final List<String> check = [
+      _nameController.text,
+      _idController.text,
+      _passwordController.text,
+      _phoneController.text,
+      _emailController.text,
+      _addressController.text
+    ];
+
+    final List<String> nothing = ["이름", "아이디", "비밀번호", "전화번호", "이메일", "주소"];
+
+    for (int i = 0; i < 6; i++) {
+      if (check[i] == '') {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              content: Text(nothing[i] + '을/를 입력하십시오.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('확인'),
+                ),
+              ],
+            );
+          },
+        );
+        return;
+      }
+    }
     if (!agreedToTerms) {
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('동의 필요'),
-            content: Text('개인정보 수집 및 이용에 동의해야 합니다.'),
+            content: Text('개인정보 수집을 동의하십시오.'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -49,38 +73,21 @@ class _SignUpPageState extends State<SignUpPage> {
             ],
           );
         },
+        
       );
       return;
     }
 
-    if (password != confirmPassword) {
-      setState(() {
-        _passwordsMatch = false;
-      });
-    } else {
-      // 여기서 회원가입 로직을 구현할 수 있습니다.
-      // 서버에 데이터를 전송하고 회원 정보를 저장하는 코드를 추가해야 합니다.
-
-      // 예: 서버로 회원가입 요청을 보내는 부분
-      // signUp(email, password);
-    }
+    flag = true;
   }
 
   bool isDuplicate = false;
   int duplicateCount = 0;
   bool isPassword = false;
+  int passwordCount = 0;
   bool isPhoneNumber = false;
   int phoneCount = 0;
   bool isCheck = false;
-
-  void checkForDuplicate() {
-    // 여기에서 아이디 중복 체크 로직을 수행합니다.
-    // 예를 들어, 사용자가 입력한 아이디가 중복되면 isDuplicate 값을 true로 설정합니다.
-    // 여기서는 간단한 예시로 "test"라는 아이디가 중복된 것으로 가정합니다.
-    setState(() {
-      isDuplicate = _idController.text == "test";
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -197,7 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       alignment: Alignment.topLeft,
                       child: Text(
                         isDuplicate ? '중복된 아이디입니다.' : '사용 가능한 아이디입니다.',
-                      style: TextStyle(
+                        style: TextStyle(
                           color: isDuplicate ? Colors.red : Colors.green,
                           fontSize: 12,
                         ),
@@ -221,21 +228,14 @@ class _SignUpPageState extends State<SignUpPage> {
                         // 비밀번호 입력칸
                         controller: _passwordController,
                         decoration: InputDecoration(
-                            border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                            border: OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color.fromARGB(100, 0, 0, 0),
                                 width: 1,
                               ),
                               //borderRadius: BorderRadius.circular(12),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color.fromARGB(100, 255, 89, 99),
-                                width: 1,
-                              ),
-                              // borderRadius: BorderRadius.circular(12),
                             ),
                             hintText: "비밀번호를 입력해주세요.",
                             hintStyle:
@@ -247,24 +247,30 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   Center(
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 15),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                       child: TextFormField(
                         // 비밀번호 재입력칸
-                        controller: _RepasswordController,
-                        onChanged: (value) {
+                        controller: _rePasswordController,
+                        onTapOutside: (value) {
                           setState(() {
-                            isPassword = _RepasswordController.text ==
-                                _passwordController;
-                            print('버튼');
-                            print(isPassword);
+                            isPassword = _rePasswordController.text ==
+                                _passwordController.text;
+                            passwordCount++;
                           });
                         },
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
                           contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: isCheck
+                                  ? Colors.red.shade400
+                                  : Color.fromARGB(100, 0, 0, 0),
+                              width: 1,
+                            ),
+                          ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: isPassword
+                              color: isCheck
                                   ? Colors.red.shade400
                                   : Color.fromARGB(100, 0, 0, 0),
                               width: 1,
@@ -279,14 +285,29 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
-                  Align(
-                    // 전화번호 텍스트
-                    alignment: AlignmentDirectional(-1.00, 0.00),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
+                  if (passwordCount != 0)
+                    Align(
+                      alignment: AlignmentDirectional(-1.00, 0.00),
                       child: Text(
-                        '전화번호',
-                        textAlign: TextAlign.start,
+                        isPassword ? '비밀번호가 일치합니다.' : '비밀번호가 일치하지 않습니다.',
+                        style: TextStyle(
+                          color:
+                              isPassword ? Colors.green : Colors.red.shade400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: Align(
+                      // 전화번호 텍스트
+                      alignment: AlignmentDirectional(-1.00, 0.00),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
+                        child: Text(
+                          '전화번호',
+                          textAlign: TextAlign.start,
+                        ),
                       ),
                     ),
                   ),
@@ -298,7 +319,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           Expanded(
                             child: TextFormField(
                                 // 전화번호 입력칸
-                                controller: _PnumController,
+                                controller: _phoneController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(),
                                   contentPadding:
@@ -474,22 +495,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           keyboardType: TextInputType.text),
                     ),
                   ),
-                  if (!_passwordsMatch)
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: AlertDialog(
-                        title: Text('오류'),
-                        content: Text('비밀번호가 일치하지 않습니다.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text('확인'),
-                          ),
-                        ],
-                      ),
-                    ),
                   Align(
                     // 개인 정보 방침 텍스트
                     alignment: AlignmentDirectional(-1.00, 0.00),
@@ -534,6 +539,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       Checkbox(
                         value: agreedToTerms,
+                        activeColor: const Color.fromARGB(255, 44, 96, 68),
                         onChanged: (bool? value) {
                           if (value != null) {
                             setState(() {
@@ -545,20 +551,30 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text('개인정보 수집 및 이용에 동의합니다.'),
                     ],
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      _handleSignUp(); // Call _handleSignUp function first
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RecommandPage(),
-                        ),
-                        (route) => false,
-                      );
-                    },
-                    child: Text('가입 하기'),
-                    style: ElevatedButton.styleFrom(
-                      primary: const Color.fromARGB(255, 44, 96, 68),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (!flag) {
+                          _handleSignUp();
+                        } else {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RecommandPage(),
+                            ),
+                            (route) => false,
+                          );
+                        }
+                      },
+                      child: Text(
+                        '가입 하기',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: const Color.fromARGB(255, 44, 96, 68),
+                        fixedSize: Size(170, 40),
+                      ),
                     ),
                   ),
                 ],
