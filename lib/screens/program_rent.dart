@@ -4,6 +4,7 @@ import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../program/rent.dart';
 
 class ProgramApply extends StatefulWidget {
   @override
@@ -120,6 +121,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                 ),
                 //추천 하려고 하는 프로그램 띄우기 위한 container
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.white),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -131,7 +133,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                             children: [
                               Image.asset(
                                 'assets/${recommended[0]['location']}',
-                                fit: BoxFit.cover,
+                                fit: BoxFit.contain,
                                 height: 200,
                               ),
                               SizedBox(height: 20),
@@ -262,8 +264,13 @@ class _ProgramApplyState extends State<ProgramApply> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  launch(
-                                      'https://sd1in.net/program/application-for-rental');
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => rentPage()),
+                                  );
+                                  // launch(
+                                  //     'https://sd1in.net/program/application-for-rental');
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white,
@@ -322,7 +329,6 @@ class _ProgramApplyState extends State<ProgramApply> {
                 ),
 
                 Align(
-                  // 아이디 텍스트
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),

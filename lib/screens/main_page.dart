@@ -1,15 +1,13 @@
 //main.dart
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-// import '../data/loading.dart';
-import '../data/network.dart';
-import 'weather_screen.dart';
 import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
-import 'dart:async';
+import 'main_banner.dart';
 
 const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
@@ -23,64 +21,43 @@ class _MainPageState extends State<MainPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   PageController _pageController = PageController(initialPage: 0);
-  late Timer _timer;
-
-  // ScrollController _scrollController = ScrollController();
-
-  int _activePage = 0;
-  int _currentPage = 0;
   int _selectedIndex = 1;
 
   String? cityName;
   int? temp;
-  // dynamic parseWeatherData = Loading().getLocation();
 
   @override
   void initState() {
     super.initState();
-
-    getLocation();
-
-    _pageController = PageController(initialPage: 0);
-
-    // 타이머를 사용하여 페이지 자동으로 넘기기
-    _timer = Timer.periodic(Duration(milliseconds: 2000), (Timer timer) {
-      _currentPage++;
-      _currentPage = _currentPage % 3;
-
-      _pageController.animateToPage(_currentPage,
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
-    });
   }
 
-  dynamic getLocation() async {
-    // MyLocation myLocation = MyLocation();
-    // await myLocation.getMyCurrentLocation();
-    // latitude3 = myLocation.latitude2;
-    // longitude3 = myLocation.longitude2;
-    // print(latitude3);
-    // print(longitude3);
+  // dynamic getLocation() async {
 
-    Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
-        'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
-    // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
+  //   Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
+  //       'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
+  //   // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
 
-    var weatherData = await network.getJsonData();
-    print("메인페이지");
-    print(weatherData);
-    print(weatherData['main']['temp']);
-    print(weatherData['name']);
-    return WeatherScreen(
-      parseWeatherData: weatherData,
-    );
-  }
+  //   var weatherData = await network.getJsonData();
+  //   print("메인페이지");
+  //   // print(weatherData);
+  //   // print(weatherData['main']['temp']);
+  //   // print(weatherData['name']);
+  //   return weatherData;
+  // }
 
   @override
   void dispose() {
     // 상태가 해제된 위젯에서 setState를 호출하지 않도록 타이머를 취소합니다.
-    _timer.cancel();
     _pageController.dispose();
     super.dispose();
+  }
+
+  _launchURL(String url) {
+    if (url.isNotEmpty) {
+      launch(url);
+    } else {
+      print("없는 주소");
+    }
   }
 
   @override
@@ -107,128 +84,57 @@ class _MainPageState extends State<MainPage> {
                   child: Text(
                     '지금 성동구에선?',
                     textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                height: 145,
-                child: Stack(
-                  fit: StackFit.loose,
-                  children: [
-                    PageView(
-                      // controller: _pageController,
-                      controller: _pageController ??=
-                          PageController(initialPage: 0),
-                      scrollDirection: Axis.horizontal,
-                      onPageChanged: (int page) {
-                        setState(() {
-                          _activePage = page;
-                        });
-                      },
-                      children: [
-                        Align(
-                          alignment: AlignmentDirectional(0.00, -1.00),
-                          child: ClipRRect(
-                            // borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/SNS 인증샷.jpg',
-                              width: double.infinity,
-                              height: 130,
-                              fit: BoxFit.contain,
-                              alignment: Alignment(0.00, -1.00),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.00, -1.00),
-                          child: ClipRRect(
-                            // borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/세이프 라이딩.jpg',
-                              width: double.infinity,
-                              height: 130,
-                              fit: BoxFit.contain,
-                              alignment: Alignment(0.00, -1.00),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(0.00, -1.00),
-                          child: ClipRRect(
-                            // borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              'assets/플로깅플레져.jpg',
-                              width: double.infinity,
-                              height: 130,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Center(
-                      // heightFactor: 190,
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          verticalDirection: VerticalDirection.down,
-                          children: List<Widget>.generate(
-                              3,
-                              (index) => Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 3),
-                                    child: InkWell(
-                                      onTap: () {
-                                        _pageController.animateToPage(index,
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            curve: Curves.easeIn);
-                                      },
-                                      child: CircleAvatar(
-                                        radius: 3,
-                                        backgroundColor: _activePage == index
-                                            ? Colors.grey
-                                            : Colors.grey.withOpacity(0.7),
-                                      ),
-                                    ),
-                                  )),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 20, 0, 7),
-                  child: Text(
-                    '공지사항 (Notice)',
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-              ),
-              Container(
+              BannerPage(),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black38, width: 1.5),
+                    border: Border.all(color: Colors.black38, width: 1.0),
                     borderRadius: BorderRadius.circular(8)),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
+                        title: Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                          child: Text(
+                            "공지사항 (Notice)",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       dense: true,
                       contentPadding: EdgeInsets.all(0),
-                      trailing: IconButton(
-                        icon: Icon(Icons.keyboard_arrow_right),
-                        iconSize: 25,
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => Notice()),
-                          );
-                        },
+                        trailing: Padding(
+                          padding: EdgeInsets.all(5),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_right),
+                            iconSize: 25,
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Notice()),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                        child: Divider(
+                          height: 2,
+                          thickness: 0.8,
+                          color: Colors.black38,
                       ),
                     ),
                     Padding(
@@ -240,7 +146,7 @@ class _MainPageState extends State<MainPage> {
                           border: Border(
                             bottom: BorderSide(
                               color: Colors.black38, // 아래 테두리의 색상 설정
-                              width: 1.5, // 아래 테두리의 두께 설정
+                              width: 1.0, // 아래 테두리의 두께 설정
                             ),
                           ),
                         ),
@@ -254,7 +160,10 @@ class _MainPageState extends State<MainPage> {
                           },
                           child: Text(
                             "공지사항 1 제목",
-                            style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                           ),
                         ),
                       ),
@@ -268,7 +177,7 @@ class _MainPageState extends State<MainPage> {
                           border: Border(
                             bottom: BorderSide(
                               color: Colors.black38, // 아래 테두리의 색상 설정
-                              width: 1.5, // 아래 테두리의 두께 설정
+                              width: 1.0, // 아래 테두리의 두께 설정
                             ),
                           ),
                         ),
@@ -282,7 +191,10 @@ class _MainPageState extends State<MainPage> {
                           },
                           child: Text(
                             "공지사항 2 제목",
-                            style: TextStyle(color: Colors.black),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                           ),
                         ),
                       ),
@@ -299,12 +211,16 @@ class _MainPageState extends State<MainPage> {
                         },
                         child: Text(
                           "공지사항 3 제목",
-                          style: TextStyle(color: Colors.black),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                         ),
                       ),
                     ),
                     // Divider()
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Align(
@@ -314,51 +230,24 @@ class _MainPageState extends State<MainPage> {
                   child: Text(
                     '성동구 날씨 (Seongdong\'s Weather)',
                     textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black38, width: 1.5),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WeatherScreen()
-                    // Padding(
-                    //   padding: EdgeInsets.only(left: 15, right: 15),
-                    //     child: WeatherScreen()
-                    //     // child: Container(
-                    //     //   alignment: Alignment.centerLeft,
-                    //     //   width: MediaQuery.of(context).size.width,
-                    //     //   child: Row(
-                    //     //     children: [
-                    //     //       Icon(Icons.cloud, size: 100),
-                    //     //       Column(
-                    //     //         crossAxisAlignment: CrossAxisAlignment.center,
-                    //     //         children: [
-                    //     //           Text(
-                    //     //             '$cityName',
-                    //     //             style: TextStyle(fontSize: 15.0),
-                    //     //           ),
-                    //     //           SizedBox(
-                    //     //             height: 20.0,
-                    //     //           ),
-                    //     //           Text(
-                    //     //             '$temp',
-                    //     //             style: TextStyle(fontSize: 15.0),
-                    //     //           ),
-                    //     //         ],
-                    //     //       ),
-                    //     //       // WeatherScreen()
-                    //     //     ],
-                    //     //   ),
-                    //     // ),
-                    // ),
-                    // Divider()
-                  ],
-                ),
-              )
+              // Container(
+              //   decoration: BoxDecoration(
+              //       border: Border.all(color: Colors.black38, width: 1.5),
+              //       borderRadius: BorderRadius.circular(8)),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       WeatherScreen()
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),
@@ -373,4 +262,11 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+
+class PageInfo {
+  final String imageUrl;
+  final String linkUrl;
+
+  PageInfo({required this.imageUrl, required this.linkUrl});
 }
