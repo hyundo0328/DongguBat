@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
-import '../screens/my_page.dart';
+import '../mypage/my_page.dart';
 import '../screens/program_rent.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 

@@ -11,18 +11,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  final db = FirebaseFirestore.instance;
-  final user = <String, dynamic>{
-    "first": "id",
-    "last": "email",
-    "born": "password",
-    "Pnum": "Pnum",
-    "address": "address",
-    "name": "name",
-  };
-  // Add a new document with a generated ID
-  db.collection("users_test").add(user).then((DocumentReference doc) =>
-      print('DocumentSnapshot added with ID: ${doc.id}'));
   runApp(MyApp());
 }
 
