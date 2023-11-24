@@ -8,8 +8,7 @@ import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
 import 'main_banner.dart';
-
-const apiKey = '895c7d17476c72440ce44ba845661bbc';
+import './map.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -23,27 +22,10 @@ class _MainPageState extends State<MainPage> {
   PageController _pageController = PageController(initialPage: 0);
   int _selectedIndex = 1;
 
-  String? cityName;
-  int? temp;
-
   @override
   void initState() {
     super.initState();
   }
-
-  // dynamic getLocation() async {
-
-  //   Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
-  //       'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
-  //   // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
-
-  //   var weatherData = await network.getJsonData();
-  //   print("메인페이지");
-  //   // print(weatherData);
-  //   // print(weatherData['main']['temp']);
-  //   // print(weatherData['name']);
-  //   return weatherData;
-  // }
 
   @override
   void dispose() {
@@ -72,7 +54,7 @@ class _MainPageState extends State<MainPage> {
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "동구밭"),
         ),
-        body: Padding(
+        body: SingleChildScrollView(
           padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -224,6 +206,29 @@ class _MainPageState extends State<MainPage> {
                       // Divider()
                     ],
                   ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Align(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
+                  child: Text(
+                    '성동구 1인가구지원센터 위치',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 300,
+                // child: MapSample(),
+                child: Image.asset(
+                  'assets/지원센터.png',
+                  fit: BoxFit.cover,
+                  width: 380,
+                  height: 50,
                 ),
               ),
               SizedBox(height: 20),
