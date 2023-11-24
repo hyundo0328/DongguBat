@@ -1,13 +1,11 @@
 // mypage.dart
 import 'package:donggu_bat/login/login.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import '../screens/email_change.dart';
-import '../screens/phone_change.dart';
 import 'rent.dart';
 import 'program.dart';
+import 'user_profile.dart';
 
 class MyPageScreen extends StatefulWidget {
   @override
@@ -122,7 +120,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 15, 0),
                                           child: Text(
-                                            '김민종 님',
+                                            '김동구 님',
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 fontFamily: 'Readex Pro'),
@@ -420,121 +418,3 @@ class _MyPageScreenState extends State<MyPageScreen> {
     );
   }
 }
-
-class UserProfilePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
-        child: WidgetAppBar(title: "내 정보 수정"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          children: [
-            // 사용자 아이콘 (여기에 사용자의 프로필 이미지 아이콘을 추가)
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Center(
-                child: CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage:
-                      AssetImage('assets/user_profile.jpg'), // 프로필 이미지 경로
-                ),
-              ),
-            ),
-            SizedBox(height: 10.0),
-            // 사용자 이름
-            Text(
-              'hyundo',
-              style: TextStyle(fontSize: 25.0),
-            ),
-            SizedBox(height: 5.0),
-            // 로그인한 이메일
-            Text(
-              'hyundo13@naver.com',
-              style: TextStyle(fontSize: 16.0, color: Colors.grey),
-            ),
-            SizedBox(height: 30.0),
-            // 전화번호 변경 버튼
-            ListTile(
-              leading: Icon(Icons.phone),
-              title: Text('전화번호 변경'),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                // 전화번호 변경 화면으로 이동
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return PhoneNumberChangePage(); // 전화번호 변경 화면의 클래스
-                }));
-              },
-            ),
-            // 이메일 주소 변경 버튼
-            ListTile(
-              leading: Icon(Icons.email),
-              title: Text('이메일 주소 변경'),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                // 이메일 주소 변경 화면으로 이동
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return EmailChangePage(); // 이메일 주소 변경 화면의 클래스
-                }));
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// class ProfileImageChangePage extends StatefulWidget {
-//   @override
-//   _ProfileImageChangePageState createState() => _ProfileImageChangePageState();
-// }
-
-// class _ProfileImageChangePageState extends State<ProfileImageChangePage> {
-//   // 프로필 이미지를 저장할 변수 또는 경로
-//   String _profileImagePath = ''; // 초기 이미지 경로 설정
-
-//   // 이미지 피커를 초기화
-//   final ImagePicker _picker = ImagePicker();
-
-//   // 이미지 업로드 함수
-//   Future<void> _uploadImage() async {
-//     final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-//     if (pickedFile != null) {
-//       setState(() {
-//         _profileImagePath = pickedFile.path;
-//       });
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('프로필 이미지 변경'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             // 프로필 이미지 표시
-//             CircleAvatar(
-//               radius: 80,
-//               backgroundImage: _profileImagePath.isEmpty
-//                   ? AssetImage('assets/profile_image.png') // 기본 이미지 경로
-//                   : FileImage(File(_profileImagePath)), // 업로드한 이미지 경로
-//             ),
-//             SizedBox(height: 20.0),
-//             ElevatedButton(
-//               onPressed: _uploadImage, // 이미지 업로드 함수 호출
-//               child: Text('이미지 업로드'),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -31,24 +31,9 @@ class _MainPageState extends State<MainPage> {
     super.initState();
   }
 
-  // dynamic getLocation() async {
-
-  //   Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
-  //       'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
-  //   // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
-
-  //   var weatherData = await network.getJsonData();
-  //   print("메인페이지");
-  //   // print(weatherData);
-  //   // print(weatherData['main']['temp']);
-  //   // print(weatherData['name']);
-  //   return weatherData;
-  // }
-
   @override
   void dispose() {
     // 상태가 해제된 위젯에서 setState를 호출하지 않도록 타이머를 취소합니다.
-    _pageController.dispose();
     super.dispose();
   }
 
@@ -67,12 +52,12 @@ class _MainPageState extends State<MainPage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        key: scaffoldKey,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "동구밭"),
         ),
-        body: Padding(
+        body: SingleChildScrollView(
+          child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -97,7 +82,8 @@ class _MainPageState extends State<MainPage> {
                 child: Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black38, width: 1.0),
-                      borderRadius: BorderRadius.circular(8)),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -320,6 +306,7 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           ),
+        ),
         ),
         bottomNavigationBar: WidgetBottomNavigationBar(
           selectedIndex: _selectedIndex,

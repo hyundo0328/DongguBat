@@ -69,7 +69,7 @@ class _BannerPageState extends State<BannerPage> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width - 30,
-      height: 165,
+      height: 185,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -94,7 +94,7 @@ class _BannerPageState extends State<BannerPage> {
                     child: Image.asset(
                       pages[index].imageUrl,
                       width: double.infinity,
-                      height: 150,
+                      height: 170,
                       fit: BoxFit.contain,
                       alignment: Alignment(0.00, -1.00),
                     ),

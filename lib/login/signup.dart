@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../screens/main_page.dart';
 import 'recommand.dart';
 import '../widgets/widget_appbar.dart';
 
@@ -135,7 +134,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               //borderRadius: BorderRadius.circular(12),
                             ),
                           ),
-                          keyboardType: TextInputType.text),
+                        keyboardType: TextInputType.text,
+                      ),
                     ),
                   ),
                   Align(
