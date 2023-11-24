@@ -244,7 +244,6 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                         builder: (context) =>
                                             MyRentPageScreen()),
                                   );
-                                  // Handle the action when "View All" button is pressed
                                 },
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(0, 10, 10, 0),
