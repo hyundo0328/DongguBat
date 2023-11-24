@@ -158,7 +158,12 @@ class _LogInstate extends State<LogIn> {
                                     builder: (context) => SignUpPage()),
                               );
                             },
-                            child: Text('회원가입'),
+                            child: Text(
+                              '회원가입',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
                             style:
                                 TextButton.styleFrom(primary: Colors.black45),
                           ),
@@ -170,7 +175,12 @@ class _LogInstate extends State<LogIn> {
                                     builder: (context) => FindIDPW()),
                               );
                             },
-                            child: Text('ID/PW 찾기'),
+                            child: Text(
+                              'ID/PW 찾기',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
                             style:
                                 TextButton.styleFrom(primary: Colors.black45),
                           ),

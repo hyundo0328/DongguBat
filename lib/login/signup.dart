@@ -87,7 +87,7 @@ class _SignUpPageState extends State<SignUpPage> {
   int passwordCount = 0;
   bool isPhoneNumber = false;
   int phoneCount = 0;
-  bool isCheck = false;
+  bool isCheck = true;
 
   @override
   Widget build(BuildContext context) {
@@ -251,7 +251,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: TextFormField(
                         // 비밀번호 재입력칸
                         controller: _rePasswordController,
-                        onTapOutside: (value) {
+                        onChanged: (value) {
                           setState(() {
                             isPassword = _rePasswordController.text ==
                                 _passwordController.text;
@@ -262,17 +262,17 @@ class _SignUpPageState extends State<SignUpPage> {
                           contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
                           border: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: isCheck
-                                  ? Colors.red.shade400
-                                  : Color.fromARGB(100, 0, 0, 0),
+                              color: isPassword
+                                  ? Color.fromARGB(100, 0, 0, 0)
+                                  : Colors.red.shade400,
                               width: 1,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: isCheck
-                                  ? Colors.red.shade400
-                                  : Color.fromARGB(100, 0, 0, 0),
+                              color: isPassword
+                                  ? Color.fromARGB(100, 0, 0, 0)
+                                  : Colors.red.shade400,
                               width: 1,
                             ),
                           ),
@@ -298,7 +298,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 15),
                     child: Align(
                       // 전화번호 텍스트
                       alignment: AlignmentDirectional(-1.00, 0.00),
@@ -372,16 +372,16 @@ class _SignUpPageState extends State<SignUpPage> {
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: isCheck
-                                        ? Colors.red.shade400
-                                        : Color.fromARGB(100, 0, 0, 0),
+                                        ? Color.fromARGB(100, 0, 0, 0)
+                                        : Colors.red.shade400,
                                     width: 1,
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: isCheck
-                                        ? Colors.red.shade400
-                                        : Color.fromARGB(100, 0, 0, 0),
+                                        ? Color.fromARGB(100, 0, 0, 0)
+                                        : Colors.red.shade400,
                                     width: 1,
                                   ),
                                 ),

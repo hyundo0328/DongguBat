@@ -87,7 +87,6 @@ class _MyPageScreenState extends State<MyPageScreen> {
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 5, 0, 10),
                     child: Row(
-                      // mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
                           width: 80,
@@ -210,6 +209,15 @@ class _MyPageScreenState extends State<MyPageScreen> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black38, width: 1.0),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Text("포인트"),
                     ),
                   ),
                   Container(
