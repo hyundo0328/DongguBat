@@ -165,7 +165,6 @@ class _ProgramApplyState extends State<ProgramApply> {
                     height: 100,
                   ),
                 ),
-
                 Align(
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
