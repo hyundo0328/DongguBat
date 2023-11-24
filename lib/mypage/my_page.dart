@@ -213,9 +213,34 @@ class _MyPageScreenState extends State<MyPageScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black38, width: 1.0),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Text("포인트"),
+                        border: Border.all(color: Colors.black38, width: 1.0),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '포인트',
+                              style: TextStyle(
+                                fontSize: 16, // Adjust the font size as needed
+                                fontWeight: FontWeight
+                                    .bold, // Add bold font weight if required
+                              ),
+                            ),
+                            SizedBox(
+                                width:
+                                    8), // Adjust spacing between "포인트" and points value
+                            Text(
+                              '1000 points', // You can replace this with the actual value
+                              style: TextStyle(
+                                fontSize: 16, // Adjust the font size as needed
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                   Container(
