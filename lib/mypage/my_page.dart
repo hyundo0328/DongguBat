@@ -6,6 +6,9 @@ import '../widgets/widget_bottombar.dart';
 import 'rent.dart';
 import 'program.dart';
 import 'user_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class MyPageScreen extends StatefulWidget {
   @override
@@ -30,6 +33,16 @@ class _MyPageScreenState extends State<MyPageScreen> {
 
   int _selectedIndex = 2;
 
+  //1125 hys 추가 - 로그아웃 함수 구현 
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      print("Logout Success");
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   Future<void> _showConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
       context: context,
@@ -48,6 +61,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
             TextButton(
               child: Text('예'),
               onPressed: () {
+                signOut();  //로그아웃 
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

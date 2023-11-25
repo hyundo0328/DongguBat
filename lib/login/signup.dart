@@ -221,16 +221,17 @@ class _SignUpPageState extends State<SignUpPage> {
   Future<bool> _singupInDB() async{
     //login 실행
     try {
-      // final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-      //   email: _emailController.text, 
-      //   password: _passwordController.text
-      // );
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text, 
+        password: _passwordController.text
+      );
       print("sign in with : ");
       print(FirebaseAuth.instance.currentUser?.uid);
       //auth에서 비밀번호와 이메일 업데이트
       await FirebaseAuth.instance.currentUser?.updateEmail(_emailController.text);
       await FirebaseAuth.instance.currentUser?.updateDisplayName(_nameController.text);
       await FirebaseAuth.instance.currentUser?.updatePassword(_passwordController.text);
+      await FirebaseAuth.instance.currentUser?.updatePhotoURL('assets/user_profile.jpg');
       await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).set({
         "id":_idController.text,
         "email": _emailController.text,
