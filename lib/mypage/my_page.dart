@@ -221,6 +221,13 @@ class _MyPageScreenState extends State<MyPageScreen> {
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
+                            Icon(
+                              Icons.money,
+                              size: 30,
+                              color: Color.fromARGB(255, 16, 16, 16),
+                            ),
+                            SizedBox(width: 10),
+
                             Text(
                               '포인트',
                               style: TextStyle(
@@ -229,6 +236,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                     .bold, // Add bold font weight if required
                               ),
                             ),
+                            Spacer(),
                             SizedBox(
                                 width:
                                     8), // Adjust spacing between "포인트" and points value
