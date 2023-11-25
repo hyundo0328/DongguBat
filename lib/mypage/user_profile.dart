@@ -82,19 +82,32 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+  // 이름 정보 가져오기
   final TextEditingController _nameController =
-      TextEditingController(text: '김동구'); // 이름 정보 가져오기
+      TextEditingController(text: '김동구');
+
+  // 전화번호 정보 가져오기
   final TextEditingController _phoneController =
-      TextEditingController(text: '010-1234-5678'); // 전화번호 정보 가져오기
+      TextEditingController(text: '010-1234-5678');
+
+  // 아이디 정보 가져오기
   final TextEditingController _idController =
-      TextEditingController(text: 'donggubat'); // 아이디 정보 가져오기
+      TextEditingController(text: 'donggubat');
+
+  // 비밀번호 정보 저장하기
   final TextEditingController _passwordController =
-      TextEditingController(); // 비밀번호 정보 저장하기
+      TextEditingController();
+
+  // 비밀번호 확인
   final TextEditingController _rePasswordController = TextEditingController();
+
+  // 이메일 정보 가져오기
   final TextEditingController _emailController =
-      TextEditingController(text: 'donggubat@dongguk.edu.kr'); // 이메일 정보 가져오기
+      TextEditingController(text: 'donggubat@dongguk.edu.kr');
+
+  // 주소 정보 가져오기
   final TextEditingController _addressController =
-      TextEditingController(text: '서울특별시 성동구 마장로39길 31'); // 주소 정보 가져오기
+      TextEditingController(text: '서울특별시 성동구 마장로39길 31'); 
 
   bool isDuplicate = false;
   int duplicateCount = 0;
