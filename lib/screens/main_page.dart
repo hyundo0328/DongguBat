@@ -1,6 +1,7 @@
 //main.dart
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../notice/notice_list.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
 import '../notice/notice_page.dart';
@@ -109,7 +110,7 @@ class _MainPageState extends State<MainPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Notice()),
+                                      builder: (context) => NoticeList()),
                                 );
                               },
                             ),
