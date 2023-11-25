@@ -32,6 +32,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
   ];
 
   int _selectedIndex = 2;
+  String? current_uid = FirebaseAuth.instance.currentUser?.uid;
+  String? current_email = FirebaseAuth.instance.currentUser?.email;
+  String? current_name = FirebaseAuth.instance.currentUser?.displayName;
+  // String? current_photo = FirebaseAuth.instance.currentUser?.photoURL;
+  // String? current_pnum = FirebaseAuth.instance.currentUser?.phoneNumber;
 
   //1125 hys 추가 - 로그아웃 함수 구현 
   Future<void> signOut() async {
@@ -108,7 +113,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                             shape: BoxShape.circle,
                           ),
                           child: Image.asset(
-                            'assets/user_profile.jpg',
+                            "assets/profile.png",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -134,7 +139,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 15, 0),
                                           child: Text(
-                                            '김동구 님',
+                                            '${current_name} 님',
                                             style: TextStyle(
                                                 fontSize: 16,
                                                 fontFamily: 'Readex Pro'),
@@ -208,7 +213,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         10, 0, 5, 20),
-                                    child: Text('이메일 : donggubat@dgu.kr',
+                                    child: Text('이메일 : ${current_email}',
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontFamily: 'Readex Pro',

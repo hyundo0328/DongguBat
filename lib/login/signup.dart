@@ -231,7 +231,7 @@ class _SignUpPageState extends State<SignUpPage> {
       await FirebaseAuth.instance.currentUser?.updateEmail(_emailController.text);
       await FirebaseAuth.instance.currentUser?.updateDisplayName(_nameController.text);
       await FirebaseAuth.instance.currentUser?.updatePassword(_passwordController.text);
-      await FirebaseAuth.instance.currentUser?.updatePhotoURL('assets/user_profile.jpg');
+      await FirebaseAuth.instance.currentUser?.updatePhotoURL("");
       await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).set({
         "id":_idController.text,
         "email": _emailController.text,
@@ -242,7 +242,6 @@ class _SignUpPageState extends State<SignUpPage> {
         // 다른 사용자 속성들도 필요에 따라 추가할 수 있습니다.
       });
       print("db update!");
-
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -576,33 +575,34 @@ class _SignUpPageState extends State<SignUpPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // _sendEmail();  //이메일 가입하기 위해 일단 실행 
+                        checkSignUp();
 
                         if (!flag) {
                           checkSignUp();
                         } else {
-                          bool emailverify = _singupInDB() as bool;
-                        if (!emailverify){
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('오류'),
-                                  content: Text('이메일 인증을 먼저 진행해주세요!'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        // 경고 창 닫기
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('확인'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
+                          await _singupInDB();
+                        // if (!emailverify){
+                        //     showDialog(
+                        //       context: context,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           title: Text('오류'),
+                        //           content: Text('이메일 인증을 먼저 진행해주세요!'),
+                        //           actions: [
+                        //             TextButton(
+                        //               onPressed: () {
+                        //                 // 경고 창 닫기
+                        //                 Navigator.of(context).pop();
+                        //               },
+                        //               child: Text('확인'),
+                        //             ),
+                        //           ],
+                        //         );
+                        //       },
+                        //     );
+                        //   }
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

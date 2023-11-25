@@ -219,9 +219,12 @@ class _RecommandPageState extends State<RecommandPage> {
                     prefer_list.add("null");
                   }
 
-                  await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).set({
+
+                  await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).update({
                     "recommand_list" : prefer_list.join(', ')
-                    });
+                    }).then((value) => print("DocumentSnapshot successfully updated!"),
+                    onError: (e) => print("Error updating document $e"));
+
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
