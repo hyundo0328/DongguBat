@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "633234134006",
+    "project_id": "donggubatreal",
+    "storage_bucket": "donggubatreal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:633234134006:android:cecb1f986c44086358edd7",
+        "android_client_info": {
+          "package_name": "com.example.donggu_bat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdSyslI1dTBI8rZsq0FwnRyUORQej4RiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

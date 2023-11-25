@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import '../screens/main_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RecommandPage extends StatefulWidget {
   @override
@@ -190,7 +192,39 @@ class _RecommandPageState extends State<RecommandPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 44, 96, 68),
                 ),
-                onPressed: () {
+                onPressed: () async {
+
+                  if (FirebaseAuth.instance.currentUser != null) {
+                  print("current user in the recommand page");
+                  print(FirebaseAuth.instance.currentUser?.uid);}
+
+                  var prefer_list = new List.empty(growable: true);
+
+                  if (check_body) {
+                    prefer_list.add("check_body");
+                  }
+                  if (check_mind) {
+                    prefer_list.add("check_mind");
+                  }
+                  if (check_relationship) {
+                    prefer_list.add("check_relationship");
+                  }
+                  if (check_finance) {
+                    prefer_list.add("check_finance");
+                  }
+                  if (check_support) {
+                    prefer_list.add("check_support");
+                  }
+                  if (check_nothing) {
+                    prefer_list.add("null");
+                  }
+
+
+                  await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).update({
+                    "recommand_list" : prefer_list.join(', ')
+                    }).then((value) => print("DocumentSnapshot successfully updated!"),
+                    onError: (e) => print("Error updating document $e"));
+
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(

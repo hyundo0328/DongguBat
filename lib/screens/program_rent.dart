@@ -5,6 +5,8 @@ import '../widgets/widget_bottombar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../program/rent.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProgramApply extends StatefulWidget {
   @override
@@ -13,6 +15,106 @@ class ProgramApply extends StatefulWidget {
 
 class _ProgramApplyState extends State<ProgramApply> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  //1125 hys 추가 - uid 및 DB에서 현재 로그인한 사용자 정보 불러오기
+  String? current_uid = FirebaseAuth.instance.currentUser?.uid; //사용자 uid
+  String? current_email = FirebaseAuth.instance.currentUser?.email; //사용자 이메일
+  String? current_name =
+      FirebaseAuth.instance.currentUser?.displayName; //사용자 이름
+  String? current_photo = FirebaseAuth.instance.currentUser
+      ?.photoURL; //사용자 프로필 사진 주소(기본 설정 : 'assets/profile.png')
+  String? current_address; //사용자 주소
+  String? current_recommendlist; //사용자 선호 프로그램 목록
+  String? recommend_img_url;
+  String? recommend_url;
+  String? recommend_text;
+  List<String> locations = [];
+  late Set<Map<String, String>> programDayExist = {};
+  Future<void> fetchData() async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+        .collection("programData")
+        .doc("0")
+        .get();
+
+    if (snapshot.exists) {
+      Map<String, dynamic> recommend = snapshot.data() as Map<String, dynamic>;
+      recommend_img_url = recommend['이미지'];
+      recommend_url = recommend['URL'];
+      recommend_text = recommend["프로그램 소개"];
+      // Now update the recommended list
+      print(recommend_img_url);
+    } else {
+      print("error : 문서가 존재하지 않습니다!");
+    }
+  }
+
+  //위에서 정의한 current 유저 정보 변수들에 DB에서 문서 읽어와 값 할당
+  void set_current() async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get();
+
+    // 문서가 존재하는지 확인
+    if (documentSnapshot.exists) {
+      // 문서의 데이터 가져오기
+      Map<String, dynamic> data =
+          documentSnapshot.data() as Map<String, dynamic>;
+      current_address = data['address'];
+      current_recommendlist = data['recommend_list'];
+    } else {
+      print("error : 문서가 존재하지 않습니다!");
+    }
+  }
+
+  void set_program() async {
+    try {
+      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('programData')
+          .where('일정', isNotEqualTo: "")
+          .get();
+
+      List<QueryDocumentSnapshot> documents = querySnapshot.docs;
+
+      for (QueryDocumentSnapshot document in documents) {
+        Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+
+        // 가져온 데이터 활용 예시 "이름", "일정", "카테고리"
+        String scheduleName = data['이름'];
+        String scheduleDate = data['일정'];
+        String scheduleCat = data['카테고리'];
+
+        programDayExist.add({
+          'name': scheduleName,
+          'time': scheduleDate,
+          'location': scheduleCat
+        });
+        String newValue = scheduleCat; // 새로 추가하려는 값
+
+        // 리스트에 값이 이미 있는지 확인
+        if (!locations.contains(newValue)) {
+          // 리스트에 추가
+          locations.add(newValue);
+        }
+        // 원하는 작업 수행
+        // print('문서 ID: $documentId, 일정: $scheduleData');
+        // 이 부분에서 가져온 데이터를 저장하거나 활용할 수 있습니다.
+      }
+      //print(programDayExist);
+      print(locations);
+    } catch (error) {
+      print('데이터 가져오기 실패: $error');
+    }
+  }
+
+  //hys 1125 추가, 자동으로 currunt user 값들 세팅하기 위한 함수
+  @override
+  void initState() {
+    super.initState();
+    set_current();
+    fetchData();
+    set_program();
+  }
 
   int _selectedIndex = 0;
   int _currentMonthIndex = 0;
@@ -68,29 +170,6 @@ class _ProgramApplyState extends State<ProgramApply> {
     'https://sd1in.net/product/personal-consultation'
   ];
 
-  List<Map<String, String>> recommended = [
-    {
-      'location': '추천.png',
-      'url': 'https://sd1in.net/product/personal-consultation',
-      'text':
-          '내담자는 미술치료에서의 공감으로 자기대상과의 관계에서 형성된 다양한 사고와 감정, 욕구를 자유롭게 표현할 수 있으며, 자기대상이 자신의 인생에 미친 영향을 탐색할 수 있게 됩니다. 치료자와 미술이라는 환경 속에서 내담자는 창조적이면서 공감적인 삶을 경험하게 되고, 자기의 발달과 회복이 촉진되는 것입니다.'
-    }
-  ];
-
-  List<Map<String, String>> rent = [
-    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-    {'name': '4층 다목적실', 'time': '13:00 - 15:00', 'location': '성동구 동1'},
-    {'name': '3층 소회의실', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-    {'name': '3층 자치사랑방', 'time': '13:00 - 15:00', 'location': '성동구 동2'},
-    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동2'},
-    {'name': '3층 작은도서관', 'time': '10:00 - 12:00', 'location': '성동구 동2'},
-    {'name': '1층 다목적실', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-  ];
-
-  List<String> locations = ['성동구 동1', '성동구 동2', '성동구 동3'];
-  List<String> name = ['소회의실', '자치사랑방', '공유부엌', '작은도서관', '다목적실'];
   String? dropdownValue;
 
   @override
@@ -114,7 +193,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
                     child: Text(
-                      '당신을 위한 추천 (Recommand for You)',
+                      '당신을 위한 추천 (Recommend for You)',
                       textAlign: TextAlign.start,
                     ),
                   ),
@@ -128,38 +207,40 @@ class _ProgramApplyState extends State<ProgramApply> {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text("프로그램 신청"),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Image.asset(
-                                'assets/${recommended[0]['location']}',
-                                fit: BoxFit.contain,
-                                height: 200,
-                              ),
-                              SizedBox(height: 20),
-                              Text('${recommended[0]['text']}'),
-                              SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () async {
-                                  String? url = recommended[0]['url'];
-                                  if (url != null) {
-                                    launch(url);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary:
-                                      const Color.fromARGB(255, 44, 96, 68),
+                          content: SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Image.network(
+                                  recommend_img_url ?? '',
+                                  //fit: BoxFit.contain,
+                                  //height: 200,
                                 ),
-                                child: Text("접수 바로가기"),
-                              ),
-                            ],
+                                SizedBox(height: 20),
+                                Text(recommend_text ?? ''),
+                                SizedBox(height: 20),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    String? url = recommend_url;
+                                    if (url != null) {
+                                      launch(url);
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    primary:
+                                        const Color.fromARGB(255, 44, 96, 68),
+                                  ),
+                                  child: Text("접수 바로가기"),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
                     );
                   },
-                  child: Image.asset(
-                    'assets/${recommended[0]['location']}',
+                  child: Image.network(
+                    recommend_img_url ?? '',
                     fit: BoxFit.cover,
                     width: 400,
                     height: 100,
@@ -179,7 +260,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                 Row(
                   children: [
                     Icon(Icons.location_pin),
-                    SizedBox(width: 10),
+                    SizedBox(width: 20),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 12),
                       decoration: BoxDecoration(
@@ -190,9 +271,11 @@ class _ProgramApplyState extends State<ProgramApply> {
                         value: dropdownValue,
                         onChanged: (String? newValue) {
                           setState(() {
-                            dropdownValue = newValue;
-                            selectedLocation =
-                                newValue ?? ''; // null 체크 및 대체값 설정
+                            dropdownValue = newValue; // null 체크 및 대체값 설정
+                            selectedLocation = newValue ?? ''; // 선택된 위치 업데이트
+
+                            // 선택한 위치에 따라 필요한 동작 수행
+                            // 예를 들어, 해당 위치에 대한 정보를 가져오거나 화면을 업데이트할 수 있습니다.
                           });
                         },
                         items: locations
@@ -204,61 +287,37 @@ class _ProgramApplyState extends State<ProgramApply> {
                         }).toList(),
                       ),
                     ),
-                    //   Spacer(),
-                    //   Icon(Icons.house_outlined),
-                    //   SizedBox(width: 10),
-                    //   Container(
-                    //     padding: EdgeInsets.symmetric(horizontal: 12),
-                    //     decoration: BoxDecoration(
-                    //       border: Border.all(),
-                    //       borderRadius: BorderRadius.circular(5),
-                    //     ),
-                    //     child: DropdownButton<String>(
-                    //       value: dropdownValue,
-                    //       onChanged: (String? newValue) {
-                    //         setState(() {
-                    //           dropdownValue = newValue;
-                    //           selectedname = newValue ?? ''; // null 체크 및 대체값 설정
-                    //         });
-                    //       },
-                    //       items:
-                    //           name.map<DropdownMenuItem<String>>((String value) {
-                    //         return DropdownMenuItem<String>(
-                    //           value: value,
-                    //           child: Text(value), // 위치 이름
-                    //         );
-                    //       }).toList(),
-                    //     ),
-                    //   ),
                   ],
                 ),
+
                 Container(
                   height: 250,
                   child: ListView.builder(
                     scrollDirection: Axis.vertical,
-                    itemCount: rent.length,
+                    itemCount: programDayExist.length,
                     itemBuilder: (BuildContext context, int index) {
+                      Map<String, String> programDay =
+                          programDayExist.elementAt(index);
+
                       if (selectedLocation.isEmpty ||
-                          rent[index]['location'] == selectedLocation) {
+                          programDay['location'] == selectedLocation) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
                               Expanded(
-                                child: Row(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      rent[index]['name'] ?? '대관 위치 이름 없음',
+                                      programDay['name'] ?? '대관 위치 이름 없음',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-
-                                    Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
                                     Text(
-                                      '${rent[index]['time']}', // 대관 시간
+                                      '${programDay['time']}', // 대관 시간
                                     ),
-                                    Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
                                   ],
                                 ),
                               ),
@@ -267,10 +326,9 @@ class _ProgramApplyState extends State<ProgramApply> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => rentPage()),
+                                      builder: (context) => rentPage(),
+                                    ),
                                   );
-                                  // launch(
-                                  //     'https://sd1in.net/program/application-for-rental');
                                 },
                                 style: ElevatedButton.styleFrom(
                                   primary: Colors.white,
@@ -282,45 +340,6 @@ class _ProgramApplyState extends State<ProgramApply> {
                             ],
                           ),
                         );
-                        // } else if (selectedname.isEmpty ||
-                        //     rent[index]['name']!.contains(selectedname)) {
-                        //   return Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: Row(
-                        //       children: [
-                        //         Expanded(
-                        //           child: Row(
-                        //             children: [
-                        //               Text(
-                        //                 rent[index]['name'] ?? '대관 위치 이름 없음',
-                        //                 style: TextStyle(
-                        //                   fontWeight: FontWeight.bold,
-                        //                 ),
-                        //               ),
-
-                        //               Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
-                        //               Text(
-                        //                 '${rent[index]['time']}', // 대관 시간
-                        //               ),
-                        //               Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         ElevatedButton(
-                        //           onPressed: () {
-                        //             launch(
-                        //                 'https://sd1in.net/program/application-for-rental');
-                        //           },
-                        //           style: ElevatedButton.styleFrom(
-                        //             primary: Colors.white,
-                        //             onPrimary: Colors.black,
-                        //             side: BorderSide(color: Colors.grey),
-                        //           ),
-                        //           child: Text('신청하기'),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   );
                       } else {
                         return SizedBox.shrink();
                       }

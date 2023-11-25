@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import '../data/network.dart';
-import '../notice/notice_page.dart';
+import '../notice/notice_list.dart';
+import '../notice/notice_move.dart';
 import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
 import 'main_banner.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 const apiKey = '895c7d17476c72440ce44ba845661bbc';
 
@@ -22,36 +23,51 @@ class _MainPageState extends State<MainPage> {
   // const Main({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  //1125 hys 추가 - uid 및 DB에서 현재 로그인한 사용자 정보 불러오기
+  String? current_uid = FirebaseAuth.instance.currentUser?.uid; //사용자 uid
+  String? current_email = FirebaseAuth.instance.currentUser?.email; //사용자 이메일
+  String? current_name =
+      FirebaseAuth.instance.currentUser?.displayName; //사용자 이름
+  String? current_photo = FirebaseAuth.instance.currentUser
+      ?.photoURL; //사용자 프로필 사진 주소(기본 설정 : 'assets/profile.png')
+  String? current_address; //사용자 주소
+  String? current_recommandlist; //사용자 선호 프로그램 목록
+
+  //위에서 정의한 current 유저 정보 변수들에 DB에서 문서 읽어와 값 할당
+  void set_current() async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get();
+
+    // 문서가 존재하는지 확인
+    if (documentSnapshot.exists) {
+      // 문서의 데이터 가져오기
+      Map<String, dynamic> data =
+          documentSnapshot.data() as Map<String, dynamic>;
+      current_address = data['address'];
+      current_recommandlist = data['recommand_list'];
+    } else {
+      print("error : 문서가 존재하지 않습니다!");
+    }
+  }
+
+  //hys 1125 추가, 자동으로 currunt user 값들 세팅하기 위한 함수
+  @override
+  void initState() {
+    set_current();
+    super.initState();
+  }
+
   PageController _pageController = PageController(initialPage: 0);
   int _selectedIndex = 1;
 
   String? cityName;
   int? temp;
-  late GoogleMapController mapController;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  // dynamic getLocation() async {
-
-  //   Network network = Network('https://api.openweathermap.org/data/2.5/weather?'
-  //       'lat=37.550&lon=127.041&exclude=hourly&appid=$apiKey&units=metric');
-  //   // https://api.openweathermap.org/data/3.0/onecall?lat=37.550&lon=127.041&exclude=hourly&appid=895c7d17476c72440ce44ba845661bbc&units=metric
-
-  //   var weatherData = await network.getJsonData();
-  //   print("메인페이지");
-  //   // print(weatherData);
-  //   // print(weatherData['main']['temp']);
-  //   // print(weatherData['name']);
-  //   return weatherData;
-  // }
 
   @override
   void dispose() {
     // 상태가 해제된 위젯에서 setState를 호출하지 않도록 타이머를 취소합니다.
-    _pageController.dispose();
     super.dispose();
   }
 
@@ -70,7 +86,6 @@ class _MainPageState extends State<MainPage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        key: scaffoldKey,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "동구밭"),
@@ -100,8 +115,9 @@ class _MainPageState extends State<MainPage> {
                   padding: EdgeInsets.only(top: 20),
                   child: Container(
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black38, width: 1.0),
-                        borderRadius: BorderRadius.circular(8)),
+                      border: Border.all(color: Colors.black38, width: 1.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -127,7 +143,7 @@ class _MainPageState extends State<MainPage> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Notice()),
+                                      builder: (context) => NoticeList()),
                                 );
                               },
                             ),
@@ -232,39 +248,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 SizedBox(height: 20),
                 Align(
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
-                    child: Text(
-                      '성동구 1인가구지원센터 위치',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  height: 300, // Adjust the height as needed
-                  child: GoogleMap(
-                    onMapCreated: (GoogleMapController controller) {
-                      mapController = controller;
-                    },
-                    initialCameraPosition: CameraPosition(
-                      target: LatLng(37.550, 127.041), // Initial location
-                      zoom: 15.0,
-                    ),
-                    markers: {
-                      Marker(
-                        markerId: MarkerId('marker_1'),
-                        position: LatLng(37.550, 127.041), // Marker position
-                        infoWindow: InfoWindow(title: '성동구 1인가구 지원센터'),
-                      ),
-                    },
-                  ),
-                ),
-                SizedBox(height: 20),
-                Align(
+                  alignment: Alignment.center,
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
                     child: Text(
@@ -292,8 +276,8 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           SizedBox(height: 5),
                           Container(
-                              width: 60,
-                              height: 60,
+                              width: 80,
+                              height: 80,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
@@ -316,8 +300,8 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           SizedBox(height: 5),
                           Container(
-                              width: 60,
-                              height: 60,
+                              width: 80,
+                              height: 80,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
@@ -340,8 +324,8 @@ class _MainPageState extends State<MainPage> {
                         children: [
                           SizedBox(height: 5),
                           Container(
-                              width: 60,
-                              height: 60,
+                              width: 80,
+                              height: 80,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8.0),
                               ),
