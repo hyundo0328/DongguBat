@@ -88,6 +88,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
   String? current_uid = FirebaseAuth.instance.currentUser?.uid;
   String? current_email = FirebaseAuth.instance.currentUser?.email;
   String? current_name = FirebaseAuth.instance.currentUser?.displayName;
+  String? current_photo = FirebaseAuth.instance.currentUser?.photoURL;
 
   // 이름 정보 가져오기
   final TextEditingController _nameController =
@@ -177,7 +178,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     child: CircleAvatar(
                       radius: 50.0,
                       backgroundImage:
-                          AssetImage('assets/user_profile.jpg'), // 프로필 이미지 경로
+                          AssetImage(current_photo.toString()), // 프로필 이미지 경로
                     ),
                   ),
                 ),

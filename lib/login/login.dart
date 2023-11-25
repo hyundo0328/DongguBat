@@ -41,7 +41,7 @@ class _LogInstate extends State<LogIn> {
       barrierDismissible: false, // 사용자가 다이얼로그 외부를 탭하면 닫히지 않도록 설정
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text('아이디 또는 비밀번호가 틀렸습니다.'),
+          content: Text('이메일 또는 비밀번호가 틀렸습니다.'),
           actions: <Widget>[
             TextButton(
               child: Text('확인'),
@@ -90,7 +90,7 @@ class _LogInstate extends State<LogIn> {
                         decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                            hintText: 'ID'),
+                            hintText: 'Email'),
                         keyboardType: TextInputType.text,
                         style: TextStyle(fontSize: 20),
                       ),

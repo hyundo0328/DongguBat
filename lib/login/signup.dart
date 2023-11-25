@@ -231,7 +231,7 @@ class _SignUpPageState extends State<SignUpPage> {
       await FirebaseAuth.instance.currentUser?.updateEmail(_emailController.text);
       await FirebaseAuth.instance.currentUser?.updateDisplayName(_nameController.text);
       await FirebaseAuth.instance.currentUser?.updatePassword(_passwordController.text);
-      await FirebaseAuth.instance.currentUser?.updatePhotoURL("");
+      await FirebaseAuth.instance.currentUser?.updatePhotoURL("assets/profile.png");
       await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).set({
         "id":_idController.text,
         "email": _emailController.text,

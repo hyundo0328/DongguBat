@@ -32,10 +32,11 @@ class _MyPageScreenState extends State<MyPageScreen> {
   ];
 
   int _selectedIndex = 2;
+  //1125 hys 추가
   String? current_uid = FirebaseAuth.instance.currentUser?.uid;
   String? current_email = FirebaseAuth.instance.currentUser?.email;
   String? current_name = FirebaseAuth.instance.currentUser?.displayName;
-  // String? current_photo = FirebaseAuth.instance.currentUser?.photoURL;
+  String? current_photo = FirebaseAuth.instance.currentUser?.photoURL;
   // String? current_pnum = FirebaseAuth.instance.currentUser?.phoneNumber;
 
   //1125 hys 추가 - 로그아웃 함수 구현 
@@ -113,7 +114,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                             shape: BoxShape.circle,
                           ),
                           child: Image.asset(
-                            "assets/profile.png",
+                            current_photo.toString(),
                             fit: BoxFit.cover,
                           ),
                         ),
