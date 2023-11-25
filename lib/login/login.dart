@@ -1,7 +1,9 @@
+import 'package:donggu_bat/login/signup.dart';
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
-import '../login/signup.dart';
+import 'signup_before.dart';
 import '../login/find_IDPW.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -11,6 +13,27 @@ class LogIn extends StatefulWidget {
 class _LogInstate extends State<LogIn> {
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
+
+  //hys 1125 추가, 이메일 로그인 구현 
+  Future<bool> _LoginWithEmail(String email, String password) async {
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password
+      );
+      print("sign in with : ");
+      print(FirebaseAuth.instance.currentUser?.uid);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+      return false;
+    }
+  }
+
 
   Future<void> _showConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
@@ -31,6 +54,7 @@ class _LogInstate extends State<LogIn> {
       },
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,9 +120,11 @@ class _LogInstate extends State<LogIn> {
                           backgroundColor: Color.fromARGB(255, 44, 96, 68),
                           fixedSize: Size(150, 45),
                         ),
-                        onPressed: () {
-                          if (controller1.text == '' &&
-                              controller2.text == '') {
+                        onPressed: () async {
+                          // _LoginWithEmail(controller1.text, controller2.text);
+                          // if (controller1.text == '' &&
+                          //     controller2.text == '') {
+                          if (await _LoginWithEmail(controller1.text, controller2.text)) {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
@@ -158,7 +184,12 @@ class _LogInstate extends State<LogIn> {
                                     builder: (context) => SignUpPage()),
                               );
                             },
-                            child: Text('회원가입'),
+                            child: Text(
+                              '회원가입',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
                             style:
                                 TextButton.styleFrom(primary: Colors.black45),
                           ),
@@ -170,7 +201,12 @@ class _LogInstate extends State<LogIn> {
                                     builder: (context) => FindIDPW()),
                               );
                             },
-                            child: Text('ID/PW 찾기'),
+                            child: Text(
+                              'ID/PW 찾기',
+                              style: TextStyle(
+                                fontSize: 15,
+                              ),
+                            ),
                             style:
                                 TextButton.styleFrom(primary: Colors.black45),
                           ),

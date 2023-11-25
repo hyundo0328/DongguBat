@@ -15,9 +15,30 @@ migration:
     - platform: root
       create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
       base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+<<<<<<< HEAD
     - platform: web
       create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
       base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+=======
+    - platform: android
+      create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+      base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+    - platform: ios
+      create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+      base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+    - platform: linux
+      create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+      base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+    - platform: macos
+      create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+      base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+    - platform: web
+      create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+      base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+    - platform: windows
+      create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+      base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+>>>>>>> 3a80a32a17b4aab688bba5c29a66b4cb1561f6ff
 
   # User provided section
 

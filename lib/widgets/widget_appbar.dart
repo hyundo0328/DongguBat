@@ -43,7 +43,12 @@ class WidgetAppBar extends StatelessWidget {
     return AppBar(
       centerTitle: true,
       backgroundColor: const Color.fromARGB(255, 44, 96, 68),
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 22,
+        ),
+      ),
       actions: actions, // Use the title parameter
     );
   }

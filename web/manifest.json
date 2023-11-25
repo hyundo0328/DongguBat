@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
     "name": "donggu_bat",
     "short_name": "donggu_bat",
+=======
+    "name": "donggubat",
+    "short_name": "donggubat",
+>>>>>>> 3a80a32a17b4aab688bba5c29a66b4cb1561f6ff
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
