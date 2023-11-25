@@ -1,167 +1,77 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
-class YourWidget extends StatefulWidget {
+class FileDownloadButton extends StatefulWidget {
+  final String fileUrl;
+  final String fileName;
+
+  FileDownloadButton({required this.fileUrl, required this.fileName});
+
   @override
-  _YourWidgetState createState() => _YourWidgetState();
+  _FileDownloadButtonState createState() => _FileDownloadButtonState();
 }
 
-class _YourWidgetState extends State<YourWidget> {
-  final TextEditingController _textControl1 = TextEditingController();
-  final TextEditingController _textControl2 = TextEditingController();
-  final TextEditingController _textControl3 = TextEditingController();
-  final TextEditingController _textControl4 = TextEditingController();
-  final TextEditingController _textControl5 = TextEditingController();
-  final TextEditingController _textControl6 = TextEditingController();
-  final TextEditingController _textControl7 = TextEditingController();
-  final TextEditingController _textControl8 = TextEditingController();
-  final TextEditingController _textControl9 = TextEditingController();
-  
+class _FileDownloadButtonState extends State<FileDownloadButton> {
+  bool downloading = false;
+  late String savePath;
+
+  @override
+  void initState() {
+    super.initState();
+    _initSavePath();
+  }
+
+  Future<void> _initSavePath() async {
+    final directory = await getApplicationDocumentsDirectory();
+    savePath = directory.path + '/' + widget.fileName;
+  }
+
+  Future<void> _startDownload() async {
+    setState(() {
+      downloading = true;
+    });
+
+    final response = await http.get(Uri.parse(widget.fileUrl));
+    final file = File(savePath);
+    await file.writeAsBytes(response.bodyBytes);
+
+    setState(() {
+      downloading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-          controller: _textControl1,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl2,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl3,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl4,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl5,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl6,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl7,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl8,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-        TextFormField(
-          controller: _textControl9,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: Color.fromARGB(100, 0, 0, 0),
-                width: 1,
-              ),
-              //borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          keyboardType: TextInputType.text,
-        ),
-
         ElevatedButton(
-          onPressed: () {},
-          child: Text("클릭"),
-        )
+          onPressed: downloading ? null : _startDownload,
+          child: Text(downloading ? 'Downloading...' : 'Download File'),
+        ),
+        if (downloading)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CircularProgressIndicator(),
+          ),
       ],
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Text('File Download Example'),
+      ),
+      body: Center(
+        child: FileDownloadButton(
+          fileUrl: 'https://example.com/path/to/your/file',
+          fileName: 'example_file.txt',
+        ),
+      ),
+    ),
+  ));
 }

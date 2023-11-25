@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../notice/notice_list.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import '../notice/notice_page.dart';
 import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
@@ -20,8 +19,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   // const Main({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  PageController _pageController = PageController(initialPage: 0);
   int _selectedIndex = 1;
 
   String? cityName;

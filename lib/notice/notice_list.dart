@@ -1,11 +1,13 @@
-import 'package:donggu_bat/notice/notice_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/gestures.dart';
 import 'notice1.dart';
 import 'notice2.dart';
 import 'notice3.dart';
 
 class NoticeList extends StatelessWidget {
+
   // 공지 DB 여기에다 추가하면 될듯
   final List<String> noticeTitles = [
     "[건강마루멤버십028] 건강습관만들기 - 식단관리 교육 자료 : 당류 (★건강마루멤버십 회원전용)",
@@ -17,7 +19,7 @@ class NoticeList extends StatelessWidget {
     "[건강마루멤버십034] 9~10월 이벤트 걷기미션 안내(★건강마루멤버십 회원전용)",
   ];
 
-  // 요약 내용 추가하는데 일일히 요약 노가다 해야할수도..
+  // 공지사항 작성일, 조회수 목록
   final List<Map<String, String>> noticeInfo = [
     {
       'date': "2023-07-13",
@@ -97,7 +99,7 @@ class NoticeList extends StatelessWidget {
                               'title': noticeTitles[index],
                               'date': noticeInfo[index]['date']!,
                               'view': noticeInfo[index]['view']!,
-                              // 'index': index,
+                              'index': index,
                             },
                           ),
                         ),
@@ -152,3 +154,4 @@ class NoticeList extends StatelessWidget {
     );
   }
 }
+
