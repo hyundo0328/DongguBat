@@ -2,6 +2,80 @@ import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import 'my_page.dart';
 
+// TextFormField 설명 텍스트 생성 Class
+class AlignTextClass extends StatelessWidget {
+  final String textname;
+
+  AlignTextClass({required this.textname});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: AlignmentDirectional(-1.00, 0.00),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 3),
+        child: Text(
+          this.textname,
+          textAlign: TextAlign.start,
+          style: TextStyle(fontSize: 15),
+        ),
+      ),
+    );
+  }
+}
+
+// TextFormField 생성 Class
+class TextFieldClass extends StatelessWidget {
+  final String textName;
+  final TextEditingController controller;
+
+  TextFieldClass({required this.textName, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        decoration: this.textName == '이름' ||
+                this.textName == '전화번호' ||
+                this.textName == '아이디'
+            ? BoxDecoration(
+                color: Colors.black
+                    .withOpacity(0.1), // Adjust the opacity as needed
+                borderRadius: BorderRadius.circular(8.0),
+              )
+            : null,
+        child: TextFormField(
+          readOnly:
+              this.textName == '비밀번호' || this.textName == '이메일' ? false : true,
+          controller: this.controller,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color.fromARGB(100, 0, 0, 0),
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color.fromARGB(100, 0, 0, 0),
+                width: 1,
+              ),
+            ),
+            hintText: this.textName == '비밀번호'
+                ? "비밀번호를 입력해주세요."
+                : (this.textName == '비밀번호 확인' ? "입력한 비밀번호를 다시 입력해주세요." : null),
+            hintStyle: (this.textName == '비밀번호' || this.textName == '비밀번호 확인')
+                ? TextStyle(fontSize: 13, color: Colors.black54)
+                : null,
+          ),
+          keyboardType: TextInputType.text,
+        ),
+      ),
+    );
+  }
+}
+
 class UserProfilePage extends StatefulWidget {
   @override
   State<UserProfilePage> createState() => _UserProfilePageState();
@@ -9,17 +83,18 @@ class UserProfilePage extends StatefulWidget {
 
 class _UserProfilePageState extends State<UserProfilePage> {
   final TextEditingController _nameController =
-      TextEditingController(text: '김동구');
+      TextEditingController(text: '김동구'); // 이름 정보 가져오기
   final TextEditingController _phoneController =
-      TextEditingController(text: '010-1234-5678');
+      TextEditingController(text: '010-1234-5678'); // 전화번호 정보 가져오기
   final TextEditingController _idController =
-      TextEditingController(text: 'donggubat');
-  final TextEditingController _passwordController = TextEditingController();
+      TextEditingController(text: 'donggubat'); // 아이디 정보 가져오기
+  final TextEditingController _passwordController =
+      TextEditingController(); // 비밀번호 정보 저장하기
   final TextEditingController _rePasswordController = TextEditingController();
   final TextEditingController _emailController =
-      TextEditingController(text: 'donggubat@dongguk.edu.kr');
+      TextEditingController(text: 'donggubat@dongguk.edu.kr'); // 이메일 정보 가져오기
   final TextEditingController _addressController =
-      TextEditingController(text: '서울특별시 성동구 마장로39길 31');
+      TextEditingController(text: '서울특별시 성동구 마장로39길 31'); // 주소 정보 가져오기
 
   bool isDuplicate = false;
   int duplicateCount = 0;
@@ -56,161 +131,27 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     ),
                   ),
                 ),
-                Align(
-                  // 이름 텍스트
-                  alignment: AlignmentDirectional(-1.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
-                    child: Text(
-                      '이름',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                Center(
-                  // 이름 필드
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black
-                          .withOpacity(0.1), // Adjust the opacity as needed
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: TextFormField(
-                      readOnly: true,
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                        hintText: "입력한 비밀번호를 다시 입력해주세요.",
-                        hintStyle:
-                            TextStyle(fontSize: 12, color: Colors.black54),
-                      ),
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-                ),
-                Align(
-                  // 전화번호 텍스트
-                  alignment: AlignmentDirectional(-1.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 3),
-                    child: Text(
-                      '전화번호',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                Center(
-                  // 전화번호 필드
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black
-                          .withOpacity(0.1), // Adjust the opacity as needed
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: TextFormField(
-                      readOnly: true,
-                      controller: _phoneController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-                ),
-                Align(
-                  // 아이디 텍스트
-                  alignment: AlignmentDirectional(-1.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 3),
-                    child: Text(
-                      '아이디',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                Center(
-                  // 아이디 필드
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black
-                          .withOpacity(0.1), // Adjust the opacity as needed
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: TextFormField(
-                      readOnly: true,
-                      controller: _idController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-                ),
-                Align(
-                  // 비밀번호 텍스트
-                  alignment: AlignmentDirectional(-1.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 3),
-                    child: Text(
-                      '비밀번호',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                Center(
-                  // 새로운 비밀번호 입력 필드
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: TextFormField(
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                        hintText: "비밀번호를 입력해주세요.",
-                        hintStyle:
-                            TextStyle(fontSize: 15, color: Colors.black54),
-                      ),
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                    ),
-                  ),
-                ),
+
+                // 이름 칸
+                AlignTextClass(textname: '이름'),
+                TextFieldClass(textName: '이름', controller: _nameController),
+
+                // 아이디 칸
+                AlignTextClass(textname: '아이디'),
+                TextFieldClass(textName: '아이디', controller: _idController),
+
+                // 전화번호 칸
+                AlignTextClass(textname: '전화번호'),
+                TextFieldClass(textName: '전화번호', controller: _phoneController),
+
+                // 비밀번호 칸
+                AlignTextClass(textname: '비밀번호'),
+                TextFieldClass(
+                    textName: '비밀번호', controller: _passwordController),
                 Center(
                   // 비밀번호 확인 필드
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                     child: TextFormField(
                       controller: _rePasswordController,
                       onChanged: (value) {
@@ -240,7 +181,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                         ),
                         hintText: "입력한 비밀번호를 다시 입력해주세요.",
                         hintStyle:
-                            TextStyle(fontSize: 15, color: Colors.black54),
+                            TextStyle(fontSize: 13, color: Colors.black54),
                       ),
                       keyboardType: TextInputType.text,
                       obscureText: true,
@@ -258,77 +199,16 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       ),
                     ),
                   ),
-                Align(
-                  // 이메일 텍스트
-                  alignment: AlignmentDirectional(-1.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 0, 3),
-                    child: Text(
-                      '이메일',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-                ),
-                Align(
-                  // 주소 텍스트
-                  alignment: AlignmentDirectional(-1.00, 0.00),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 3),
-                    child: Text(
-                      '주소',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                Center(
-                  // 주소 필드
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black
-                          .withOpacity(0.1), // Adjust the opacity as needed
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: TextFormField(
-                      readOnly: true,
-                      controller: _addressController,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(15, 5, 5, 15),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color.fromARGB(100, 0, 0, 0),
-                            width: 1,
-                          ),
-                        ),
-                      ),
-                      keyboardType: TextInputType.text,
-                    ),
-                  ),
-                ),
+                
+                // 이메일 칸
+                AlignTextClass(textname: '이메일'),
+                TextFieldClass(textName: '이메일', controller: _emailController),
+
+                // 주소 칸
+                AlignTextClass(textname: '주소'),
+                TextFieldClass(textName: '주소', controller: _addressController),
+
+                // 변경하기 버튼
                 Padding(
                   padding: const EdgeInsets.only(top: 40),
                   child: ElevatedButton(
