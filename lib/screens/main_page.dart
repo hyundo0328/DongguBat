@@ -222,7 +222,7 @@ class _MainPageState extends State<MainPage> {
                 ),
               ),
               SizedBox(
-                height: 300,
+                height: 200,
                 // child: MapSample(),
                 child: Image.asset(
                   'assets/지원센터.png',
@@ -231,6 +231,8 @@ class _MainPageState extends State<MainPage> {
                   height: 50,
                 ),
               ),
+              Text('[ 서울 성동구 마장로39길 31 행복신협빌딩 3층,'),
+              Text('5호선 마장역 2번 출구에서 296m ]'),
               SizedBox(height: 20),
               Align(
                 alignment: Alignment.center,
@@ -322,6 +324,85 @@ class _MainPageState extends State<MainPage> {
                   ),
                   Spacer(),
                 ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      _openFacebookPage('https://www.facebook.com/sd1in/');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 5),
+                        Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Icon(Icons.facebook)),
+                        Text('페이스북'),
+                        SizedBox(height: 10),
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      _openInstagramPage(
+                          'https://www.instagram.com/sd1in_net/');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 5),
+                        Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Icon(Icons.snapchat)),
+                        Text('인스타그램'),
+                        SizedBox(height: 10),
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      _openBlogPage('https://blog.naver.com/sd1in');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 5),
+                        Container(
+                            width: 80,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Icon(Icons.home)),
+                        Text('블로그'),
+                        SizedBox(height: 10),
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                ],
               )
             ],
           ),
@@ -376,6 +457,30 @@ void _openKakaoTalkChannel(String channelID) async {
     await launch(_channelLink.toString());
   } else {
     throw 'Could not launch KakaoTalk';
+  }
+}
+
+void _openFacebookPage(String facebookUrl) async {
+  if (await canLaunch(facebookUrl)) {
+    await launch(facebookUrl);
+  } else {
+    throw 'Could not launch $facebookUrl';
+  }
+}
+
+void _openInstagramPage(String instagramUrl) async {
+  if (await canLaunch(instagramUrl)) {
+    await launch(instagramUrl);
+  } else {
+    throw 'Could not launch $instagramUrl';
+  }
+}
+
+void _openBlogPage(String BlogUrl) async {
+  if (await canLaunch(BlogUrl)) {
+    await launch(BlogUrl);
+  } else {
+    throw 'Could not launch $BlogUrl';
   }
 }
 

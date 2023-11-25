@@ -210,7 +210,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.fromLTRB(5, 5, 5, 10),
                     child: Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.black38, width: 1.0),
@@ -227,7 +227,6 @@ class _MyPageScreenState extends State<MyPageScreen> {
                               color: Color.fromARGB(255, 16, 16, 16),
                             ),
                             SizedBox(width: 10),
-
                             Text(
                               '포인트',
                               style: TextStyle(
@@ -243,7 +242,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                             Text(
                               '1000 points', // You can replace this with the actual value
                               style: TextStyle(
-                                fontSize: 16, // Adjust the font size as needed
+                                fontSize: 16,
                               ),
                             ),
                           ],

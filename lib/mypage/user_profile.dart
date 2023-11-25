@@ -48,36 +48,34 @@ class _UserProfilePageState extends State<UserProfilePage> {
               children: [
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Stack(
-                      children: [
-                        CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage:
-                              AssetImage('assets/user_profile.jpg'),
-                        ),
-                        Positioned(
-                          bottom: -10,
-                          right: -10,
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CameraScreen(),
-                                ),
-                              );
-                            },
-                            icon: Icon(
-                              Icons.camera_alt,
-                              size: 30,
-                              color: Color.fromARGB(255, 16, 16, 16),
-                            ),
+                  // child: Padding(
+                  //   // padding: EdgeInsets.all(10),
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 50.0,
+                        backgroundImage: AssetImage('assets/user_profile.jpg'),
+                      ),
+                      Positioned(
+                        bottom: -10,
+                        right: -10,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CameraScreen(),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.camera_alt,
+                            size: 30,
+                            color: Color.fromARGB(255, 16, 16, 16),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Align(
