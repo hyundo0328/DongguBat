@@ -58,255 +58,234 @@ class _MainPageState extends State<MainPage> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Align(
-                alignment: AlignmentDirectional(-1.00, 0.00),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
-                  child: Text(
-                    '지금 성동구에선?',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+            padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Align(
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
+                    child: Text(
+                      '지금 성동구에선?',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              BannerPage(),
-              Padding(
-                padding: EdgeInsets.only(top: 20),
-                child: Container(
-                  decoration: BoxDecoration(
+                BannerPage(),
+                Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: Container(
+                    decoration: BoxDecoration(
                       border: Border.all(color: Colors.black38, width: 1.0),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ListTile(
-                        title: Padding(
-                          padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                          child: Text(
-                            "공지사항 (Notice)",
-                            style: TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        dense: true,
-                        contentPadding: EdgeInsets.all(0),
-                        trailing: Padding(
-                          padding: EdgeInsets.all(5),
-                          child: IconButton(
-                            icon: Icon(Icons.keyboard_arrow_right),
-                            iconSize: 25,
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Notice()),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-                        child: Divider(
-                          height: 2,
-                          thickness: 0.8,
-                          color: Colors.black38,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 15, right: 15),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.black38, // 아래 테두리의 색상 설정
-                                width: 1.0, // 아래 테두리의 두께 설정
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          title: Padding(
+                            padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                            child: Text(
+                              "공지사항 (Notice)",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
+                          dense: true,
+                          contentPadding: EdgeInsets.all(0),
+                          trailing: Padding(
+                            padding: EdgeInsets.all(5),
+                            child: IconButton(
+                              icon: Icon(Icons.keyboard_arrow_right),
+                              iconSize: 25,
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Notice()),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+                          child: Divider(
+                            height: 2,
+                            thickness: 0.8,
+                            color: Colors.black38,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15, right: 15),
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Colors.black38, // 아래 테두리의 색상 설정
+                                  width: 1.0, // 아래 테두리의 두께 설정
+                                ),
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => NoticePage1()),
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity, // 가로 길이를 화면에 꽉 채우는 역할
+                                child: Text(
+                                  "공지사항 1 제목",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15, right: 15),
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Colors.black38, // 아래 테두리의 색상 설정
+                                  width: 1.0, // 아래 테두리의 두께 설정
+                                ),
+                              ),
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => NoticePage2()),
+                                );
+                              },
+                              child: Container(
+                                width: double.infinity, // 가로 길이를 화면에 꽉 채우는 역할
+                                child: Text(
+                                  "공지사항 2 제목",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15),
                           child: TextButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => NoticePage1()),
+                                    builder: (context) => NoticePage3()),
                               );
                             },
-                            child: Text(
-                              "공지사항 1 제목",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
+                            child: Container(
+                              width: double.infinity, // 가로 길이를 화면에 꽉 채우는 역할
+                              child: Text(
+                                "공지사항 3 제목",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 15, right: 15),
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: BorderSide(
-                                color: Colors.black38, // 아래 테두리의 색상 설정
-                                width: 1.0, // 아래 테두리의 두께 설정
-                              ),
-                            ),
-                          ),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => NoticePage2()),
-                              );
-                            },
-                            child: Text(
-                              "공지사항 2 제목",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 15),
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => NoticePage3()),
-                            );
-                          },
-                          child: Text(
-                            "공지사항 3 제목",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17,
-                            ),
-                          ),
-                        ),
-                      ),
-                      // Divider()
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
-                  child: Text(
-                    '상담바로가기',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                        // Divider()
+                      ],
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  Spacer(),
-                  ElevatedButton(
-                    onPressed: () {
-                      _makePhoneCall('0222817715');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5),
-                        Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Icon(Icons.phone_android)),
-                        Text('전화연결'),
-                        SizedBox(height: 10),
-                      ],
+                SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
+                    child: Text(
+                      '상담바로가기',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  Spacer(),
-                  ElevatedButton(
-                    onPressed: () {
-                      _sendEmail('sungdong9solo@daum.net');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
+                ),
+                SizedBox(height: 10),
+                Row(
+                  children: [
+                    Spacer(),
+                    ElevatedButton(
+                      onPressed: () {
+                        _makePhoneCall('0222817715');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                      ),
+                      child: Counseling(
+                        icon: Icons.phone_android,
+                        text: '전화연결',
+                      ),
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5),
-                        Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Icon(Icons.email_outlined)),
-                        Text('E-mail'),
-                        SizedBox(height: 10),
-                      ],
+                    Spacer(),
+                    ElevatedButton(
+                      onPressed: () {
+                        _sendEmail('sungdong9solo@daum.net');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                      ),
+                      child: Counseling(
+                        icon: Icons.email_outlined,
+                        text: 'E-mail',
+                      ),
                     ),
-                  ),
-                  Spacer(),
-                  ElevatedButton(
-                    onPressed: () {
-                      _openKakaoTalkChannel('_gThpb');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
-                      onPrimary: Colors.black,
+                    Spacer(),
+                    ElevatedButton(
+                      onPressed: () {
+                        _openKakaoTalkChannel('_gThpb');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        onPrimary: Colors.black,
+                      ),
+                      child: Counseling(
+                        icon: Icons.chat_bubble_outline,
+                        text: '카카오톡',
+                      ),
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5),
-                        Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Icon(Icons.chat_bubble_outline)),
-                        Text('카카오톡'),
-                        SizedBox(height: 10),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                ],
-              )
-            ],
+                    Spacer(),
+                  ],
+                )
+              ],
+            ),
           ),
-        ),
         ),
         bottomNavigationBar: WidgetBottomNavigationBar(
           selectedIndex: _selectedIndex,
@@ -366,4 +345,39 @@ class PageInfo {
   final String linkUrl;
 
   PageInfo({required this.imageUrl, required this.linkUrl});
+}
+
+class Counseling extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  Counseling({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 5),
+        Container(
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Icon(
+            this.icon,
+            size: 40,
+          ),
+        ),
+        Text(
+          '${this.text}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+        ),
+        SizedBox(height: 10),
+      ],
+    );
+  }
 }
