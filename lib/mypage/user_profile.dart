@@ -50,30 +50,30 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   alignment: Alignment.topLeft,
                   child: Padding(
                     padding: EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    child: Stack(
                       children: [
                         CircleAvatar(
                           radius: 50.0,
                           backgroundImage:
                               AssetImage('assets/user_profile.jpg'),
                         ),
-                        SizedBox(
-                            width:
-                                20), // Adding space between CircleAvatar and IconButton
-                        IconButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CameraScreen(),
-                              ),
-                            );
-                          },
-                          icon: Icon(
-                            Icons.camera_alt,
-                            size: 30,
-                            color: const Color.fromARGB(255, 44, 96, 68),
+                        Positioned(
+                          bottom: -10,
+                          right: -10,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CameraScreen(),
+                                ),
+                              );
+                            },
+                            icon: Icon(
+                              Icons.camera_alt,
+                              size: 30,
+                              color: Color.fromARGB(255, 16, 16, 16),
+                            ),
                           ),
                         ),
                       ],
