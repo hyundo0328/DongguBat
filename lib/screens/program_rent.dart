@@ -4,6 +4,7 @@ import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../program/rent.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class ProgramApply extends StatefulWidget {
   @override
@@ -18,21 +19,40 @@ class _ProgramApplyState extends State<ProgramApply> {
   // int _rentIndex = 0;
   String selectedLocation = '';
   String selectedname = '';
-
-  List<String> _monthlyImages = [
-    '1.png',
-    '2.png',
-    '3.png',
-    '4.jpg',
-    '5.png',
-    'image.png',
-    'rainbow.jpg',
-    'SNS 인증샷.jpg',
-    'user_progile.jpg',
-    'vertical_symbol.jpg',
-    '세이프 라이딩.jpg',
-    '플로깅플레져.jpg'
+  int _postscriptindex = 0;
+  List<Map<String, String>> postscript = [
+    {
+      'nickname': '왕십리생명체2',
+      'content': '심리지원 클래스 참여했는데 만족스러웠습니다. 좋은 수업 감사합니다 🙏',
+      'photo': '후기.png',
+      'hashtag1': '#만족스러워요',
+      'hashtag2': '#도움돼요',
+      'hashtag3': '#심리상담'
+    },
+    {
+      'nickname': '반짝반짝',
+      'content': '타르트를 만들었는데 아주 맛있었어요!',
+      'photo': '후기1.png',
+      'hashtag1': '#재밌어요',
+      'hashtag2': '#만족스러워요',
+      'hashtag3': '#요리수업'
+    },
   ];
+
+  // List<String> _monthlyImages = [
+  //   '1.png',
+  //   '2.png',
+  //   '3.png',
+  //   '4.jpg',
+  //   '5.png',
+  //   'image.png',
+  //   'rainbow.jpg',
+  //   'SNS 인증샷.jpg',
+  //   'user_progile.jpg',
+  //   'vertical_symbol.jpg',
+  //   '세이프 라이딩.jpg',
+  //   '플로깅플레져.jpg'
+  // ];
 
   List<Map<String, String>> month = [
     {
@@ -329,177 +349,126 @@ class _ProgramApplyState extends State<ProgramApply> {
                   ),
                 ),
                 SizedBox(height: 10),
-                InkWell(
-                  onTap: () {
-                    _openPage(
-                        'https://www.daangn.com/kr/business-profiles/d06f5c73c5e64686bc9c3f88716274a4/?tab=REVIEWS');
-                  },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                      side: BorderSide(color: Colors.grey, width: 1.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
+                Container(
+                  child: CarouselSlider.builder(
+                    itemCount: postscript.length,
+                    itemBuilder: (BuildContext context, int index, _) {
+                      return Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          side: BorderSide(color: Colors.grey, width: 1.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/프로필.png',
+                                    width: 30,
+                                    height: 30,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    postscript[index]['nickname'] ?? '',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                postscript[index]['content'] ?? '',
+                                style: TextStyle(fontSize: 16),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(height: 5),
+                              Image.asset(
+                                  'assets/${postscript[index]['photo']}'),
+                              SizedBox(height: 5),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                padding: EdgeInsets.all(5),
+                                child: Row(
                                   children: [
-                                    Image.asset(
-                                      'assets/프로필.png',
-                                      width: 30,
-                                      height: 30,
-                                      fit: BoxFit.cover,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 2,
+                                        horizontal: 8,
+                                      ),
+                                      margin: EdgeInsets.only(right: 5),
+                                      child: Text(
+                                        postscript[index]['hashtag1'] ?? '',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                     SizedBox(width: 5),
-                                    Text(
-                                      '왕십리생명체2 님',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 2,
+                                        horizontal: 8,
+                                      ),
+                                      child: Text(
+                                        postscript[index]['hashtag2'] ?? '',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 5),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 2,
+                                        horizontal: 8,
+                                      ),
+                                      child: Text(
+                                        postscript[index]['hashtag3'] ?? '',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 5),
-                                Text(
-                                  '심리지원 클래스 참여했는데 만족스러웠습니다. 좋은 수업 감사합니다 🙏',
-                                  style: TextStyle(fontSize: 16),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                SizedBox(height: 5),
-                                Image.asset('assets/후기.png'),
-                                SizedBox(height: 5),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(5),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 2,
-                                          horizontal: 8,
-                                        ),
-                                        margin: EdgeInsets.only(right: 5),
-                                        child: Text(
-                                          '#만족스러워요',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 5),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 2,
-                                          horizontal: 8,
-                                        ),
-                                        child: Text(
-                                          '#도움돼요',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 5),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[300],
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 2,
-                                          horizontal: 8,
-                                        ),
-                                        child: Text(
-                                          '#심리상담',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
+                    options: CarouselOptions(
+                        height: 350.0,
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: false,
+                        viewportFraction: 1),
                   ),
                 ),
-
-                // Container(
-                //   child: Column(
-                //     children: [
-                //       SizedBox(height: 10),
-                //       Text(
-                //         '${_currentMonthIndex + 1} 월 추천 프로그램',
-                //         textAlign: TextAlign.center,
-                //         style: TextStyle(
-                //             fontSize: 18.0, fontWeight: FontWeight.bold),
-                //       ),
-                //       SizedBox(height: 10),
-                //       SizedBox(
-                //         height: 200, // 이미지 높이 조절
-                //         child: CarouselSlider.builder(
-                //           itemCount: _monthlyImages.length,
-                //           options: CarouselOptions(
-                //             autoPlay: false,
-                //             enlargeCenterPage: true,
-                //             viewportFraction: 0.9,
-                //             aspectRatio: 16 / 9,
-                //             onPageChanged: (index, _) {
-                //               setState(() {
-                //                 _currentMonthIndex = index;
-                //               });
-                //             },
-                //           ),
-                //           itemBuilder: (BuildContext context, int index, _) {
-                //             return GestureDetector(
-                //               onTap: () {
-                //                 String url =
-                //                     month[_currentMonthIndex]['url'] ?? '';
-                //                 if (url.isNotEmpty) {
-                //                   launch(url);
-                //                 }
-                //               },
-                //               child: Image.asset(
-                //                   'assets/${month[_currentMonthIndex]['photo']}'),
-                //             );
-                //             // return Image.asset(
-                //             //   'assets/${_monthlyImages[index]}',
-                //             //   fit: BoxFit.cover,
-                //             // );
-                //           },
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
           ),
