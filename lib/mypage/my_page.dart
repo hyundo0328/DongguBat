@@ -6,6 +6,9 @@ import '../widgets/widget_bottombar.dart';
 import 'rent.dart';
 import 'program.dart';
 import 'user_profile.dart';
+import '../screens/email_change.dart';
+import '../screens/phone_change.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyPageScreen extends StatefulWidget {
   @override

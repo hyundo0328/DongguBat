@@ -73,20 +73,19 @@ class _ProgramApplyState extends State<ProgramApply> {
       'location': '추천.png',
       'url': 'https://sd1in.net/product/personal-consultation',
       'text':
-          '내담자는 미술치료에서의 공감으로 자기대상과의 관계에서 형성된 다양한 사고와 감정, 욕구를 자유롭게 표현할 수 있으며, 자기대상이 자신의 인생에 미친 영향을 탐색할 수 있게 됩니다. 치료자와 미술이라는 환경 속에서 내담자는 창조적이면서 공감적인 삶을 경험하게 되고, 자기의 발달과 회복이 촉진되는 것입니다.'
+          "내담자는 미술치료에서의 공감으로 자기대상과의 관계에서 형성된 다양한 사고와 감정, 욕구를 자유롭게 표현할 수 있으며, 자기대상이 자신의 인생에 미친 영향을 탐색할 수 있게 됩니다."
+          "\n 치료자와 미술이라는 환경 속에서 내담자는 창조적이면서 공감적인 삶을 경험하게 되고, 자기의 발달과 회복이 촉진되는 것입니다."
     }
   ];
 
   List<Map<String, String>> rent = [
-    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-    {'name': '4층 다목적실', 'time': '13:00 - 15:00', 'location': '성동구 동1'},
+    {'name': '1층 다목적실', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
     {'name': '3층 소회의실', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
+    {'name': '4층 다목적실', 'time': '13:00 - 15:00', 'location': '성동구 동1'},
+    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
+    {'name': '3층 작은도서관', 'time': '10:00 - 12:00', 'location': '성동구 동2'},
     {'name': '3층 자치사랑방', 'time': '13:00 - 15:00', 'location': '성동구 동2'},
     {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동2'},
-    {'name': '3층 작은도서관', 'time': '10:00 - 12:00', 'location': '성동구 동2'},
-    {'name': '1층 다목적실', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
-    {'name': '5층 공유부엌', 'time': '10:00 - 12:00', 'location': '성동구 동1'},
   ];
 
   List<String> locations = ['성동구 동1', '성동구 동2', '성동구 동3'];
@@ -104,7 +103,7 @@ class _ProgramApplyState extends State<ProgramApply> {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
+            padding: EdgeInsetsDirectional.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -114,31 +113,40 @@ class _ProgramApplyState extends State<ProgramApply> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
                     child: Text(
-                      '당신을 위한 추천 (Recommand for You)',
+                      '추천 프로그램',
                       textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-                //추천 하려고 하는 프로그램 띄우기 위한 container
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.white),
-                  onPressed: () {
+                // 추천할 프로그램의 설명 팝업화면
+                InkWell(
+                  onTap: () {
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("프로그램 신청"),
+                          title: Text(
+                            "프로그램 안내",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold),
+                          ),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Image.asset(
                                 'assets/${recommended[0]['location']}',
                                 fit: BoxFit.contain,
-                                height: 200,
+                                height: 250,
                               ),
-                              SizedBox(height: 20),
-                              Text('${recommended[0]['text']}'),
-                              SizedBox(height: 20),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(15, 25, 15, 25),
+                                child: Text('${recommended[0]['text']}'),
+                              ),
                               ElevatedButton(
                                 onPressed: () async {
                                   String? url = recommended[0]['url'];
@@ -149,8 +157,14 @@ class _ProgramApplyState extends State<ProgramApply> {
                                 style: ElevatedButton.styleFrom(
                                   primary:
                                       const Color.fromARGB(255, 44, 96, 68),
+                                  fixedSize: Size(150, 40),
                                 ),
-                                child: Text("접수 바로가기"),
+                                child: Text(
+                                  "접수 바로가기",
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ],
                           ),
@@ -161,11 +175,12 @@ class _ProgramApplyState extends State<ProgramApply> {
                   child: Image.asset(
                     'assets/${recommended[0]['location']}',
                     fit: BoxFit.cover,
-                    width: 400,
-                    height: 100,
+                    width: MediaQuery.of(context).size.width,
+                    height: 150,
                   ),
                 ),
-
+                
+                // 대관 신청
                 Align(
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
@@ -173,158 +188,130 @@ class _ProgramApplyState extends State<ProgramApply> {
                     child: Text(
                       '대관 신청 (Rental Application)',
                       textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Icon(Icons.location_pin),
-                    SizedBox(width: 10),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
-                        border: Border.all(),
-                        borderRadius: BorderRadius.circular(5),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.location_pin,
+                        size: 35,
                       ),
-                      child: DropdownButton<String>(
-                        value: dropdownValue,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            dropdownValue = newValue;
-                            selectedLocation =
-                                newValue ?? ''; // null 체크 및 대체값 설정
-                          });
-                        },
-                        items: locations
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value), // 위치 이름
-                          );
-                        }).toList(),
+                      SizedBox(width: 10),
+                      // Container(padding: EdgeInsets.all(10), child: Text('위치')),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black38, width: 1.0),
+                          //borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: DropdownButton<String>(
+                          value: dropdownValue,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                              selectedLocation = newValue ?? '';
+                            });
+                          },
+                          items: locations
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
-                    ),
-                    //   Spacer(),
-                    //   Icon(Icons.house_outlined),
-                    //   SizedBox(width: 10),
-                    //   Container(
-                    //     padding: EdgeInsets.symmetric(horizontal: 12),
-                    //     decoration: BoxDecoration(
-                    //       border: Border.all(),
-                    //       borderRadius: BorderRadius.circular(5),
-                    //     ),
-                    //     child: DropdownButton<String>(
-                    //       value: dropdownValue,
-                    //       onChanged: (String? newValue) {
-                    //         setState(() {
-                    //           dropdownValue = newValue;
-                    //           selectedname = newValue ?? ''; // null 체크 및 대체값 설정
-                    //         });
-                    //       },
-                    //       items:
-                    //           name.map<DropdownMenuItem<String>>((String value) {
-                    //         return DropdownMenuItem<String>(
-                    //           value: value,
-                    //           child: Text(value), // 위치 이름
-                    //         );
-                    //       }).toList(),
-                    //     ),
-                    //   ),
-                  ],
+                    ],
+                  ),
                 ),
                 Container(
-                  height: 250,
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: rent.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      if (selectedLocation.isEmpty ||
-                          rent[index]['location'] == selectedLocation) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      rent[index]['name'] ?? '대관 위치 이름 없음',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                  height: 240,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black38, width: 1.0),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: rent.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (selectedLocation.isEmpty ||
+                            rent[index]['location'] == selectedLocation) {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      // 대관 장소
+                                      Text(
+                                        rent[index]['name'] ?? '대관 위치 이름 없음',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
+                                      Divider(
+                                        thickness: 1,
+                                        color: Colors.black38,
+                                      ),
+                                      Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
 
-                                    Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
-                                    Text(
-                                      '${rent[index]['time']}', // 대관 시간
-                                    ),
-                                    Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
-                                  ],
+                                      // 대관 시간
+                                      Text(
+                                        '${rent[index]['time']}',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => rentPage()),
-                                  );
-                                  // launch(
-                                  //     'https://sd1in.net/program/application-for-rental');
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.white,
-                                  onPrimary: Colors.black,
-                                  side: BorderSide(color: Colors.grey),
-                                ),
-                                child: Text('신청하기'),
-                              ),
-                            ],
-                          ),
-                        );
-                        // } else if (selectedname.isEmpty ||
-                        //     rent[index]['name']!.contains(selectedname)) {
-                        //   return Padding(
-                        //     padding: const EdgeInsets.all(8.0),
-                        //     child: Row(
-                        //       children: [
-                        //         Expanded(
-                        //           child: Row(
-                        //             children: [
-                        //               Text(
-                        //                 rent[index]['name'] ?? '대관 위치 이름 없음',
-                        //                 style: TextStyle(
-                        //                   fontWeight: FontWeight.bold,
-                        //                 ),
-                        //               ),
 
-                        //               Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
-                        //               Text(
-                        //                 '${rent[index]['time']}', // 대관 시간
-                        //               ),
-                        //               Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         ElevatedButton(
-                        //           onPressed: () {
-                        //             launch(
-                        //                 'https://sd1in.net/program/application-for-rental');
-                        //           },
-                        //           style: ElevatedButton.styleFrom(
-                        //             primary: Colors.white,
-                        //             onPrimary: Colors.black,
-                        //             side: BorderSide(color: Colors.grey),
-                        //           ),
-                        //           child: Text('신청하기'),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   );
-                      } else {
-                        return SizedBox.shrink();
-                      }
-                    },
+                                // 신청하기 버튼
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 3),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => rentPage()),
+                                      );
+                                      // launch(
+                                      //     'https://sd1in.net/program/application-for-rental');
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.white,
+                                      onPrimary: Colors.black,
+                                      side: BorderSide(color: Colors.grey),
+                                    ),
+                                    child: Text(
+                                      '신청하기',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return SizedBox.shrink();
+                        }
+                      },
+                    ),
                   ),
                 ),
 
@@ -333,8 +320,10 @@ class _ProgramApplyState extends State<ProgramApply> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
                     child: Text(
-                      '월간 프로그램 안내 (Monthly Program)',
+                      '월간 프로그램 안내',
                       textAlign: TextAlign.start,
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
