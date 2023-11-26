@@ -229,7 +229,7 @@ class _ProgramApplyState extends State<ProgramApply> {
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.black38, width: 1.0),
-                          //borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: DropdownButton<String>(
                           value: dropdownValue,
