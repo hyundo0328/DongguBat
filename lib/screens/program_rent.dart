@@ -2,7 +2,6 @@ import 'package:donggu_bat/widgets/widget_bottombar.dart';
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import '../widgets/widget_bottombar.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../program/rent.dart';
 
@@ -15,8 +14,8 @@ class _ProgramApplyState extends State<ProgramApply> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   int _selectedIndex = 0;
-  int _currentMonthIndex = 0;
-  int _rentIndex = 0;
+  // int _currentMonthIndex = 0;
+  // int _rentIndex = 0;
   String selectedLocation = '';
   String selectedname = '';
 
@@ -72,8 +71,7 @@ class _ProgramApplyState extends State<ProgramApply> {
     {
       'location': '추천.png',
       'url': 'https://sd1in.net/product/personal-consultation',
-      'text':
-          "내담자는 미술치료에서의 공감으로 자기대상과의 관계에서 형성된 다양한 사고와 감정, 욕구를 자유롭게 표현할 수 있으며, 자기대상이 자신의 인생에 미친 영향을 탐색할 수 있게 됩니다."
+      'text': "내담자는 미술치료에서의 공감으로 자기대상과의 관계에서 형성된 다양한 사고와 감정, 욕구를 자유롭게 표현할 수 있으며, 자기대상이 자신의 인생에 미친 영향을 탐색할 수 있게 됩니다."
           "\n 치료자와 미술이라는 환경 속에서 내담자는 창조적이면서 공감적인 삶을 경험하게 되고, 자기의 발달과 회복이 촉진되는 것입니다."
     }
   ];
@@ -155,6 +153,8 @@ class _ProgramApplyState extends State<ProgramApply> {
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
+                                  side: BorderSide(
+                                      color: Colors.black38, width: 1.0),
                                   primary:
                                       const Color.fromARGB(255, 44, 96, 68),
                                   fixedSize: Size(150, 40),
@@ -176,10 +176,10 @@ class _ProgramApplyState extends State<ProgramApply> {
                     'assets/${recommended[0]['location']}',
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
-                    height: 150,
+                    height: 200,
                   ),
                 ),
-                
+
                 // 대관 신청
                 Align(
                   alignment: AlignmentDirectional(-1.00, 0.00),
@@ -314,67 +314,192 @@ class _ProgramApplyState extends State<ProgramApply> {
                     ),
                   ),
                 ),
-
                 Align(
                   alignment: AlignmentDirectional(-1.00, 0.00),
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
                     child: Text(
-                      '월간 프로그램 안내',
+                      '오늘의 후기',
                       textAlign: TextAlign.start,
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
-                Container(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      Text(
-                        '${_currentMonthIndex + 1} 월 추천 프로그램',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 10),
-                      SizedBox(
-                        height: 200, // 이미지 높이 조절
-                        child: CarouselSlider.builder(
-                          itemCount: _monthlyImages.length,
-                          options: CarouselOptions(
-                            autoPlay: false,
-                            enlargeCenterPage: true,
-                            viewportFraction: 0.9,
-                            aspectRatio: 16 / 9,
-                            onPageChanged: (index, _) {
-                              setState(() {
-                                _currentMonthIndex = index;
-                              });
-                            },
+                SizedBox(height: 10),
+                InkWell(
+                  onTap: () {
+                    _openPage(
+                        'https://www.daangn.com/kr/business-profiles/d06f5c73c5e64686bc9c3f88716274a4/?tab=REVIEWS');
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                      side: BorderSide(color: Colors.grey, width: 1.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Image.asset(
+                                      'assets/프로필.png',
+                                      width: 30,
+                                      height: 30,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    SizedBox(width: 5),
+                                    Text(
+                                      '왕십리생명체2 님',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  '심리지원 클래스 참여했는데 만족스러웠습니다. 좋은 수업 감사합니다 🙏',
+                                  style: TextStyle(fontSize: 16),
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                SizedBox(height: 5),
+                                Image.asset('assets/후기.png'),
+                                SizedBox(height: 5),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(5),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 2,
+                                          horizontal: 8,
+                                        ),
+                                        margin: EdgeInsets.only(right: 5),
+                                        child: Text(
+                                          '#만족스러워요',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 5),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 2,
+                                          horizontal: 8,
+                                        ),
+                                        child: Text(
+                                          '#도움돼요',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 5),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 2,
+                                          horizontal: 8,
+                                        ),
+                                        child: Text(
+                                          '#심리상담',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                          itemBuilder: (BuildContext context, int index, _) {
-                            return GestureDetector(
-                              onTap: () {
-                                String url =
-                                    month[_currentMonthIndex]['url'] ?? '';
-                                if (url.isNotEmpty) {
-                                  launch(url);
-                                }
-                              },
-                              child: Image.asset(
-                                  'assets/${month[_currentMonthIndex]['photo']}'),
-                            );
-                            // return Image.asset(
-                            //   'assets/${_monthlyImages[index]}',
-                            //   fit: BoxFit.cover,
-                            // );
-                          },
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
+
+                // Container(
+                //   child: Column(
+                //     children: [
+                //       SizedBox(height: 10),
+                //       Text(
+                //         '${_currentMonthIndex + 1} 월 추천 프로그램',
+                //         textAlign: TextAlign.center,
+                //         style: TextStyle(
+                //             fontSize: 18.0, fontWeight: FontWeight.bold),
+                //       ),
+                //       SizedBox(height: 10),
+                //       SizedBox(
+                //         height: 200, // 이미지 높이 조절
+                //         child: CarouselSlider.builder(
+                //           itemCount: _monthlyImages.length,
+                //           options: CarouselOptions(
+                //             autoPlay: false,
+                //             enlargeCenterPage: true,
+                //             viewportFraction: 0.9,
+                //             aspectRatio: 16 / 9,
+                //             onPageChanged: (index, _) {
+                //               setState(() {
+                //                 _currentMonthIndex = index;
+                //               });
+                //             },
+                //           ),
+                //           itemBuilder: (BuildContext context, int index, _) {
+                //             return GestureDetector(
+                //               onTap: () {
+                //                 String url =
+                //                     month[_currentMonthIndex]['url'] ?? '';
+                //                 if (url.isNotEmpty) {
+                //                   launch(url);
+                //                 }
+                //               },
+                //               child: Image.asset(
+                //                   'assets/${month[_currentMonthIndex]['photo']}'),
+                //             );
+                //             // return Image.asset(
+                //             //   'assets/${_monthlyImages[index]}',
+                //             //   fit: BoxFit.cover,
+                //             // );
+                //           },
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -389,5 +514,13 @@ class _ProgramApplyState extends State<ProgramApply> {
         ),
       ),
     );
+  }
+}
+
+void _openPage(String Url) async {
+  if (await canLaunch(Url)) {
+    await launch(Url);
+  } else {
+    throw 'Could not launch $Url';
   }
 }
