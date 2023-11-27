@@ -91,7 +91,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
       },
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
+          preferredSize: Size.fromHeight(60.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "마이페이지"),
         ),
         body: SingleChildScrollView(
@@ -131,19 +131,19 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                   alignment: AlignmentDirectional(0.00, -1.00),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 0, 5, 0),
+                                        10, 0, 2, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 15, 0),
+                                                  0, 0, 12, 0),
                                           child: Text(
                                             '${current_name} 님',
                                             style: TextStyle(
-                                                fontSize: 16,
-                                                fontFamily: 'Readex Pro'),
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                         Padding(
@@ -174,6 +174,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                                 fontFamily: 'Readex Pro',
                                                 color: Color(0xFFC2C2C2),
                                                 fontSize: 11,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                             ),
                                           ),
@@ -201,6 +202,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                                 fontFamily: 'Readex Pro',
                                                 color: Color(0xFFC2C2C2),
                                                 fontSize: 11,
+                                                fontWeight: FontWeight.bold,
                                               ),
                                             ),
                                           ),
@@ -214,12 +216,14 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         10, 0, 5, 20),
-                                    child: Text('이메일 : ${current_email}',
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
+                                    child: Text(
+                                      '이메일 : donggubat@dgu.kr',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
                                           fontFamily: 'Readex Pro',
                                           color: Color(0xFFC2C2C2),
-                                        )),
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -230,12 +234,45 @@ class _MyPageScreenState extends State<MyPageScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(bottom: 20),
                     child: Container(
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black38, width: 1.0),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Text("포인트"),
+                        border: Border.all(color: Colors.black38, width: 1.0),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.money,
+                              size: 35,
+                              color: Color.fromARGB(255, 16, 16, 16),
+                            ),
+                            SizedBox(width: 15),
+                            Text(
+                              '포인트',
+                              style: TextStyle(
+                                  fontSize:
+                                      17, // Adjust the font size as needed
+                                  fontWeight: FontWeight
+                                      .bold // Add bold font weight if required
+                                  ),
+                            ),
+                            Spacer(),
+                            SizedBox(
+                                width:
+                                    8), // Adjust spacing between "포인트" and points value
+                            Text(
+                              '1000 points', // You can replace this with the actual value
+                              style: TextStyle(
+                                fontSize: 17,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                   Container(

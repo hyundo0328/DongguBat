@@ -16,10 +16,13 @@ migration:
       create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
       base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
 <<<<<<< HEAD
+<<<<<<< HEAD
     - platform: web
       create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
       base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
 =======
+=======
+>>>>>>> 4934f62e38508cc396108fa2e67cc810e0d37632
     - platform: android
       create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
       base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
@@ -38,7 +41,10 @@ migration:
     - platform: windows
       create_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
       base_revision: 2f708eb8396e362e280fac22cf171c2cb467343c
+<<<<<<< HEAD
 >>>>>>> 3a80a32a17b4aab688bba5c29a66b4cb1561f6ff
+=======
+>>>>>>> 4934f62e38508cc396108fa2e67cc810e0d37632
 
   # User provided section
 

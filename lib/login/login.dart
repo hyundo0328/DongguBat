@@ -2,8 +2,10 @@ import 'package:donggu_bat/login/signup.dart';
 import 'package:flutter/material.dart';
 import '../screens/main_page.dart';
 import 'signup_before.dart';
-import '../login/find_IDPW.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import '../login/signup.dart';
+import '../login/find_IDPW.dart';
 
 class LogIn extends StatefulWidget {
   @override
@@ -41,7 +43,7 @@ class _LogInstate extends State<LogIn> {
       barrierDismissible: false, // 사용자가 다이얼로그 외부를 탭하면 닫히지 않도록 설정
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text('이메일 또는 비밀번호가 틀렸습니다.'),
+          content: Text('아이디 또는 비밀번호가 틀렸습니다.'),
           actions: <Widget>[
             TextButton(
               child: Text('확인'),
@@ -54,7 +56,6 @@ class _LogInstate extends State<LogIn> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

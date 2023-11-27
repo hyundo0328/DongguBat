@@ -46,7 +46,8 @@ class WidgetAppBar extends StatelessWidget {
       title: Text(
         title,
         style: TextStyle(
-          fontSize: 22,
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
         ),
       ),
       actions: actions, // Use the title parameter

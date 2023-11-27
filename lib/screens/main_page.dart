@@ -1,4 +1,3 @@
-//main.dart
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/widget_appbar.dart';
@@ -8,6 +7,8 @@ import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
 import 'main_banner.dart';
+import 'package:donggu_bat/widgets/widget_bottombar.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -22,7 +23,6 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   // const Main({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
 
   //1125 hys 추가 - uid 및 DB에서 현재 로그인한 사용자 정보 불러오기 
   String? current_uid = FirebaseAuth.instance.currentUser?.uid;  //사용자 uid
@@ -180,10 +180,9 @@ class _MainPageState extends State<MainPage> {
                               );
                             },
                             child: Text(
-                              "공지사항 1 제목",
+                              "[건강마루멤버십034] 9~10월 이벤트 걷기미션 안내(★건강마루멤버십 회원전용)",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
                                 fontSize: 17,
                               ),
                             ),
@@ -212,10 +211,9 @@ class _MainPageState extends State<MainPage> {
                               );
                             },
                             child: Text(
-                              "공지사항 2 제목",
+                              "[건강마루멤버십033] 8월 이벤트 걷기미션 결과발표",
                               style: TextStyle(
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
                                 fontSize: 17,
                               ),
                             ),
@@ -233,10 +231,9 @@ class _MainPageState extends State<MainPage> {
                             );
                           },
                           child: Text(
-                            "공지사항 3 제목",
+                            "[건강마루멤버십032] 건강습관만들기 - 식단관리 교육 자료 : 영양표시 (★건강마루멤버십 회원전용)",
                             style: TextStyle(
                               color: Colors.black,
-                              fontWeight: FontWeight.bold,
                               fontSize: 17,
                             ),
                           ),
@@ -247,13 +244,14 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
+
+              // 지원센터 위치 지도
               Align(
-                alignment: Alignment.center,
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
                   child: Text(
-                    '상담바로가기',
+                    '성동구 1인가구지원센터 위치',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -261,7 +259,36 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black38, width: 1.0),
+                ),
+                child: Image.asset(
+                  'assets/지원센터.png',
+                  fit: BoxFit.cover,
+                  width: 380,
+                  height: 200,
+                ),
+              ),
+              Text('[ 서울 성동구 마장로39길 31 행복신협빌딩 3층,'),
+              Text('5호선 마장역 2번 출구에서 296m ]'),
+              SizedBox(height: 30),
+
+              // 상담 바로가기
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
+                  child: Text(
+                    '상담 바로가기',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
               Row(
                 children: [
                   Spacer(),
@@ -273,19 +300,9 @@ class _MainPageState extends State<MainPage> {
                       primary: Colors.white,
                       onPrimary: Colors.black,
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5),
-                        Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Icon(Icons.phone_android)),
-                        Text('전화연결'),
-                        SizedBox(height: 10),
-                      ],
+                    child: Counseling(
+                      icon: Icons.phone_android,
+                      text: '전화연결',
                     ),
                   ),
                   Spacer(),
@@ -297,19 +314,9 @@ class _MainPageState extends State<MainPage> {
                       primary: Colors.white,
                       onPrimary: Colors.black,
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5),
-                        Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Icon(Icons.email_outlined)),
-                        Text('E-mail'),
-                        SizedBox(height: 10),
-                      ],
+                    child: Counseling(
+                      icon: Icons.email_outlined,
+                      text: 'E-mail',
                     ),
                   ),
                   Spacer(),
@@ -321,22 +328,172 @@ class _MainPageState extends State<MainPage> {
                       primary: Colors.white,
                       onPrimary: Colors.black,
                     ),
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5),
-                        Container(
-                            width: 80,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.0),
-                            ),
-                            child: Icon(Icons.chat_bubble_outline)),
-                        Text('카카오톡'),
-                        SizedBox(height: 10),
-                      ],
+                    child: Counseling(
+                      icon: Icons.chat_bubble_outline,
+                      text: '카카오톡',
                     ),
                   ),
                   Spacer(),
+                ],
+              ),
+              SizedBox(height: 80),
+              // 상담 바로가기
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 6),
+                  child: Text(
+                    '다양한 정보',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      _openFacebookPage('https://www.facebook.com/sd1in/');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      // padding: EdgeInsets.all(15), // 버튼 내용물과 테두리 간의 여백 조절
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/페이스북.JPG',
+                                fit: BoxFit.cover,
+                                width: 40,
+                                height: 40,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text('Facebook'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      _openInstagramPage(
+                          'https://www.instagram.com/sd1in_net/');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/인스타.JPG',
+                                fit: BoxFit.cover,
+                                width: 40,
+                                height: 40,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text('Instagram'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      _openBlogPage('https://blog.naver.com/sd1in');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                'assets/블로그.JPG',
+                                fit: BoxFit.cover,
+                                width: 40,
+                                height: 40,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text('Blog'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      _openBlogPage('https://blog.naver.com/sd1in');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.white,
+                      onPrimary: Colors.black,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Icons.web,
+                                size: 40,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text('Website'),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],
@@ -396,9 +553,68 @@ void _openKakaoTalkChannel(String channelID) async {
   }
 }
 
+void _openFacebookPage(String facebookUrl) async {
+  if (await canLaunch(facebookUrl)) {
+    await launch(facebookUrl);
+  } else {
+    throw 'Could not launch $facebookUrl';
+  }
+}
+
+void _openInstagramPage(String instagramUrl) async {
+  if (await canLaunch(instagramUrl)) {
+    await launch(instagramUrl);
+  } else {
+    throw 'Could not launch $instagramUrl';
+  }
+}
+
+void _openBlogPage(String BlogUrl) async {
+  if (await canLaunch(BlogUrl)) {
+    await launch(BlogUrl);
+  } else {
+    throw 'Could not launch $BlogUrl';
+  }
+}
+
 class PageInfo {
   final String imageUrl;
   final String linkUrl;
 
   PageInfo({required this.imageUrl, required this.linkUrl});
+}
+
+class Counseling extends StatelessWidget {
+  final IconData icon;
+  final String text;
+
+  Counseling({required this.icon, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(height: 5),
+        Container(
+          width: 80,
+          height: 80,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: Icon(
+            this.icon,
+            size: 40,
+          ),
+        ),
+        Text(
+          '${this.text}',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+        ),
+        SizedBox(height: 10),
+      ],
+    );
+  }
 }

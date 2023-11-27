@@ -3,6 +3,7 @@ import '../widgets/widget_appbar.dart';
 import 'my_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import './camera.dart';
 
 // TextFormField 설명 텍스트 생성 Class
 class AlignTextClass extends StatelessWidget {
@@ -173,16 +174,36 @@ class _UserProfilePageState extends State<UserProfilePage> {
               children: [
                 Align(
                   alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: CircleAvatar(
-                      radius: 50.0,
-                      backgroundImage:
-                          AssetImage(current_photo.toString()), // 프로필 이미지 경로
-                    ),
+                  // child: Padding(
+                  //   // padding: EdgeInsets.all(10),
+                  child: Stack(
+                    children: [
+                      CircleAvatar(
+                        radius: 50.0,
+                        backgroundImage: AssetImage(current_photo.toString()),
+                      ),
+                      Positioned(
+                        bottom: -10,
+                        right: -10,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CameraScreen(),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.camera_alt,
+                            size: 30,
+                            color: Color.fromARGB(255, 16, 16, 16),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-
                 // 이름 칸
                 AlignTextClass(textname: '이름'),
                 TextFieldClass(textName: '이름', controller: _nameController),

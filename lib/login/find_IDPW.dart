@@ -172,10 +172,7 @@ class _Page1State extends State<Page1> {
                         isPhoneNumber = !isPhoneNumber;
                         print('전화번호 버튼');
                         print(isPhoneNumber);
-                        
                       });
-                      // _SendMessage();
-
                     },
                     child: Text('인증번호 받기'),
                   ),
