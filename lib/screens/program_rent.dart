@@ -205,7 +205,12 @@ class _ProgramApplyState extends State<ProgramApply> {
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(15, 25, 15, 25),
-                                child: Text('${recommended[0]['text']}'),
+                                child: Container(
+                                  height: 200,
+                                  child: SingleChildScrollView(
+                                    child: Text('${recommended[0]['text']}'),
+                                  ),
+                                ),
                               ),
                               ElevatedButton(
                                 onPressed: () async {
@@ -239,6 +244,140 @@ class _ProgramApplyState extends State<ProgramApply> {
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
                     height: 200,
+                  ),
+                ),
+
+                // 프로그램 신청
+                Align(
+                  alignment: AlignmentDirectional(-1.00, 0.00),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 25, 0, 7),
+                    child: Text(
+                      '프로그램 신청',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(5, 0, 5, 10),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.auto_fix_high,
+                        size: 35,
+                      ),
+                      SizedBox(width: 10),
+                      // Container(padding: EdgeInsets.all(10), child: Text('위치')),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black38, width: 1.0),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: DropdownButton<String>(
+                          value: dropdownValue,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValue = newValue!;
+                              selectedLocation = newValue ?? '';
+                            });
+                          },
+                          items: locations
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  height: 250,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black38, width: 1.0),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: rent.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (selectedLocation.isEmpty ||
+                            rent[index]['location'] == selectedLocation) {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      // 프로그램 이름
+                                      Text(
+                                        rent[index]['name'] ?? '프로그램 없음',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Divider(
+                                        thickness: 1,
+                                        color: Colors.black38,
+                                      ),
+                                      Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
+
+                                      // 프로그램 시간
+                                      Text(
+                                        '${rent[index]['time']}',
+                                        style: TextStyle(fontSize: 14),
+                                      ),
+                                      Spacer(), // 간격을 일정하게 설정하기 위해 Spacer 사용
+                                    ],
+                                  ),
+                                ),
+
+                                // 신청하기 버튼
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 3),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //       builder: (context) => rentPage()),
+                                      // );
+                                      launch('${rent[index]['url']}');
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.white,
+                                      onPrimary: Colors.black,
+                                      side: BorderSide(color: Colors.grey),
+                                    ),
+                                    child: Text(
+                                      '신청하기',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        } else {
+                          return SizedBox.shrink();
+                        }
+                      },
+                    ),
                   ),
                 ),
 
