@@ -7,7 +7,13 @@ import '../notice/notice1.dart';
 import '../notice/notice2.dart';
 import '../notice/notice3.dart';
 import 'main_banner.dart';
-import './map.dart';
+import 'package:donggu_bat/widgets/widget_bottombar.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+const apiKey = '895c7d17476c72440ce44ba845661bbc';
+
 
 class MainPage extends StatefulWidget {
   @override
@@ -18,18 +24,51 @@ class _MainPageState extends State<MainPage> {
   // const Main({super.key});
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  //1125 hys 추가 - uid 및 DB에서 현재 로그인한 사용자 정보 불러오기 
+  String? current_uid = FirebaseAuth.instance.currentUser?.uid;  //사용자 uid
+  String? current_email = FirebaseAuth.instance.currentUser?.email;  //사용자 이메일
+  String? current_name = FirebaseAuth.instance.currentUser?.displayName;  //사용자 이름
+  String? current_photo = FirebaseAuth.instance.currentUser?.photoURL;   //사용자 프로필 사진 주소(기본 설정 : 'assets/profile.png')
+  String? current_address;  //사용자 주소
+  String? current_recommandlist;  //사용자 선호 프로그램 목록 
+
+  //위에서 정의한 current 유저 정보 변수들에 DB에서 문서 읽어와 값 할당 
+  void set_current() async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get();
+
+    // 문서가 존재하는지 확인
+    if (documentSnapshot.exists) {
+      // 문서의 데이터 가져오기
+      Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+      current_address = data['address'];
+      current_recommandlist = data['recommand_list'];
+
+    }
+    else{
+      print("error : 문서가 존재하지 않습니다!");
+    }
+  }
+  
+  //hys 1125 추가, 자동으로 currunt user 값들 세팅하기 위한 함수
+  @override
+  void initState() {
+    set_current();
+    super.initState();
+  }
+
+
   PageController _pageController = PageController(initialPage: 0);
   int _selectedIndex = 1;
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  String? cityName;
+  int? temp;
 
   @override
   void dispose() {
     // 상태가 해제된 위젯에서 setState를 호출하지 않도록 타이머를 취소합니다.
-    _pageController.dispose();
     super.dispose();
   }
 
@@ -48,12 +87,12 @@ class _MainPageState extends State<MainPage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        key: scaffoldKey,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(55.0), // AppBar의 원하는 높이로 설정
           child: WidgetAppBar(title: "동구밭"),
         ),
         body: SingleChildScrollView(
+          child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -77,9 +116,9 @@ class _MainPageState extends State<MainPage> {
                 padding: EdgeInsets.only(top: 20),
                 child: Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black38, width: 1.0),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
+                      border: Border.all(color: Colors.black38, width: 1.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -459,6 +498,7 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           ),
+        ),
         ),
         bottomNavigationBar: WidgetBottomNavigationBar(
           selectedIndex: _selectedIndex,

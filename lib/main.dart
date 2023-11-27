@@ -1,11 +1,25 @@
 //main.dart
 import 'package:flutter/material.dart';
 import 'login/login.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'screens/main_page.dart';
 
-void main() {
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MyApp());
 }
+
+
+// void main() {
+//   runApp(MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   // 여기에서 로그인 여부를 확인하는 로직을 작성합니다.
@@ -20,3 +34,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

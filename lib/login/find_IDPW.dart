@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../widgets/widget_appbar.dart';
 import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FindIDPW extends StatefulWidget {
   @override
@@ -106,6 +108,27 @@ class _Page1State extends State<Page1> {
   bool isPhoneNumber = false;
   int phoneCount = 0;
   bool isCheck = true;
+  String _verificationId = '';
+
+  //hys 1125 추가, sms 메시지 보내는 코드
+  // void _SendMessage() {
+  //     // String Pnum = '+82'+ _phoneController.text.substring(1);
+
+  //     // FirebaseAuth.instance.verifyPhoneNumber(phoneNumber : Pnum,
+  //     //         verificationCompleted: (PhoneAuthCredential credential) async {
+  //     //           print('인증 문자 수신');
+  //     //         },
+  //     //         verificationFailed: (FirebaseAuthException e) {
+  //     //           print('인증 문자 전송 실패');
+  //     //         },
+  //     //         codeSent: (String verificationId, int? resendToken) async {
+  //     //           print('인증 문자 전송');
+  //     //           this._verificationId = verificationId; // 인증 코드 확인때 필요한 값
+  //     //         },
+  //     //         codeAutoRetrievalTimeout: (String verificationId){});
+  //     print("hello");
+  // }
+
 
   @override
   Widget build(BuildContext context) {

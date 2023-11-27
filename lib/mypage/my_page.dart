@@ -6,6 +6,9 @@ import '../widgets/widget_bottombar.dart';
 import 'rent.dart';
 import 'program.dart';
 import 'user_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class MyPageScreen extends StatefulWidget {
   @override
@@ -29,6 +32,22 @@ class _MyPageScreenState extends State<MyPageScreen> {
   ];
 
   int _selectedIndex = 2;
+  //1125 hys 추가
+  String? current_uid = FirebaseAuth.instance.currentUser?.uid;
+  String? current_email = FirebaseAuth.instance.currentUser?.email;
+  String? current_name = FirebaseAuth.instance.currentUser?.displayName;
+  String? current_photo = FirebaseAuth.instance.currentUser?.photoURL;
+  // String? current_pnum = FirebaseAuth.instance.currentUser?.phoneNumber;
+
+  //1125 hys 추가 - 로그아웃 함수 구현 
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      print("Logout Success");
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   Future<void> _showConfirmationDialog(BuildContext context) async {
     return showDialog<void>(
@@ -48,6 +67,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
             TextButton(
               child: Text('예'),
               onPressed: () {
+                signOut();  //로그아웃 
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -94,7 +114,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                             shape: BoxShape.circle,
                           ),
                           child: Image.asset(
-                            'assets/user_profile.jpg',
+                            current_photo.toString(),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -120,7 +140,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 0, 12, 0),
                                           child: Text(
-                                            '김동구 님',
+                                            '${current_name} 님',
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.bold),

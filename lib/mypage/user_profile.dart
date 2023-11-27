@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/widget_appbar.dart';
 import 'my_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import './camera.dart';
 
 // TextFormField 설명 텍스트 생성 Class
@@ -83,31 +85,39 @@ class UserProfilePage extends StatefulWidget {
 }
 
 class _UserProfilePageState extends State<UserProfilePage> {
+
+  String? current_uid = FirebaseAuth.instance.currentUser?.uid;
+  String? current_email = FirebaseAuth.instance.currentUser?.email;
+  String? current_name = FirebaseAuth.instance.currentUser?.displayName;
+  String? current_photo = FirebaseAuth.instance.currentUser?.photoURL;
+
   // 이름 정보 가져오기
   final TextEditingController _nameController =
-      TextEditingController(text: '김동구');
+      TextEditingController(text: FirebaseAuth.instance.currentUser?.displayName);
 
   // 전화번호 정보 가져오기
   final TextEditingController _phoneController =
-      TextEditingController(text: '010-1234-5678');
+      TextEditingController(text: '');
 
   // 아이디 정보 가져오기
   final TextEditingController _idController =
-      TextEditingController(text: 'donggubat');
+      TextEditingController(text: FirebaseAuth.instance.currentUser?.email);
 
   // 비밀번호 정보 저장하기
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController =
+      TextEditingController();
 
   // 비밀번호 확인
   final TextEditingController _rePasswordController = TextEditingController();
 
   // 이메일 정보 가져오기
   final TextEditingController _emailController =
-      TextEditingController(text: 'donggubat@dongguk.edu.kr');
+      TextEditingController(text: FirebaseAuth.instance.currentUser?.email);
 
   // 주소 정보 가져오기
   final TextEditingController _addressController =
-      TextEditingController(text: '서울특별시 성동구 마장로39길 31');
+      TextEditingController(text: ""); 
+
 
   bool isDuplicate = false;
   int duplicateCount = 0;
@@ -116,6 +126,35 @@ class _UserProfilePageState extends State<UserProfilePage> {
   bool isPhoneNumber = false;
   int phoneCount = 0;
   bool isCheck = true;
+
+  //hys 1125 추가 - 사용자 주소, 전화번호 받아오는 함수  
+  void set_address() async {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get();
+
+    // 문서가 존재하는지 확인
+    if (documentSnapshot.exists) {
+      // 문서의 데이터 가져오기
+      Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+
+      _addressController.text = data['address'];
+      _phoneController.text = data['Pnum'];
+
+    }
+    else{
+      _addressController.text = "error!";
+    }
+  }
+  
+
+  @override
+  void initState() {
+    set_address();
+    super.initState();
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +180,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                     children: [
                       CircleAvatar(
                         radius: 50.0,
-                        backgroundImage: AssetImage('assets/user_profile.jpg'),
+                        backgroundImage: AssetImage(current_photo.toString()),
                       ),
                       Positioned(
                         bottom: -10,
@@ -232,7 +271,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                       ),
                     ),
                   ),
-
+                
                 // 이메일 칸
                 AlignTextClass(textname: '이메일'),
                 TextFieldClass(textName: '이메일', controller: _emailController),
@@ -240,6 +279,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
                 // 주소 칸
                 AlignTextClass(textname: '주소'),
                 TextFieldClass(textName: '주소', controller: _addressController),
+                
 
                 // 변경하기 버튼
                 Padding(

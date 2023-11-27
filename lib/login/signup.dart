@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'recommand.dart';
 import '../widgets/widget_appbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // TextFormField 설명 텍스트 생성 Class
 class AlignTextClass extends StatelessWidget {
@@ -112,6 +114,9 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _addressController = TextEditingController();
   bool agreedToTerms = false;
 
+  String _verificationId = '';  //sms 인증할 때 필요한 거 
+  String _uid = ''; //사용자 uid 저장할때 
+
   void checkSignUp() {
     final List<dynamic> check = [
       _nameController.text,
@@ -157,6 +162,96 @@ class _SignUpPageState extends State<SignUpPage> {
 
     flag = true;
   }
+
+  //hys 1125 추가, sms 메시지 보내는 코드
+  void _SendMessage() {
+      String Pnum = '+82'+ _phoneController.text.substring(1);
+
+      FirebaseAuth.instance.verifyPhoneNumber(phoneNumber : Pnum,
+              verificationCompleted: (PhoneAuthCredential credential) async {
+                print('인증 문자 수신');
+              },
+              verificationFailed: (FirebaseAuthException e) {
+                print('인증 문자 전송 실패');
+              },
+              codeSent: (String verificationId, int? resendToken) async {
+                print('인증 문자 전송');
+                this._verificationId = verificationId; // 인증 코드 확인때 필요한 값
+              },
+              codeAutoRetrievalTimeout: (String verificationId){});
+  }
+
+  //hys 1125 추가, 인증 이메일 전송하는 코드
+  void _sendEmail() async {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+    FirebaseAuth.instance.currentUser?.sendEmailVerification();
+    print("email sent");
+  }
+
+  //hys 1125 추가, 휴대폰 인증 진행하는 코드 -> 인증되면 1 돌려줌. 
+  Future<bool> _CheckVerify() async {
+    PhoneAuthCredential phoneAuthCredential =  
+    PhoneAuthProvider.credential(
+      verificationId: this._verificationId, smsCode: _authenticationController.text);
+    
+    try {
+        // FirebaseAuth 인스턴스를 얻어와서 signInWithCredential 메서드를 사용하여 인증을 시도합니다.
+        final UserCredential authCredential = await FirebaseAuth.instance.signInWithCredential(phoneAuthCredential);
+
+        // 인증에 성공한 경우, UserCredential에서 User를 얻어와서 사용할 수 있습니다.
+        final User? user = authCredential.user;
+
+        if (user != null) {
+          // 인증된 사용자에 대한 추가 로직을 수행합니다.
+          print('인증 성공: ${user.uid}');
+          return true;
+          
+        } else {
+          // 인증된 사용자가 null인 경우에 대한 처리
+          print('인증된 사용자가 없습니다.');
+        }
+      } catch (e) {
+        // 인증에 실패한 경우, 예외를 처리합니다.
+        print('인증 실패: $e');
+      }
+      return false;
+    }
+
+  //hys 1125 추가, 회원가입시 DB에 사용자 정보 저장
+  Future<bool> _singupInDB() async{
+    //login 실행
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text, 
+        password: _passwordController.text
+      );
+      print("sign in with : ");
+      print(FirebaseAuth.instance.currentUser?.uid);
+      //auth에서 비밀번호와 이메일 업데이트
+      await FirebaseAuth.instance.currentUser?.updateEmail(_emailController.text);
+      await FirebaseAuth.instance.currentUser?.updateDisplayName(_nameController.text);
+      await FirebaseAuth.instance.currentUser?.updatePassword(_passwordController.text);
+      await FirebaseAuth.instance.currentUser?.updatePhotoURL("assets/profile.png");
+      await FirebaseFirestore.instance.collection('user').doc(FirebaseAuth.instance.currentUser?.uid).set({
+        "id":_idController.text,
+        "email": _emailController.text,
+        "password": _passwordController.text,
+        "Pnum": _phoneController.text,
+        "address": _addressController.text,
+        "name": _nameController.text,
+        // 다른 사용자 속성들도 필요에 따라 추가할 수 있습니다.
+      });
+      print("db update!");
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+        return false;
+      } 
+    }
+    return false;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -317,6 +412,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   isPhoneNumber = !isPhoneNumber;
                                   print('전화번호 버튼');
                                   print(isPhoneNumber);
+                                  _SendMessage();  //sms 인증번호 전송 
                                 });
                               },
                               child: Text('인증번호 받기'),
@@ -348,8 +444,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               onPressed: () {
                                 setState(() {
-                                  isCheck =
-                                      _authenticationController.text == "1234";
+                                  isCheck = _CheckVerify() as bool;
+                                  //    _authenticationController.text == "1234";
                                   print('인증번호');
                                   print(isCheck);
                                   phoneCount++;
@@ -375,11 +471,48 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
 
                   // 이메일 칸
-                  AlignTextClass(textname: '이메일'),
-                  TextFieldClass(
-                    textName: '이메일',
-                    controller: _emailController,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AlignTextClass(textname: '이메일'),
+                      TextFieldClass(
+                        textName: '이메일',
+                        controller: _emailController,
+                      ),
+                      SizedBox(height: 16), // 버튼 위에 간격 추가
+
+                      // 여기에 버튼 추가
+                      ElevatedButton(
+                        onPressed: () {
+                          if (passwordCount != 0){
+                            _sendEmail();
+                          }
+                          else{
+                            Align(
+                              alignment: AlignmentDirectional(-1.00, 0.00),
+                              child: Text(
+                                '비밀번호가 일치하지 않습니다.',
+                                style: TextStyle(
+                                  color:
+                                      Colors.red.shade400,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            );
+                          }
+                          
+                          // 버튼이 눌렸을 때 수행할 동작 정의
+                          // 예: 이메일을 확인하고 어떤 작업 수행
+                        },
+                        child: Text('이메일 인증하기'), // 버튼에 표시될 텍스트
+                      ),
+                    ],
                   ),
+                  // AlignTextClass(textname: '이메일'),
+                  // TextFieldClass(
+                  //   textName: '이메일',
+                  //   controller: _emailController,
+                  // ),
 
                   // 주소 칸
                   AlignTextClass(textname: '주소'),
@@ -442,10 +575,34 @@ class _SignUpPageState extends State<SignUpPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        // _sendEmail();  //이메일 가입하기 위해 일단 실행 
+                        checkSignUp();
+
                         if (!flag) {
                           checkSignUp();
                         } else {
+                          await _singupInDB();
+                        // if (!emailverify){
+                        //     showDialog(
+                        //       context: context,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           title: Text('오류'),
+                        //           content: Text('이메일 인증을 먼저 진행해주세요!'),
+                        //           actions: [
+                        //             TextButton(
+                        //               onPressed: () {
+                        //                 // 경고 창 닫기
+                        //                 Navigator.of(context).pop();
+                        //               },
+                        //               child: Text('확인'),
+                        //             ),
+                        //           ],
+                        //         );
+                        //       },
+                        //     );
+                        //   }
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -454,6 +611,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             (route) => false,
                           );
                         }
+                        //DB에 데이터 넣기
                       },
                       child: Text(
                         '가입 하기',
